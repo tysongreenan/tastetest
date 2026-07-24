@@ -19,6 +19,7 @@
     "FRONTEND.md",
     "AGENTS.md",
     "COLLABORATION.md",
+    "docs",
     "skills"
   ],
   "scripts": {

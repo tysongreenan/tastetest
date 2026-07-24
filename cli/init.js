@@ -152,12 +152,30 @@ export async function initProject(opts = {}) {
   );
   console.log(`  → ${log.at(-1).status.padEnd(8)} TASTETEST.md (how to run)`);
 
-  // 7) Report folder
+  // 7) Report folder + shared run-state template
   const reportDir = path.join(target, "tastetest-report");
   if (!dryRun) mkdirSync(reportDir, { recursive: true });
   const keep = path.join(reportDir, ".gitkeep");
   if (!dryRun && !existsSync(keep)) writeFileSync(keep, "");
   console.log("  →         tastetest-report/");
+
+  const runStateSrc = path.join(PACKAGE_ROOT, "docs", "run-state.template.yaml");
+  if (existsSync(runStateSrc)) {
+    const runStateDest = path.join(reportDir, "run-state.template.yaml");
+    const r = copyOne(runStateSrc, runStateDest, { force, dryRun });
+    log.push(r);
+    console.log(`  → ${r.status.padEnd(8)} tastetest-report/run-state.template.yaml`);
+  }
+
+  // Collaboration law + roster (needed for full multi-agent protocol)
+  for (const name of ["AGENTS.md", "COLLABORATION.md"]) {
+    const src = path.join(PACKAGE_ROOT, name);
+    if (!existsSync(src)) continue;
+    const dest = path.join(target, name);
+    const r = copyOne(src, dest, { force, dryRun });
+    log.push(r);
+    console.log(`  → ${r.status.padEnd(8)} ${name}`);
+  }
 
   const written = log.filter((x) => x.status === "wrote").length;
   const skipped = log.filter((x) => x.status === "skip").length;
@@ -352,7 +370,15 @@ ${
 `
     : `| *(lean)* | \`npx @tysongreenan/tastetest init --full\` for packs + FRONTEND |
 `
-}| \`tastetest-report/\` | Reports |
+}| \`AGENTS.md\` | Roster · run classes · protocol pack |
+| \`COLLABORATION.md\` | Handoffs · Approves · consensus |
+| \`tastetest-report/\` | Reports + \`run-state.template.yaml\` |
+
+### Full multi-agent runs
+
+1. Copy \`tastetest-report/run-state.template.yaml\` → \`run-state.yaml\`  
+2. Set \`run_class\` + \`protocol\`  
+3. No implement without consensus **PROCEED** (see \`COLLABORATION.md\`)
 
 ## Re-run
 

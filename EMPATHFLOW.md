@@ -62,6 +62,11 @@ Optimize. Do not expand.
 
 ### Process (keep it short)
 
+**0. Run class (one line)**
+- `lite` · `standard` · `full` · `implement` — see `AGENTS.md`.  
+- Multi-persona / marketing redesign → load **full** pack (`EMPATHFLOW.full.md` + `COLLABORATION.md`) and write `tastetest-report/run-state.yaml` from `docs/run-state.template.yaml` (or the copy under `tastetest-report/`).  
+- **No implement without consensus PROCEED** on standard/full (see `COLLABORATION.md`).
+
 **1. Intent**
 - What is the page’s primary job for a first-time buyer?
 - What is the one action we want them to take?

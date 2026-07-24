@@ -12,6 +12,40 @@ Then: **Run EmpathFlow** or Cursor **`/tastetest`**.
 
 ---
 
+## Protocol pack (Orchestrator declares every run)
+
+| Pack | Load | When |
+|------|------|------|
+| **short** | `EMPATHFLOW.md` + `playbook.md` (+ craft/motion skills as needed) | Buyer density pass, single surface, lite craft |
+| **full** | short + `EMPATHFLOW.full.md` + `COLLABORATION.md` + this file + `docs/personas.md` | Multi-persona council, homepage/marketing, implement after report |
+
+Write the choice into **`tastetest-report/run-state.yaml`** (`protocol: short | full`).  
+Do not half-load the full crew while pretending it is a short pass.
+
+### Shared run-state (context engineering)
+
+At Phase 0, copy `docs/run-state.template.yaml` → `tastetest-report/run-state.yaml` and fill it.
+
+Every specialist **reads** run-state before working. Orchestrator **updates** priority, preserve, brief, scores, approves, artifact paths.  
+Handoffs reference artifacts and run-state fields — they do not re-tell the whole run (anti–telephone-game).
+
+---
+
+## Run classes (scale seats to the job)
+
+| Class | When | Seats (approx) |
+|-------|------|----------------|
+| **lite** | One component / focus ring / tiny craft fix | Orchestrator + 1 domain critic |
+| **standard** | Single page or flow UX | Orchestrator + Product + Journey + Heuristic + **priority PM only** + relevant critics |
+| **full** | Homepage / marketing redesign / multi-surface | Full roster + **all** Persona Managers + design brief |
+| **implement** | After report PROCEED | Only Approves required for touched surfaces; one **Executor**; critics re-score only |
+
+Full crew is **expensive** — default to **standard** unless the surface is conversion-critical marketing or the user asks for full.
+
+Set `run_class` in run-state at preflight. Skipping run-class selection on a multi-role run is a process failure.
+
+---
+
 ## Core crew
 
 | # | Agent | Skill | Job |
@@ -43,8 +77,9 @@ Then: **Run EmpathFlow** or Cursor **`/tastetest`**.
 
 ```
 0. Preflight
+   ├─ run_class + protocol pack → write run-state.yaml
    ├─ Intent + preserve list
-   ├─ Personas exist?
+   ├─ Personas exist? (standard/full)
    ├─ Seat Persona Managers (PM-*)
    └─ Priority council → Priority / Secondary / Deferred
          │
@@ -54,7 +89,9 @@ Then: **Run EmpathFlow** or Cursor **`/tastetest`**.
          ▼
 3. Journeys (all in-scope PMs; weight priority)
          ▼
-4. Critique (priority first + secondary harm pass)
+4. Critique — parallel read wave when possible
+   (craft ∥ motion ∥ prose ∥ heuristics on frozen journey artifacts)
+   then Orchestrator / Report Writer merges; any Block holds
          ▼
 5. Frontend Design **asks** Orchestrator + all PMs for visual prefs (design brief)
    then library search · Craft · Motion · Prose · Design System
@@ -62,8 +99,11 @@ Then: **Run EmpathFlow** or Cursor **`/tastetest`**.
          ▼
 6. Report
          ▼
-7. Consensus log → implement only if Approves met
+7. Consensus log (evidence-cited Approves) → implement only if Approves met
+   → one Executor applies plan; critics re-score (no mid-edit redesign)
 ```
+
+**Parallel rule:** Workers in a fan-out must have **non-overlapping** tasks. Interdependent work stays serial in the pipeline.
 
 **Frontend Design cannot invent taste.** No ui-ux-pro-max search or redesign until managers answer the brief (`FRONTEND.md` Step 0) **and** project `DESIGN.md` is loaded when marketing/`web/` is in scope (Step 0b).
 

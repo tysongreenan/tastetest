@@ -108,26 +108,38 @@ Optimizing only for priority while harming a secondary without that PM’s Appro
 
 ## 3. Talk protocol (how agents communicate)
 
-Every handoff uses this shape (in the working transcript or `tastetest-report/council.md`):
+Every handoff uses this shape (in the working transcript or `tastetest-report/council.md`).
+
+### Handoff schema (required fields)
 
 ```markdown
 ### [FROM] → [TO] | [PHASE] | [TYPE: proposal | objection | approve | veto | question]
 
+**Objective:** one sentence — what success looks like for this handoff  
+**Out of scope:** what this role must not do (prevents duplicate / thrash)  
+**Inputs:** run-state fields + artifact paths (e.g. run-state §preserve, journeys.md)  
+**Output:** path + format (e.g. craft-eval.md — table: hit | evidence | severity)  
+**Budget:** lite | standard | deep  
+**Tools:** browser | static | library-search | none  
+
 **Claim:** …
-**Evidence:** (files / gates / persona)
+**Evidence:** (files / gates / persona / run-state)
 **Ask:** approve | revise | decide
 **Blockers:** none | …
 ```
 
+Thin “Claim only” handoffs are a process failure on **full** / **standard** runs — they cause telephone-game context loss.
+
 ### Rules of engagement
 
-1. **No silent execution** — before implementing, there must be a written **proposal** and required **approves**.  
-2. **Consult before parallel work** — specialists may draft in parallel only after Manager opens the phase.  
-3. **One conversation thread per decision** — e.g. “Homepage What you get section” — not drive-by edits.  
-4. **Objections are mandatory when you disagree** — domain owners must veto or approve; “whatever” is invalid for Approve roles.  
-5. **Consensus timeout** — if a Must-consult role has no reply after one explicit ask in-session, Manager notes `abstain` and continues only if Approves are already met.  
-6. **User is final authority** — explicit user instruction overrides crew consensus; Manager records `User override: …`.
-
+1. **No silent execution** — before implementing, there must be a written **proposal**, required **approves**, and an updated **run-state** (`consensus.decision: PROCEED`).  
+2. **ApprovalGate** — treat implement as blocked unless Approves for that change type are met (see §4 and `empathflow/permissions.py`). Soft gate today (model + artifacts); runtime will hard-block when wired.  
+3. **Consult before parallel work** — specialists may draft in parallel only after Orchestrator opens the phase; tasks must be **non-overlapping**.  
+4. **One conversation thread per decision** — e.g. “Homepage What you get section” — not drive-by edits.  
+5. **Objections are mandatory when you disagree** — domain owners must veto or approve; “whatever” is invalid for Approve roles.  
+6. **Consensus timeout** — if a Must-consult role has no reply after one explicit ask in-session, Orchestrator notes `abstain` and continues only if Approves are already met.  
+7. **Anti-thrash** — max **2 revise rounds** per decision (`run-state.consensus.revise_round`); then **BLOCK** or ask the user.  
+8. **User is final authority** — explicit user instruction overrides crew consensus; Orchestrator records `User override: …`.
 ---
 
 ## 4. Consensus before doing
@@ -146,16 +158,30 @@ Every handoff uses this shape (in the working transcript or `tastetest-report/co
 ## Consensus: <decision title>
 - **Proposal:** …
 - **From:** Frontend Design
-- **Approves:** Craft ✓ · Motion ✓ · Orchestrator ✓ · PM-Avery ✓ · PM-Jordan ✓ …
+- **Approves:** (each must cite ≥1 evidence line from that role’s own section — bare ✓ invalid)
+  - Craft ✓ — evidence: …
+  - Motion ✓ — evidence: …
+  - Orchestrator ✓ — evidence: …
+  - PM-Avery ✓ — evidence: …
+  - PM-Jordan ✓ — evidence: …
+- **Secondary harm pass:** each secondary PM lists one way this could hurt them if we ship — or “none”
 - **Objections resolved:** …
 - **Rejected alternatives:** …
 - **Priority persona this run:** …
 - **Multi-persona impact:** Priority help/neutral/hurt · Secondary …
 - **Preserve list intact?** yes/no
+- **run-state updated?** yes (consensus.decision + approves)
 - **Decision:** PROCEED | REVISE | BLOCK
 ```
 
-**No consensus log → no code change** on full EmpathFlow runs.
+**No consensus log → no code change** on standard/full EmpathFlow runs.  
+**Bare ✓ without evidence → consensus invalid** (anti rubber-stamp / theater).
+
+### After PROCEED (write path)
+
+1. **One Executor** applies the approved plan (or the human).  
+2. Critics **re-score only** — no mid-edit redesign without a new consensus.  
+3. If scores drop gates → **REVISE** (counts against revise_round cap).
 
 ---
 
@@ -196,10 +222,12 @@ Every handoff uses this shape (in the working transcript or `tastetest-report/co
 
 When one model is the whole crew:
 
-1. Label sections with role names (`## Manager`, `## Craft Critic`, …).  
-2. Run phases in order; do not merge “I decided everything” into one blob.  
-3. Before any file edit on a full run, write the **Consensus** block.  
-4. If you catch yourself redesigning without personas → **stop**, open Phase 0.  
+1. Label sections with role names (`## Orchestrator Manager`, `## Craft Critic`, …).  
+2. Create / update `tastetest-report/run-state.yaml` at Phase 0.  
+3. Run phases in order; do not merge “I decided everything” into one blob.  
+4. Before any file edit on a standard/full run, write the **Consensus** block with evidence-cited Approves.  
+5. If you catch yourself redesigning without personas → **stop**, open Phase 0.  
+6. Prefer **isolated role sections + summary return** to the Orchestrator — do not paste every role’s full scratchpad into the next role.
 
 ---
 
@@ -207,15 +235,35 @@ When one model is the whole crew:
 
 User: “Only fix this button’s focus ring.”
 
-- Preflight: **lite**  
-- Approves: Manager (implicit) + Craft or Design System as relevant  
-- No full council  
-- Report/note: `Preflight: lite · Consensus: lite`
+- Preflight: **lite** · `run_class: lite` · `protocol: short`  
+- Approves: Orchestrator (implicit) + Craft or Design System as relevant  
+- No full council · no design brief  
+- Report/note: `Preflight: lite · Consensus: lite`  
+- Still write a one-line preserve check if touching conversion UI  
+
+---
+
+## 9. Process quality checklist (after full/standard runs)
+
+Write `tastetest-report/process-score.md` (binary yes/no):
+
+1. Preflight GO + run_class + protocol set?  
+2. Priority table + secondary non-negotiables in run-state?  
+3. Design brief answered before library search (if UI redesign)?  
+4. Handoffs used Objective / Inputs / Output (not Claim-only)?  
+5. Multi-persona impact on each implement proposal?  
+6. Consensus log with evidence-cited Approves before write?  
+7. Preserve list intact after fixes?  
+8. One Executor after PROCEED (no multi-author thrash)?  
+
+Any **no** → note as process debt in the report.
 
 ---
 
 ## Related
 
-- Phase order: `EMPATHFLOW.md`  
-- Roster: `AGENTS.md`  
-- Personas: `docs/personas.md`
+- Phase order / short buyer protocol: `EMPATHFLOW.md`  
+- Full crew + phases: `EMPATHFLOW.full.md` · roster: `AGENTS.md`  
+- Run-state template: `docs/run-state.template.yaml`  
+- Personas: `docs/personas.md`  
+- Runtime gates (stub → hard): `empathflow/permissions.py`
