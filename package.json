@@ -1,0 +1,43 @@
+{
+  "name": "tastetest",
+  "version": "0.1.0",
+  "description": "The UX review that lives in your repo — EmpathFlow buyer audits, craft, motion, frontend design skills",
+  "license": "MIT",
+  "author": "Tyson Greenan",
+  "type": "module",
+  "bin": {
+    "tastetest": "./bin/tastetest.js"
+  },
+  "files": [
+    "bin",
+    "cli",
+    "EMPATHFLOW.md",
+    "playbook.md",
+    "ANTI-SLOP.md",
+    "MOTION.md",
+    "FRONTEND.md",
+    "AGENTS.md",
+    "skills"
+  ],
+  "scripts": {
+    "tastetest": "node bin/tastetest.js",
+    "init": "node bin/tastetest.js init"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "ux",
+    "ui",
+    "empathflow",
+    "cursor",
+    "claude",
+    "design-review",
+    "anti-slop"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tysongreenan/tastetest.git"
+  },
+  "homepage": "https://github.com/tysongreenan/tastetest"
+}
