@@ -68,7 +68,8 @@ Missing personas or skipped priority council on a full review → **NO-GO**.
 
 | File | Job |
 |------|-----|
-| `EMPATHFLOW.md` | Buyer-level UX review (journeys, honesty, conversion) |
+| `EMPATHFLOW.md` | Buyer-level UX review — **reduction bias**, density-first (default) |
+| `EMPATHFLOW.full.md` | Full crew protocol (personas, priority council, craft/motion) |
 | `ANTI-SLOP.md` | Visual craft — template / “AI-looking” UI |
 | `MOTION.md` | Motion critic — [Emil Kowalski](https://github.com/emilkowalski/skills) |
 | `FRONTEND.md` | Frontend Design — brief + `web/DESIGN.md` + [UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) library |

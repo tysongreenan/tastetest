@@ -103,7 +103,8 @@ Before implement, always include **multi-persona impact**.
 
 | Path | Domain |
 |------|--------|
-| `EMPATHFLOW.md` | Process + preflight + priority council |
+| `EMPATHFLOW.md` | **Default** buyer review — reduction bias, density-first (short) |
+| `EMPATHFLOW.full.md` | Full multi-agent crew (personas, council, craft/motion gates) |
 | `COLLABORATION.md` | Permissions, Persona Managers, consensus |
 | `docs/personas.md` | Product humans + PM seats |
 | `web/DESIGN.md` | Marketing design system (tokens, type, components, page order) |
