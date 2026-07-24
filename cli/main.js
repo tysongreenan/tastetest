@@ -8,8 +8,8 @@ const HELP = `
 TasteTest — the UX review that lives in your repo
 
 Usage:
-  npx tastetest init [options]
-  npx tastetest --help
+  npx @tysongreenan/tastetest init [options]
+  npx @tysongreenan/tastetest --help
 
 Commands:
   init     Onboard TasteTest into a project (default)
@@ -17,11 +17,15 @@ Commands:
 
 Init options:
   --dir <path>     Project root (default: current directory)
-  --lite           Skip large skill packs (ui-ux-pro-max, deep refs)
+  --full           Also copy FRONTEND.md + skills/ (ui-ux-pro-max, motion, prose)
+  --lite           Alias for default lean install (no packs)
   --force          Overwrite existing skill files
   --no-cursor      Skip Cursor rules/commands
   --no-claude      Skip Claude Code skill registration
   --dry-run        Print actions without writing
+
+Default install is lean (locked structure):
+  EMPATHFLOW.md · playbook.md · ANTI-SLOP.md · MOTION.md + Cursor/Claude wiring
 
 After init, open your AI coding agent and say:
 
@@ -51,6 +55,7 @@ export async function main(argv) {
   if (command === "init") {
     const result = await initProject({
       dir: args.dir,
+      full: args.full,
       lite: args.lite,
       force: args.force,
       cursor: args.cursor,
@@ -94,6 +99,7 @@ function parseArgs(argv) {
   const out = {
     command: undefined,
     dir: process.cwd(),
+    full: false,
     lite: false,
     force: false,
     cursor: true,
@@ -107,6 +113,7 @@ function parseArgs(argv) {
     const a = argv[i];
     if (a === "-h" || a === "--help") out.help = true;
     else if (a === "-v" || a === "--version") out.version = true;
+    else if (a === "--full") out.full = true;
     else if (a === "--lite") out.lite = true;
     else if (a === "--force") out.force = true;
     else if (a === "--no-cursor") out.cursor = false;

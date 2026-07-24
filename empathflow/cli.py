@@ -13,20 +13,23 @@ from empathflow.crew import run
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
-def _init_project(target: Path) -> int:
-    """Copy EMPATHFLOW.md + playbook.md into the target project (skill-first install)."""
+_LEAN_SKILLS = (
+    "EMPATHFLOW.md",
+    "playbook.md",
+    "ANTI-SLOP.md",
+    "MOTION.md",
+)
+# Locked structure: --full adds design-system entry only (packs via npx init --full)
+_FULL_EXTRA = ("FRONTEND.md",)
+
+
+def _init_project(target: Path, *, full: bool = False) -> int:
+    """Copy thin skill files (lean default; --full adds FRONTEND.md)."""
     target = target.resolve()
     target.mkdir(parents=True, exist_ok=True)
 
-    files = {
-        "EMPATHFLOW.md": _REPO_ROOT / "EMPATHFLOW.md",
-        "playbook.md": _REPO_ROOT / "playbook.md",
-        "ANTI-SLOP.md": _REPO_ROOT / "ANTI-SLOP.md",
-        "MOTION.md": _REPO_ROOT / "MOTION.md",
-        "FRONTEND.md": _REPO_ROOT / "FRONTEND.md",
-        "AGENTS.md": _REPO_ROOT / "AGENTS.md",
-        "COLLABORATION.md": _REPO_ROOT / "COLLABORATION.md",
-    }
+    names = list(_LEAN_SKILLS) + (list(_FULL_EXTRA) if full else [])
+    files = {name: _REPO_ROOT / name for name in names}
     missing = [name for name, src in files.items() if not src.is_file()]
     if missing:
         print(f"error: packaged skill files missing: {', '.join(missing)}")
@@ -44,10 +47,13 @@ def _init_project(target: Path) -> int:
         print(f"wrote {dest}")
 
     print()
-    print("TasteTest skill entries installed (see AGENTS.md for full roster).")
+    mode = "full" if full else "lean"
+    print(f"TasteTest skill entries installed ({mode}).")
     print()
-    print("For full onboarding (Cursor/Claude wiring + skill packs), prefer:")
-    print("  npx tastetest init")
+    print("For Cursor/Claude wiring + deep packs, prefer:")
+    print("  npx tastetest init" + (" --full" if full else ""))
+    if not full:
+        print("  npx tastetest init --full   # FRONTEND + skills/ packs")
     print()
     print("Then in your AI agent:  Run EmpathFlow")
     print("Cursor: /tastetest")
@@ -88,11 +94,16 @@ def main(argv: list[str] | None = None) -> int:
         help="Browser backend (default: playwright)",
     )
     parser.add_argument("--headed", action="store_true", help="Run browser headed")
+    parser.add_argument(
+        "--full",
+        action="store_true",
+        help="With init: also copy FRONTEND.md (use npx for skill packs)",
+    )
 
     args = parser.parse_args(argv)
 
     if args.command == "init":
-        return _init_project(args.project)
+        return _init_project(args.project, full=args.full)
 
     config = EmpathFlowConfig(
         project_root=args.project.resolve(),

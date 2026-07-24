@@ -18,8 +18,7 @@ import { ArrowRight, BookOpen, ExternalLink, Terminal } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 
-const INIT_COMMAND = "npx tastetest init";
-const REPO_INIT = "node bin/tastetest.js init";
+const INIT_COMMAND = "npx @tysongreenan/tastetest init";
 const EASE = [0.23, 1, 0.32, 1] as const;
 const GH = "https://github.com/tysongreenan/tastetest";
 const GH_BLOB = `${GH}/blob/main`;
@@ -72,16 +71,18 @@ function GitHubIcon({ className }: { className?: string }) {
 
 function InstallBlock({
   className,
-  showHonesty = true,
+  caption,
 }: {
   className?: string;
-  showHonesty?: boolean;
+  /** Helper under the card (light bg). Omit on dark close band. */
+  caption?: string;
 }) {
   return (
     <div className={cn("w-full", className)}>
+      {/* text-foreground on card so command stays dark even inside dark close band */}
       <div
         className={cn(
-          "overflow-hidden rounded-2xl border border-border/80 bg-card",
+          "overflow-hidden rounded-2xl border border-border/80 bg-card text-foreground",
           "shadow-[0_1px_0_oklch(0_0_0_/_0.04),0_20px_56px_-24px_oklch(0.45_0.18_265_/_0.4)]"
         )}
       >
@@ -90,10 +91,14 @@ function InstallBlock({
           <span className="font-mono text-[11px] text-muted-foreground">
             install
           </span>
+          <span className="ml-auto font-mono text-[10px] text-muted-foreground/80">
+            npm
+          </span>
         </div>
-        <div className="flex items-center gap-2 p-2 pl-4">
+        <div className="flex items-center gap-2 p-2 pl-3.5 sm:pl-4">
           <span className="select-none font-mono text-sm text-primary/80">$</span>
-          <code className="min-w-0 flex-1 truncate font-mono text-[13px] font-medium tracking-tight sm:text-sm">
+          {/* Scoped name is long — wrap on narrow, single line from sm up */}
+          <code className="min-w-0 flex-1 whitespace-normal break-all font-mono text-[12px] font-medium leading-snug tracking-tight text-foreground sm:truncate sm:whitespace-nowrap sm:text-[13px] sm:leading-normal">
             {INIT_COMMAND}
           </code>
           <ButtonCopy
@@ -105,12 +110,9 @@ function InstallBlock({
           />
         </div>
       </div>
-      {showHonesty ? (
+      {caption ? (
         <p className="mt-2.5 text-center text-[11px] leading-snug text-muted-foreground sm:text-left">
-          Not on npm yet ·{" "}
-          <code className="rounded bg-muted px-1 py-0.5 font-mono text-[10px] text-foreground sm:text-[11px]">
-            {REPO_INIT}
-          </code>
+          {caption}
         </p>
       ) : null}
     </div>
@@ -150,13 +152,16 @@ export function HomePage() {
               href={GH}
               target="_blank"
               rel="noreferrer"
+              aria-label="GitHub"
               className={cn(
                 buttonVariants({ variant: "ghost", size: "sm" }),
                 "h-8 gap-1.5 rounded-full px-3"
               )}
             >
               <GitHubIcon className="size-3.5" />
-              <span className="hidden sm:inline">GitHub</span>
+              <span className="hidden sm:inline" aria-hidden>
+                GitHub
+              </span>
             </a>
             <a
               href="#start"
@@ -210,8 +215,8 @@ export function HomePage() {
                 ship tonight.
               </p>
 
-              <div className="mx-auto mt-8 max-w-md lg:mx-0">
-                <InstallBlock />
+              <div className="mx-auto mt-8 max-w-lg lg:mx-0">
+                <InstallBlock caption="Then open Cursor or Claude → Run EmpathFlow" />
               </div>
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
@@ -226,16 +231,16 @@ export function HomePage() {
                   Sample report
                 </Link>
                 <a
-                  href={GH}
+                  href="https://www.npmjs.com/package/@tysongreenan/tastetest"
                   target="_blank"
                   rel="noreferrer"
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "lg" }),
-                    "h-10 gap-2 rounded-full px-4 text-muted-foreground"
+                    "h-10 gap-1.5 rounded-full px-4 text-muted-foreground"
                   )}
                 >
-                  <GitHubIcon className="size-4" />
-                  GitHub
+                  npm
+                  <ExternalLink className="size-3.5 opacity-60" aria-hidden />
                 </a>
               </div>
             </motion.div>
@@ -286,14 +291,9 @@ export function HomePage() {
         {/* Skills — mono list, not a card museum */}
         <section id="skills" className="mx-auto max-w-5xl px-5 py-14 sm:px-6 sm:py-16">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
-                Skills in the pack
-              </h2>
-              <p className="mt-2 max-w-md text-sm text-muted-foreground">
-                Open the files. Full crew and process live on GitHub.
-              </p>
-            </div>
+            <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
+              Skills in the pack
+            </h2>
             <a
               href={`${GH}/tree/main/skills`}
               target="_blank"
@@ -324,17 +324,6 @@ export function HomePage() {
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-center text-sm text-muted-foreground sm:text-left">
-            Named agent seats and vetoes:{" "}
-            <a
-              href={`${GH_BLOB}/AGENTS.md`}
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium text-foreground underline-offset-4 hover:underline"
-            >
-              AGENTS.md
-            </a>
-          </p>
         </section>
 
         {/* Close — install again, short */}
@@ -343,23 +332,12 @@ export function HomePage() {
             <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
               Start in your repo
             </h2>
-            <div className="text-left [&_.bg-card]:bg-background [&_.text-foreground]:text-foreground [&_.text-muted-foreground]:text-foreground/55 [&_.border-border\/80]:border-border/20 [&_.border-border\/70]:border-border/15 [&_.bg-muted\/50]:bg-muted [&_.bg-muted]:bg-background/10">
-              <InstallBlock showHonesty={false} />
-              <p className="mt-2.5 text-center text-[11px] text-background/55 sm:text-left">
-                Not on npm yet ·{" "}
-                <code className="rounded bg-background/10 px-1 py-0.5 font-mono text-[10px] text-background/80">
-                  {REPO_INIT}
-                </code>
-              </p>
+            <p className="text-sm text-background/65">
+              One command. Skills land in your project.
+            </p>
+            <div className="text-left">
+              <InstallBlock />
             </div>
-            <Link
-              href="/report"
-              className="inline-flex items-center justify-center gap-2 text-sm font-medium text-background/80 transition-colors hover:text-background"
-            >
-              <BookOpen className="size-4" aria-hidden />
-              Sample report
-              <ArrowRight className="size-4" aria-hidden />
-            </Link>
           </div>
         </section>
       </main>

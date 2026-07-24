@@ -67,7 +67,9 @@ async function main() {
       links: links.slice(0, 30),
       headings,
       copyButtons,
-      hasInitCommand: text.includes("npx tastetest init"),
+      hasInitCommand:
+        text.includes("npx @tysongreenan/tastetest init") ||
+        text.includes("npx tastetest init"),
       hasGithub: links.some((l) => l.href?.includes("github")),
     };
   });

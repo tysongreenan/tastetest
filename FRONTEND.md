@@ -44,14 +44,14 @@ Library search is a **comparison bank**, not a license to replace TasteTest’s 
 | **Primary** | Blue `oklch(0.45 0.2 265)` — CTAs, Copy, focus ring |
 | **Type** | Space Grotesk (headings) · DM Sans (body) · Geist Mono (commands/paths) |
 | **CTAs** | Pill `rounded-full` primary blue; install = terminal card + labeled **Copy** |
-| **Conversion** | `npx tastetest init` + honesty if not on npm · `Run EmpathFlow` · sample before deep crew |
-| **Proof** | `ProductPreview`, `SampleExcerpt`, `/report` (Acme — not dogfood chrome) |
-| **Depth** | Crew lead + list · skills featured + mono rows · org chart — after proof |
-| **Motion** | Ambient orb OK; rare scramble on non-H1; no fake affordances · `MOTION.md` |
-| **Ban** | Glassmorphism, traffic-light chrome, eyebrow-every-section, identical card grids, icon-only primary |
+| **Conversion** | `npx @tysongreenan/tastetest init` · labeled Copy · dark close re-offer |
+| **Proof** | `ProductPreview` (Code → Agent → Report) · Sample → `/report` (Acme — not dogfood chrome) |
+| **Depth** | Skills mono file list + GitHub · crew/org live off-homepage unless council re-opens |
+| **Motion** | Ambient orb OK; preview tab cycle OK; no fake affordances · `MOTION.md` |
+| **Ban** | Glassmorphism, traffic-light chrome, eyebrow-every-section, identical card grids, icon-only primary, white-on-white install command |
 
 **Launch page order (do not reorder without council):**  
-Hero+install → Problem → How → **Sample** → Crew → Skills → Org → Dark final install.
+Hero+install+preview → Three steps → Skills mono list → Dark final install · Sample at `/report`.
 
 **When implementing or proposing:** name the `DESIGN.md` section you followed (Colors / Components / Iteration guide). If you invent a new pattern, update `web/DESIGN.md` in the same change.
 

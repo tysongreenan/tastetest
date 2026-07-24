@@ -11,7 +11,7 @@ TasteTest acts like a real buyer. It reads your codebase, builds empathy maps, c
 **Primary CTA**
 
 ```bash
-npx tastetest init
+npx @tysongreenan/tastetest init
 ```
 
 ---

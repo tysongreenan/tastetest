@@ -14,18 +14,19 @@ This file is **TasteTest’s** system — not a third-party brand kit. Structure
 
 TasteTest’s marketing presence should feel like a **precise developer tool that still has taste** — calm light canvas, electric blue actions, typography-first hierarchy, and one obvious conversion path: copy install → run EmpathFlow → see a real report shape.
 
-The homepage opens on a value claim and an **install block** (not a demo request). Proof is a product preview (code → agent → report) and a full-weight **Acme sample** section before optional crew/skills depth. Dark bands appear only as the closing install CTA, not as a default product skin. Color is mostly flat UI; soft blue radial washes and a light grid sit behind the hero as atmosphere, not decoration chrome.
+The homepage opens on a value claim and an **install block** (not a demo request). Proof is a **product path preview** (code → agent → report) plus a **Sample report** link to `/report` (Acme Checkout). Skills depth is a mono file list; crew/org live on GitHub, not the homepage. Dark bands appear only as the closing install CTA, not as a default product skin. Color is mostly flat UI; soft blue radial wash sits behind the hero as atmosphere, not decoration chrome.
 
-What makes the system distinctive is the mix of **buyer-honest conversion UI** (terminal install, labeled Copy, honesty about npm) with **craft restraint** (no glassmorphism, no traffic-light browser frames, no identical card grids on every section). Motion is ambient brand (orb, rare scramble) or state feedback — never fake affordances.
+What makes the system distinctive is the mix of **buyer-honest conversion UI** (terminal install, labeled Copy, real npm command) with **craft restraint** (no glassmorphism, no traffic-light browser frames, no identical card grids on every section). Motion is ambient brand (orb) or state feedback — never fake affordances.
 
 **Key characteristics**
 
 - Cool ink on near-white canvas; primary action is saturated blue, not near-black pill enterprise.
 - Space Grotesk display + DM Sans body + Geist Mono for commands/paths.
 - Pill CTAs (`rounded-full`) for primary marketing actions; install uses a terminal-style card + blue Copy.
-- Section anatomy varies: split hero, problem split, interactive pipeline, sample proof split, lead roster + list, featured skills + mono list, org chart, dark close.
-- One strong artifact (sample report) beats four explanation zones.
-- Honesty labels when a CTA is incomplete (e.g. package not on npm yet).
+- Lean section anatomy: split hero + preview · three steps · skills mono list · dark close. (Optional full-marketing surfaces live under Components as non-ship defaults.)
+- One strong artifact (sample report at `/report`) beats four explanation zones on the homepage.
+- Real install path only — no fake CTAs.
+- Install card always sets its own ink (`text-foreground` on `bg-card`) so the command stays readable inside the dark close band.
 
 ---
 
@@ -146,51 +147,47 @@ Base heading letter-spacing: ~`-0.025em` to `-0.03em` on large display.
 
 Base: Tailwind scale (4px). Common marketing rhythm:
 
-- Section vertical: `py-16`–`py-24` (`py-20 sm:py-24` default for major blocks)
-- Horizontal: `px-6` inside `max-w-6xl`
-- Card padding: `p-4`–`p-6` / `p-8` for proof CTAs
+- Section vertical: `py-14`–`py-20` on lean homepage (`py-16`–`py-24` if a fuller marketing page returns)
+- Horizontal: `px-5`–`px-6` inside `max-w-5xl` (marketing default)
+- Card padding: `p-4`–`p-6` for proof CTAs
 - Stack gaps: `gap-3`–`gap-6` small UI; `gap-12`–`gap-14` hero splits
 
-Large empty space is for **scan path and focal proof**, not for enterprise “trust strip far below the fold” theatrics. Dense content is OK in skill lists, org chart, and report body.
+Large empty space is for **scan path and focal proof**, not for enterprise “trust strip far below the fold” theatrics. Dense content is OK in skill lists and report body.
 
 ### Grid & container
 
 | Pattern | Spec |
 |---------|------|
-| **Page max** | `max-w-6xl` centered |
-| **Nav** | Logo left · links + GitHub + Start right · sticky blur header |
+| **Page max** | `max-w-5xl` centered (marketing) |
+| **Nav** | Logo left · How · Skills · GitHub (`aria-label` when label hidden on mobile) · Install · sticky blur header |
 | **Hero** | 2-col desktop (`lg:grid-cols-2`): copy+install \| `ProductPreview` |
-| **Problem** | 12-col: copy 5 / demos 7 |
-| **How** | Full width; pipeline internal 1 + 1.1 cols on large |
-| **Sample** | 2-col: copy+CTAs \| `SampleExcerpt` |
-| **Crew lead** | 2-col horizontal profile cards |
-| **Craft council** | Single column list rows |
-| **Skills** | 2 featured cards + full-width mono list |
-| **Close** | Narrow `max-w-md` centered install |
+| **How / Three steps** | Full width; 3-col short steps on `sm+` |
+| **Skills** | Mono file list (`rounded-2xl` bordered rows) + Browse skills/ link |
+| **Close** | Narrow `max-w-md` centered install on `bg-foreground` band |
+| **Optional (off homepage)** | Problem split · pipeline demo · sample excerpt band · crew roster · org chart — only if council re-opens full marketing |
 
 ### Whitespace philosophy
 
 Whitespace protects the **install → sample** path. Do not fill every band with identical cards. Prefer:
 
-1. Conversion / proof  
-2. Explanation with a job (gap demos, pipeline)  
-3. Depth for Jordan/Sam (crew, skills, org)  
-4. Re-offer install  
+1. Conversion / proof (hero + preview)  
+2. Short explanation (three steps)  
+3. Depth for Jordan (skills mono list → GitHub)  
+4. Re-offer install (dark close; command must stay dark ink on light card)
 
-### Launch homepage structure (Don’t Make Me Think + enough product)
+### Launch homepage structure (shipped — source of truth)
 
 **Primary job:** understand → copy install.  
 **Secondary:** prove it’s real without a content museum.
 
 1. Nav — logo · How · Skills · GitHub · Install  
-2. Hero — H1 · one line · install + Copy · Sample + GitHub  
-3. Product preview (show the loop)  
-4. Three steps (Init / Run / Fix) — short lines only  
-5. Skills as mono file list (not card grids) + AGENTS.md link  
-6. Close install band · sample link  
-7. Thin footer  
+2. Hero — H1 · one line · install + Copy · Sample report · Product preview  
+3. Three steps (Init / Run / Fix) — short lines only  
+4. Skills as mono file list (not card grids) + Browse skills/  
+5. Dark close install band (command stays on light card) 
+6. Thin footer (Sample · Agents · Skills · GitHub)
 
-**Still off the homepage:** full crew portraits, org chart pyramid, gap demos, long sample essay.  
+**Still off the homepage:** full crew portraits, org chart pyramid, gap demos, long sample essay, sticky install bar.  
 **Sample page:** `/report`. **Crew depth:** GitHub `AGENTS.md`.
 
 ---
@@ -201,13 +198,12 @@ Mostly flat. Depth from surface alternation, borders, and **one** soft blue-tint
 
 | Level | Treatment | Use |
 |-------|-----------|-----|
-| Flat | No shadow | Body sections, lists, org nodes |
+| Flat | No shadow | Body sections, lists |
 | Bordered | `border border-border/60–80` | Cards, tabs, demo shells |
 | Soft lift | `shadow-sm` | Default cards |
 | Install lift | Custom: hairline + large soft primary-tinted shadow | Full `InstallBlock` only |
-| Sticky lift | `shadow-2xl` + blur | Sticky install bar |
-| Dark field | `bg-foreground text-background` | Final CTA band only |
-| Blur chrome | `bg-background/70 backdrop-blur-xl` | Sticky header / sticky install |
+| Dark field | `bg-foreground text-background` | Final CTA band only (install card keeps light surface + dark ink) |
+| Blur chrome | `bg-background/80 backdrop-blur-xl` | Sticky header |
 
 **Do not** stack heavy multi-layer shadows on every card. **Do not** glassmorph entire sections.
 
@@ -244,37 +240,30 @@ Major media/product cards: **`rounded-2xl`**. Primary marketing buttons: **`roun
 
 #### `install-block`
 
-Terminal-style card: optional “install” header bar, `$` + mono command `npx tastetest init`, primary **Copy** via `ButtonCopy` with visible labels (`Copy` / `Copied`).
+Terminal-style card: “install” header bar, `$` + mono command `npx @tysongreenan/tastetest init`, primary **Copy** via `ButtonCopy` with visible labels (`Copy` / `Copied`).
 
-- Full: soft primary-tinted shadow  
-- Compact: sticky bar variant, no honesty line (space)  
+- Soft primary-tinted shadow  
+- Card root: `bg-card text-foreground` — **required** so the command stays dark when the block sits on the dark close band  
+- Command `code`: explicit `text-foreground`  
 - **Preserve:** command string and labeled Copy — never icon-only  
 
-#### `install-honesty`
+#### `install-caption` (optional)
 
-One line under full install:
+Short next-step under hero install only, e.g. “Then open Cursor or Claude → Run EmpathFlow”. Muted 11px. Dark close band has no caption — light card alone is enough.
 
-> Package not on npm yet. From this repo: `node bin/tastetest.js init`
+#### `product-preview`
 
-On dark close band: inverted muted text. Remove only when npm package is real.
-
-#### `agent-prompt-copy`
-
-Inline text control that copies `Run EmpathFlow`. Underline decoration with primary tint; not a second primary button.
-
-#### `sticky-install-bar`
-
-Fixed bottom (mobile full width) / bottom-right card (desktop). Shows after ~520px scroll. Motion: y/opacity ~220ms ease-out; respect `useReducedMotion`.
+Tabbed proof (Code · Agent · Report). Real buttons; optional auto-cycle when motion allowed. No traffic-light browser chrome. Report tab shows scores + P0 + file path.
 
 ### Navigation & chrome
 
 #### `site-header`
 
-Sticky, blurred. Logo = `SiriOrb` (28px) + wordmark. Links: How, Sample, Crew (md+), Skills, GitHub, **Start** / Get started (always visible; short label on mobile).
+Sticky, blurred. Logo = `SiriOrb` (~26px) + wordmark. Links: How · Skills (hidden below `sm`) · GitHub (icon always; text `sm+`; **`aria-label="GitHub"` required**) · **Install** (always visible).
 
 #### `site-footer`
 
-Multi-column: product anchors, skill file links, resources. Sample points to `/#report` and full `/report`.
+Thin: brand + MIT · Sample (`/report`) · Agents · Skills · GitHub.
 
 #### `siri-orb`
 
@@ -361,7 +350,7 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 ### Do
 
 - Keep **one obvious primary action** per section; install path always recoverable (sticky + close).  
-- **Label** incomplete paths; prefer honesty over deleting install.  
+- Prefer a working install CTA over a museum of secondary CTAs. 
 - Link to **proof** (sample) before deep crew/skills.  
 - Vary section anatomy (split / list / featured+list / dark close).  
 - Use primary blue for conversion; mono for commands and paths.  
@@ -391,7 +380,7 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 - Specific over clever. Evidence over vibes.  
 - Admit V1: skill-first, agent-run.  
 - Stop-slop prose: no “cool,” “actually,” “still want…?” filler — see `skills/stop-slop-prose/`.  
-- Primary conversion strings: `npx tastetest init`, `Run EmpathFlow`, sample CTAs **Read full sample** / **See sample report**.
+- Primary conversion strings: `npx @tysongreenan/tastetest init`, `Run EmpathFlow`, sample CTAs **Read full sample** / **See sample report**.
 
 ---
 
@@ -399,31 +388,31 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 
 | Range | Behavior |
 |-------|----------|
-| **&lt;640px** | Single column; hero stacks; nav: How · Skills · GitHub icon · **Start**; Crew/Sample may hide; sticky install full width |
-| **640–1024** | Wider single/two column; more nav labels |
-| **≥1024** | Full nav; 2-col hero/sample; 2-col lead roster; pipeline split |
+| **&lt;640px** | Single column; hero stacks; nav: logo · GitHub icon (`aria-label`) · **Install**; How/Skills hidden |
+| **640–1024** | Wider single/two column; How · Skills · GitHub label show |
+| **≥1024** | Full nav; 2-col hero (copy \| `ProductPreview`); 3-col steps |
 
 ### Touch
 
-- Primary CTAs `h-11` with pill padding.  
-- Sticky install always tappable after scroll.  
-- Before/After and pipeline targets are full-card/button sized.
+- Install **Copy** and primary pills comfortably tappable.  
+- Preview tabs full-width row on mobile.
 
 ### Collapse strategy
 
-- Nav: progressive disclosure of Crew/Sample by breakpoint; **Start always on**.  
-- Grids: 2-col → 1-col.  
-- Sticky: bottom sheet on mobile → floating card on `sm+`.
+- Nav: How/Skills hide below `sm`; **Install always on**.  
+- Hero: 2-col → 1-col stack.  
+- Steps: 3-col → 1-col.
 
 ---
 
 ## Accessibility baseline
 
 - One real H1; logical H2/H3 hierarchy.  
-- Buttons/links: visible labels matching behavior.  
-- Contrast: primary blue on white; white text on primary and on dark close band.  
+- Buttons/links: visible labels matching behavior (icon-only GitHub needs `aria-label="GitHub"`).  
+- Contrast: primary blue on white; white text on primary and dark close **headings**; install **card** keeps dark ink on light surface (never inherit close-band `text-background` onto the command).  
 - Prefer `button` / `a` semantics; no nested interactives in headings.  
 - Focus visible via ring tokens.  
+- Motion: honor `prefers-reduced-motion` on hero entrance, gradient breathing, preview cycle/typing.  
 - Reduced motion respected for Framer and orb.  
 - ScrambleHover only on non-critical nav.
 
@@ -446,7 +435,7 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 
 | Gap | Status / rule |
 |-----|----------------|
-| `npx tastetest init` not on npm | Honesty line required until publish |
+| Install command | `npx @tysongreenan/tastetest init` (scoped — bare `tastetest` blocked as too similar to `taste-test`) |
 | Sample is fictional Acme | Label as example; never dogfood chrome on `/report` |
 | Agent portraits are illustrative | Not real employees; craft still applies (no toy UI) |
 | Full AGENTS.md roster larger than marketing highlights | Link AGENTS.md; say “highlights” |

@@ -3,8 +3,25 @@
 
 When the user asks to “run EmpathFlow”, “TasteTest”, “UX review”, or similar, follow these rules exactly.
 
-**Full multi-agent process** (personas, priority council, craft/motion gates, consensus): see `EMPATHFLOW.full.md` when you need the complete crew protocol.  
-**This file is the default.** Prefer it for homepage and marketing work. Optimize. Do not expand.
+**This file is always on** — source of truth for buyer job and reduction bias.  
+Optimize. Do not expand.
+
+### What loads when
+
+| User says | Load |
+|-----------|------|
+| Run EmpathFlow / TasteTest | **this file** + `playbook.md` |
+| UI / craft / anti-slop | + `ANTI-SLOP.md` |
+| Animations / motion | + `MOTION.md` |
+| Design system / colors / type | + `FRONTEND.md` + `skills/ui-ux-pro-max` |
+
+### Priority of truth
+
+1. **EMPATHFLOW.md** — buyer job + reduction bias  
+2. **ANTI-SLOP.md** — does this look AI-made?  
+3. **MOTION.md** — Emil Kowalski standard  
+4. **playbook.md** — shared principles  
+5. Heavy packs — only when explicitly needed  
 
 ### Goal
 Act as a skeptical buyer. Improve the product so it feels **clear, light, and professional**.  

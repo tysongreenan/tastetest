@@ -36,7 +36,7 @@ function StageVisual({ id }: { id: StageId }) {
       <div className="rounded-xl border border-border/80 bg-background p-4 font-mono text-xs">
         <p className="text-muted-foreground">$</p>
         <p className="mt-1 text-foreground">
-          npx tastetest init
+          npx @tysongreenan/tastetest init
           <span className="ml-1 inline-block h-3 w-0.5 animate-pulse bg-primary align-middle" />
         </p>
         <p className="mt-3 text-[11px] text-emerald-700">

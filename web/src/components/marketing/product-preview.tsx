@@ -47,9 +47,6 @@ function CodePanel() {
         <span className="w-4 shrink-0 text-right opacity-50">16</span>
         <span>{"}"}</span>
       </div>
-      <p className="mt-4 border-t border-border/60 pt-3 text-[11px] text-muted-foreground">
-        TasteTest reads routes & components — not just screenshots.
-      </p>
     </div>
   );
 }
@@ -139,9 +136,6 @@ function ReportPanel() {
           app/checkout/page.tsx
         </p>
       </div>
-      <p className="text-[11px] text-muted-foreground">
-        Output: scored report with file-level fixes.
-      </p>
     </div>
   );
 }
@@ -169,12 +163,9 @@ export function ProductPreview({ className }: { className?: string }) {
         className
       )}
     >
-      <div className="flex items-center justify-between gap-2 border-b border-border/70 bg-muted/35 px-3 py-2">
+      <div className="flex items-center border-b border-border/70 bg-muted/35 px-3 py-2">
         <p className="font-mono text-[10px] font-medium tracking-wide text-muted-foreground uppercase">
           Product path
-        </p>
-        <p className="hidden text-[10px] text-muted-foreground sm:block">
-          Live preview
         </p>
       </div>
       <div className="flex items-center gap-1 border-b border-border/60 bg-muted/20 p-1.5">
@@ -218,9 +209,6 @@ export function ProductPreview({ className }: { className?: string }) {
           </motion.div>
         </AnimatePresence>
       </div>
-      <p className="border-t border-border/60 px-4 py-2.5 text-center text-[11px] text-muted-foreground">
-        Code → agent → report — click tabs or watch the loop
-      </p>
     </div>
   );
 }

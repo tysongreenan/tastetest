@@ -1,7 +1,7 @@
 # TasteTest sample report — Acme Checkout
 
 **Example output** (fictional product).  
-This is what a run can look like after `npx tastetest init` and **Run EmpathFlow**.
+This is what a run can look like after `npx @tysongreenan/tastetest init` and **Run EmpathFlow**.
 
 **Target:** Acme web checkout  
 **Method:** EmpathFlow full crew (preflight GO, personas, journeys, craft, motion)  

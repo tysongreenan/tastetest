@@ -5,7 +5,7 @@ Skills are the source of truth. Collaboration law: **`COLLABORATION.md`**.
 ## Install
 
 ```bash
-npx tastetest init
+npx @tysongreenan/tastetest init
 ```
 
 Then: **Run EmpathFlow** or Cursor **`/tastetest`**.
