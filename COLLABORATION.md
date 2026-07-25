@@ -40,7 +40,7 @@ Priority is **collaborative** for each run. Secondaries stay in the room — see
 | Journey list | Journey Critic | Empathy Mapper, **all in-scope Persona Managers** | **Orchestrator** + **Empathy Mapper** + **priority Persona Manager** | Secondary PM if their non-negotiable journey dropped |
 | Journey critique publish | Journey Critic | Heuristic Auditor, relevant PMs | **Orchestrator** | — |
 | Hard-gate scores | Heuristic Auditor | Journey Critic | **Orchestrator** | Heuristic Auditor |
-| DESIGN.md draft | Design System Checker | Frontend Design, Craft Critic | **Orchestrator** | Design System Checker |
+| DESIGN.md draft / update | Design System Checker | Frontend Design, Craft Critic | **Orchestrator** + **Design System Checker** | Design System Checker |
 | Craft score / redesign recs | Craft Critic | Frontend Design, Journey Critic, **priority PM** | **Orchestrator** + **Craft Critic** | Craft Critic |
 | Motion Block/Approve | Motion Critic | Craft Critic | **Orchestrator** + **Motion Critic** | Motion Critic |
 | Prose rewrites | Prose Critic | Empathy Mapper, **affected Persona Managers** | **Orchestrator** + **Prose Critic** | Prose Critic; PM if voice harms their human |
@@ -61,7 +61,8 @@ Priority is **collaborative** for each run. Secondaries stay in the room — see
 | Motion / animation | Motion + Orchestrator | |
 | Install / primary CTA | Orchestrator + Journey Critic + **priority PM** | Preserve-first |
 | Remove feature / section | Orchestrator + Journey + Empathy Mapper + **all PMs who used it** | Never Craft alone |
-| Tokens / DESIGN.md | Design System + Orchestrator | |
+| Tokens / DESIGN.md update | Design System Checker + Orchestrator | Skill `design-md`; same PR as code; Checker may veto layout if fail/rewrite |
+| Layout implement | Craft + Design System Checker + priority PM + Orchestrator | Checker Approves with DESIGN.md section cite |
 | Full homepage redesign | Orchestrator + **all Persona Managers** + Journey + Craft + Motion + **Isa** | Frontend proposes layout; Isa proposes narrative + product-show; multi-persona impact required |
 
 **Default:** If unsure who must approve → **Orchestrator + domain owner + priority Persona Manager**.
@@ -90,7 +91,7 @@ Priority is **collaborative** for each run. Secondaries stay in the room — see
 
 ### Design brief (Frontend Design — mandatory)
 
-Before any visual redesign or ui-ux-pro-max search, Frontend Design **must ask** Orchestrator + every Persona Manager for preferences (feel, trust, references, depth, motion) — `FRONTEND.md` Step 0 — then load project **`DESIGN.md`** (`web/DESIGN.md` for Panel marketing) — Step 0b. Library cannot override DESIGN.md without Craft + Orchestrator.
+Before any visual redesign or ui-ux-pro-max search: (1) **Design System Checker** runs `DESIGN-SYSTEM.md` / `skills/design-md/` health (alignment + doc_quality → run-state); (2) Frontend Design **must ask** Orchestrator + every Persona Manager for preferences — `FRONTEND.md` Step 0 — then load **`DESIGN.md`** constraints from run-state — Step 0b. Library cannot override DESIGN.md. Visual Approves must cite a **DESIGN.md section name**. Checker **Veto** if `alignment: fail` or `doc_quality: rewrite`.
 
 ```markdown
 ### Frontend Design → Managers | design brief | question
@@ -161,7 +162,7 @@ Thin “Claim only” handoffs are a process failure on **full** / **standard** 
 ## Consensus: <decision title>
 - **Proposal:** …
 - **From:** Frontend Design
-- **Approves:** (each must cite ≥1 evidence line from that role’s own section — bare ✓ invalid)
+- **Approves:** (each must cite ≥1 evidence line from that role’s own section — bare ✓ invalid; visual roles cite a DESIGN.md section)
   - Craft ✓ — evidence: …
   - Motion ✓ — evidence: …
   - Orchestrator ✓ — evidence: …
@@ -257,11 +258,13 @@ Write `panel-report/process-score.md` (binary yes/no):
 1. Preflight GO + run_class + protocol set?  
 2. Priority table + secondary non-negotiables in run-state?  
 3. Design brief answered before library search (if UI redesign)?  
-4. Handoffs used Objective / Inputs / Output (not Claim-only)?  
-5. Multi-persona impact on each implement proposal?  
-6. Consensus log with evidence-cited Approves before write?  
-7. Preserve list intact after fixes?  
-8. One Executor after PROCEED (no multi-author thrash)?  
+4. `design_system` loaded/drafted + alignment + **doc_quality** scored by Design System Checker?
+5. Handoffs used Objective / Inputs / Output (not Claim-only)?  
+6. Multi-persona impact on each implement proposal?  
+7. Consensus log with evidence-cited Approves (visual → DESIGN.md section) before write?  
+8. Preserve list intact after fixes?  
+9. One Executor after PROCEED (no multi-author thrash)?  
+10. New UI patterns updated DESIGN.md same change?  
 
 Any **no** → note as process debt in the report.
 

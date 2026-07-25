@@ -1,7 +1,8 @@
 # Panel Landing Page Copy
 
-**Direction:** Benefit + crew + “just ask” (Orchestrator manages skills).  
-**Priority:** Avery · secondary Jordan (real skills) · Sam (serious sample)
+**Direction:** Plain buyer language · install → ask → report.  
+**Priority:** Avery · secondary Jordan (real files) · Sam (serious sample)  
+**Voice law:** Below the fold use install, agent, report, file paths, GitHub. Save crew / Orchestrator / seats / P0 / AGENTS roster language for docs.
 
 ---
 
@@ -13,8 +14,8 @@ Lives in your repo
 **H1 (what + benefit)**  
 A design-review team so your product doesn’t look like AI slop
 
-**Sub (how + manager benefit)**  
-Each seat brings its own skill files. You don’t memorize skill names — the **Orchestrator** runs the crew. You just ask: **Run a panel**.
+**Sub**  
+Install once. Tell Cursor or Claude **Run a panel**. Get a scored report with file paths — not vague redesign notes.
 
 **Primary CTA**
 
@@ -23,43 +24,50 @@ npx @tysongreenan/panel init
 ```
 
 **Caption**  
-Then open Cursor or Claude → Run a panel · `/panel`
+Works with Cursor and Claude Code · `/panel`
 
 **Secondary**  
-Meet the crew · Sample report · npm
+Sample report (outline) · What gets installed (ghost → `#files`)
 
 ---
 
 ## How
 
 **H2**  
-You talk to the manager. Skills stay in the repo.
+Three steps. One command.
 
-**Body**  
-Init installs the pack. When you say Run a panel, the Orchestrator seats the right agents and loads the right files — craft, journey, copy, motion — without you hunting skill names.
-
-1. **Init** — One command drops the crew and their skills into your repo.  
-2. **Just ask** — Say “Run a panel.” The Orchestrator loads the right skills — you don’t memorize names.  
-3. **Ship the P0s** — Scored report with file paths. Fix what buyers would bounce on.
+1. **Install** — One command puts the review process in your project.  
+2. **Ask** — Tell your agent: “Run a panel.”  
+3. **Fix** — You get a scored report with file paths — what to change first.
 
 ---
 
-## Crew
+## Files
 
 **H2**  
-The crew in the package
+What gets installed
 
 **Body**  
-Specialists with their own skill files — anti-slop craft, journeys, personas, StoryBrand copy, motion, frontend patterns.
+Markdown playbooks your agent loads — the review process, craft checks, motion, and copy rules.
 
-(Show roster: Orchestrator first, PM seats, specialists with skill chips.)
+**List (mono → GitHub)**  
+PANEL.md · ANTI-SLOP.md · MOTION.md · COPY.md · FRONTEND.md · AGENTS.md  
+
+**Links**  
+Browse on GitHub · How the review team is structured: AGENTS.md
 
 ---
 
 ## Close
 
 **H2**  
-Install the crew. Just ask.
+Start in your project
 
 **Sub**  
-Copy the install. Say Run a panel. Open the sample report if you want proof first.
+Copy the install. Say Run a panel. Read the sample first if you want to see the output.
+
+**Primary**  
+Install block  
+
+**Transitional**  
+Sample report →

@@ -4,6 +4,8 @@
 Use this when reviewing or building UI.  
 **Seat:** Craft Critic.
 
+**With DESIGN.md:** generic anti-slop is not enough. Also fail brand-specific **Do’s and Don’ts** from the project design system (`web/DESIGN.md` for Panel; path in run-state `design_system`). Visual Approves cite a DESIGN.md section + any pattern hit here.
+
 ### Core standard
 Borrowed from the best anti-slop practice (Hallmark, Taste-Skill, Anthropic frontend-design, community “Design Slop” checklists):
 

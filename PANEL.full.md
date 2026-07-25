@@ -247,7 +247,7 @@ Check every time. These flag *problems* — they do not automatically authorize 
 
 1. **Understand the product** (if gaps remain after 0)
    - Scan routes, pages, components, forms, navigation, tokens, README, package.json, landing docs.
-   - Check for `DESIGN.md`. If missing, draft a starter from tokens/patterns and note the gap.
+   - **Design System Checker:** `DESIGN-SYSTEM.md` + `skills/design-md/` — resolve path, audit alignment + doc_quality, write `design_system` in run-state + `panel-report/design-system.md`. If missing on client, draft starter (`missing-drafted`).
    - Infer purpose, features, user goals.
    - Note promised vs implemented features.
    - Confirm **preserve list**.
@@ -279,8 +279,9 @@ Check every time. These flag *problems* — they do not automatically authorize 
    - Personas & Empathy Maps (**priority + secondaries**; each with Manager)
    - Critical Journeys (**persona-linked**; multi-persona coverage)
    - Journey Critique (evidence; note which persona is hurt/helped)
-   - Design System & Heuristic Evaluation (Hard gates pass/fail)
-   - **Frontend Design System** (design brief Q&A with managers; library cites; accepted vs rejected; persona fit)
+   - **Design system health** (Design System Checker: alignment · doc_quality · matrix · constraints · ship gate)
+   - Design System & Heuristic Evaluation (Hard gates pass/fail; cite design_system)
+   - **Frontend Design System** (design brief Q&A; DESIGN.md constraints; library cites; accepted vs rejected; persona fit; section cites)
    - **Craft / Anti-slop Evaluation** (pattern hits from `ANTI-SLOP.md`)
    - **Motion Evaluation** (findings table Before/After/Why; Block/Approve — from `MOTION.md`)
    - **Prose / microcopy** (stop-slop scores if marketing or report copy is in scope)

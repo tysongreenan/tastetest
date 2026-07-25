@@ -24,6 +24,8 @@ This is not “copy every viral thread.” It’s **keep what matches our produc
 | **Occam / simplify** | playbook |
 | **Browser-test the real UI** | panelcore Playwright tools (runtime); Journey when URL available |
 | **Taste / frontend-design skills** | We stay **buyer panel**, not Taste Skill clone — Craft + Frontend only |
+| **One visual source of truth** | Agent contract in `web/DESIGN.md`; run-state `design_system`; Approves cite sections |
+| **DESIGN.md kept current** | Design System Checker + `skills/design-md/` (not Frontend; not ui-ux-pro-max MASTER) |
 
 ---
 
@@ -37,7 +39,7 @@ This is not “copy every viral thread.” It’s **keep what matches our produc
 | Empathy Mapper | **`EMPATHY.md`** | personas | **Added** |
 | Journey Critic | **`JOURNEY.md`** | PANEL process | **Added** — persona success measure |
 | Heuristic Auditor | `playbook.md` | Occam, a11y, states | **Upgraded** |
-| Design System | `web/DESIGN.md` | FRONTEND | Strong (dogfood) |
+| Design System Checker | **`DESIGN-SYSTEM.md`** + **`skills/design-md/`** · living `web/DESIGN.md` | AUDIT · QUALITY · STARTER | **Owner** — currency + professional quality + veto |
 | Craft Critic | `ANTI-SLOP.md` | evidence format, +/− refs | **Upgraded** |
 | Prose Critic | `skills/stop-slop-prose/` | phrases, structures | Strong (upstream stop-slop) |
 | **Isa (copy)** | `COPY.md` | marketing-copy/* + **frameworks-x** | **Upgraded** |

@@ -54,7 +54,8 @@ TASKS: tuple[TaskSpec, ...] = (
         description=(
             "Scan routes, pages, components, forms, navigation, design tokens, README, "
             "and package manifests. Infer purpose, features, and primary user goals. "
-            "Locate or note missing DESIGN.md. Confirm preserve list. Only after preflight started."
+            "Resolve design system via root DESIGN.md (Panel: web/DESIGN.md); set run-state "
+            "design_system.path. Confirm preserve list. Only after preflight started."
         ),
         expected_output="Product Understanding section with purpose, features, and code anchors.",
     ),
@@ -87,12 +88,30 @@ TASKS: tuple[TaskSpec, ...] = (
         expected_output="Journey Critique with persona-tagged friction and evidence.",
     ),
     TaskSpec(
+        name="design_md_health",
+        description=(
+            "BLOCKING for visual runs. Design System Checker only. Load DESIGN-SYSTEM.md + "
+            "skills/design-md/ (AUDIT, QUALITY, STARTER as needed). Resolve path via root DESIGN.md. "
+            "Full-load living DESIGN.md; sync audit vs code; score doc_quality professional|thin|rewrite; "
+            "write run-state design_system (path, status, constraints, alignment, doc_quality, sections_cited). "
+            "Write panel-report/design-system.md. Propose DESIGN.md patch if drift/thin. "
+            "Draft starter if client missing. Veto visual ship if alignment fail or doc rewrite."
+        ),
+        expected_output=(
+            "design-system artifact: alignment matrix, doc_quality, constraints, ship gate Approve/Veto."
+        ),
+        blocking=True,
+    ),
+    TaskSpec(
         name="heuristic_and_design_audit",
         description=(
             "Evaluate against playbook.md (Krug, Nielsen, Laws of UX, fluidity checklist, "
-            "a11y, AI-era patterns). Check DESIGN.md adherence or draft a starter."
+            "a11y, AI-era patterns). Reference design_system alignment from design_md_health; "
+            "do not re-own DESIGN.md quality (Design System Checker owns that)."
         ),
-        expected_output="Design System & Heuristic Evaluation section.",
+        expected_output=(
+            "Heuristic Evaluation: hard gates pass/fail; cite design_system alignment if relevant."
+        ),
     ),
     TaskSpec(
         name="frontend_design_brief",
@@ -100,8 +119,9 @@ TASKS: tuple[TaskSpec, ...] = (
             "BLOCKING for Frontend Design. Interview Orchestrator + every seated Persona Manager "
             "for visual preferences: feel, trust/bounce, references, section depth, motion appetite. "
             "Orchestrator confirms priority + secondary non-negotiables + preserve list. "
-            "No ui-ux-pro-max search or layout proposal until answers are written. "
-            "See FRONTEND.md Step 0 and COLLABORATION design brief."
+            "No ui-ux-pro-max search or layout proposal until answers are written AND "
+            "design_system.status is loaded or missing-drafted (FRONTEND.md Step 0 + 0b). "
+            "See COLLABORATION design brief."
         ),
         expected_output="Design brief Q&A log with answers from Orchestrator and each PM-*.",
         blocking=True,
@@ -109,11 +129,15 @@ TASKS: tuple[TaskSpec, ...] = (
     TaskSpec(
         name="frontend_design_system",
         description=(
-            "Only after frontend_design_brief. Run skills/ui-ux-pro-max using keywords from the brief. "
-            "--design-system then domain/stack as needed. Multi-persona impact table. "
-            "Cite pattern, style, palette, type. Reject library hits that fight PM answers or Craft/Motion."
+            "Only after frontend_design_brief and design_system load. Run skills/ui-ux-pro-max "
+            "using keywords from the brief + DESIGN.md overview. Multi-persona impact table with "
+            "DESIGN.md align column. Cite DESIGN.md sections followed. Reject library hits that "
+            "fight DESIGN.md, PM answers, Craft, or Motion."
         ),
-        expected_output="Frontend Design System: brief summary, library cites, accepted vs rejected, persona fit.",
+        expected_output=(
+            "Frontend Design System: brief summary, design_system constraints, library cites, "
+            "accepted vs rejected, persona fit, section cites."
+        ),
     ),
     TaskSpec(
         name="craft_anti_slop_audit",

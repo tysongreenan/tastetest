@@ -38,6 +38,14 @@ Builds the final Markdown report from specialist artifacts. Does **not** invent 
 ## Journeys / friction
 …
 
+## Design system alignment (Design System Checker only)
+- path / status / doc_quality (professional | thin | rewrite):
+- alignment: pass | drift | fail
+- constraints applied:
+- section matrix (token / type / component / don’ts):
+- DESIGN.md updates required before ship:
+- artifact: panel-report/design-system.md
+
 ## Craft / motion / prose / copy (Isa)
 …
 
@@ -49,10 +57,12 @@ Builds the final Markdown report from specialist artifacts. Does **not** invent 
 
 ## Consensus
 - Decision: PROCEED | REVISE | BLOCK
-- Approves: …
+- Approves: … (visual Approves must cite DESIGN.md section)
 ```
 
 ### Rules
 - Misquoting a specialist → void section; re-pull.  
 - Missing secondary persona coverage → Professionalism cap (see COLLABORATION).  
-- No implement section without consensus PROCEED on standard/full runs.
+- No implement section without consensus PROCEED on standard/full runs.  
+- UI in scope but `design_system.status` not loaded/drafted → report must say **BLOCKED**, not invent alignment.  
+- Visual PROCEED without Design System Checker `alignment` when design-system seat was seated → incomplete report.

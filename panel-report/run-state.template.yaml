@@ -33,6 +33,16 @@ design_brief:
   PM-Jordan: ""
   PM-Sam: ""
 
+# Visual system contract — Design System Checker owns (DESIGN-SYSTEM.md + skills/design-md/)
+design_system:
+  path: web/DESIGN.md # client path | missing-drafted | n/a
+  status: null # loaded | missing-drafted | missing-blocked | n/a
+  constraints: [] # 3–5 bullets extracted from DESIGN.md after full load
+  alignment: null # pass | drift | fail — Design System Checker only
+  doc_quality: null # professional | thin | rewrite — Design System Checker only
+  sections_cited: [] # e.g. Colors, Components, Do’s and Don’ts
+  audit_path: null # e.g. panel-report/design-system.md
+
 scores:
   clarity: null
   density: null

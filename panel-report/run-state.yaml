@@ -1,0 +1,104 @@
+# Panel run-state — homepage REVISE implement 2026-07-25
+preflight: GO
+protocol: full
+run_class: implement
+
+intent: "Implement REVISE from homepage audit — collapse crew museum, promote sample, trim how restates, sync DESIGN.md."
+preserve:
+  - "npx @tysongreenan/panel init"
+  - "Labeled Copy on install"
+  - "Sample report → /report (Acme)"
+  - "Product path preview"
+  - "GitHub + skill file links"
+  - "Brand system"
+  - "Dark close install (text-foreground on bg-card)"
+
+personas_seated:
+  - Avery
+  - Jordan
+  - Sam
+
+priority: Avery
+secondary:
+  - persona: Jordan
+    non_negotiables:
+      - Real skill files / OSS credibility
+  - persona: Sam
+    non_negotiables:
+      - Sample first-class; no toy portrait museum
+
+design_brief:
+  Orchestrator: "Implement audit REVISE only — no library search, no new sections."
+  PM-Avery: "Density cut; install + sample first."
+  PM-Jordan: "Keep mono skill list + AGENTS.md."
+  PM-Sam: "Sample outline; no portrait grid."
+
+design_system:
+  path: web/DESIGN.md
+  status: loaded
+  constraints:
+    - "Primary = install + labeled Copy; dark close keeps light card ink"
+    - "Launch order: hero+preview → steps → skills mono list → dark close"
+    - "Sample outline before skills ghost; no crew portraits on home"
+    - "Type Space Grotesk / DM Sans / Geist Mono"
+  alignment: pass
+  doc_quality: professional
+  sections_cited:
+    - "Layout / Launch homepage structure"
+    - "Components / skills-mono-list"
+    - "Do's and Don'ts"
+  audit_path: panel-report/design-system.md
+
+scores:
+  clarity: 8.0
+  density: 8.0
+  hierarchy: 8.0
+  craft: 8.0
+  motion: 8.0
+  fluidity: 8.0
+  professionalism: 8.0
+  conversion: 8.0
+
+approves:
+  Orchestrator:
+    status: yes
+    evidence: "REVISE items shipped; lean anatomy restored"
+  PM-Avery:
+    status: yes
+    evidence: "Crew museum gone; sample outline; body ~1.4k from ~3.5k"
+  PM-Jordan:
+    status: yes
+    evidence: "Skills mono list + Browse skills/ + AGENTS.md retained"
+  PM-Sam:
+    status: yes
+    evidence: "Sample first secondary; no portrait grid"
+  Journey:
+    status: yes
+    evidence: "Land → install → sample → skills → close recovery"
+  Craft:
+    status: yes
+    evidence: "DESIGN Layout + Don'ts — no card-soup portraits"
+  Motion:
+    status: yes
+    evidence: "No new motion families"
+  Design_System_Checker:
+    status: yes
+    evidence: "alignment pass — code matches Launch structure"
+  Isa:
+    status: yes
+    evidence: "landing-copy.md synced; sample before skills"
+
+consensus:
+  decision: PROCEED
+  log_path: panel-report/council-homepage-audit.md
+  revise_round: 1
+
+artifacts:
+  - panel-report/report.md
+  - panel-report/implement-notes.md
+  - panel-report/desktop-full-after.png
+  - web/src/components/home-page.tsx
+  - web/DESIGN.md
+  - docs/landing-copy.md
+
+notes: "Implement complete 2026-07-25. bodyLen 3471→1384. #crew removed. Sample outline. How body cut. DESIGN.md skills-mono-list + don'ts updated."

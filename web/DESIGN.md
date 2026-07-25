@@ -4,9 +4,55 @@
 **Stack:** Next.js · Tailwind v4 · shadcn/ui · SmoothUI · Motion (Framer).  
 **Source of truth for tokens:** `src/app/globals.css` · fonts: `src/app/layout.tsx`.  
 **Companion skills:** root `ANTI-SLOP.md`, `MOTION.md`, `FRONTEND.md` (agent card + workflow Step 0b), `docs/personas.md`.  
-**Agents:** Frontend Design and Design System Checker load this file before proposing or scoring UI.
+**Maintainer seat:** Design System Checker — [`DESIGN-SYSTEM.md`](../DESIGN-SYSTEM.md) + [`skills/design-md/`](../skills/design-md/).  
+**Entry pointer:** repo root [`DESIGN.md`](../DESIGN.md) routes all agents here for Panel marketing.
 
 This file is **Panel’s** system — not a third-party brand kit. Structure is inspired by deep product design extracts (overview → tokens → type → layout → components → do/don’t → iteration). Values are taken from what ships in `web/`.
+
+---
+
+## Agent contract (all visual seats)
+
+**Law:** For any `web/` or Panel marketing UI work, this file is the visual source of truth. Pattern libraries (`ui-ux-pro-max`, viral frontend skills) are comparison banks only.
+
+### Who must load it
+
+| Seat | When | Required output |
+|------|------|-----------------|
+| **Orchestrator** | Phase 0 if visual/marketing in scope | Set `design_system` in `run-state.yaml` |
+| **Design System Checker** (**owner**) | Load + AUDIT + QUALITY every UI-scoped run | Alignment · doc_quality · run-state · may Veto ship |
+| **Frontend Design** | Step 0b before library search | 3–5 constraints applied + section cites |
+| **Craft Critic** | Visual craft audit | Note DESIGN.md don’ts hit, not only generic slop |
+| **Motion Critic** | When animating | Only surfaces allowed under Motion section |
+| **Executor** | Implement visual change | Cite section followed; update this file if new pattern |
+
+Isa / Product / Journey load **Voice** and conversion structure only as needed — they do not invent tokens or layout.
+
+### Hard rules
+
+1. **Load full file** (not H1 skim) before proposing, scoring, or shipping visual UI.  
+2. **Cite sections** you followed: Colors · Typography · Layout · Components · Motion · Do’s and Don’ts · Iteration.  
+3. **Conflict:** library / personal taste / third-party skill **loses** to this file + `ANTI-SLOP.md`.  
+4. **New pattern** (component, section anatomy, token) → update this file **in the same change** as code.  
+5. **Copy:** selling narrative = `COPY.md` / Isa; this file owns microcopy **voice** and conversion strings only.  
+6. **Page order:** do not reorder launch sections without Orchestrator + PM Approves.  
+7. **Run-state:** after load, Orchestrator or Design System Checker writes:
+
+```yaml
+design_system:
+  path: web/DESIGN.md   # or client path / "missing-drafted"
+  status: loaded        # loaded | missing-drafted | missing-blocked
+  constraints:          # 3–5 bullets from this file
+    - "…"
+  alignment: null       # pass | drift | fail — set by Design System Checker
+```
+
+8. **Block:** if `status` is not `loaded` or `missing-drafted` and the run touches visual UI → Frontend Design and Executor **BLOCKED**.  
+9. **Approve evidence:** Craft / Design System / Frontend Approves on visual ship must cite a **DESIGN.md section name**, not “looks fine.”
+
+### Client projects under review
+
+If the target product has no DESIGN.md: Design System Checker drafts a starter from tokens + patterns, sets `status: missing-drafted`, and notes the gap in the report. **Do not** paste Panel’s brand kit as the client’s system.
 
 ---
 
@@ -14,7 +60,7 @@ This file is **Panel’s** system — not a third-party brand kit. Structure is 
 
 Panel’s marketing presence should feel like a **precise developer tool** — calm light canvas, electric blue actions, typography-first hierarchy, and one obvious conversion path: copy install → run a panel → see a real report shape. Not a craft-taste skill site; a buyer-panel product page.
 
-The homepage opens on a value claim and an **install block** (not a demo request). Proof is a **product path preview** (code → agent → report) plus a **Sample report** link to `/report` (Acme Checkout). Skills depth is a mono file list; crew/org live on GitHub, not the homepage. Dark bands appear only as the closing install CTA, not as a default product skin. Color is mostly flat UI; soft blue radial wash sits behind the hero as atmosphere, not decoration chrome.
+The homepage opens on a value claim and an **install block** (not a demo request). Proof is a **Sample report** link to `/report` (Acme Checkout) plus real skill files — not a fake product-path / tab demo in the hero. Skills depth is a mono file list; crew/org live on GitHub, not the homepage. Dark bands appear only as the closing install CTA, not as a default product skin. Color is mostly flat UI; soft blue radial wash sits behind the hero as atmosphere, not decoration chrome.
 
 What makes the system distinctive is the mix of **buyer-honest conversion UI** (terminal install, labeled Copy, real npm command) with **craft restraint** (no glassmorphism, no traffic-light browser frames, no identical card grids on every section). Motion is ambient brand (orb) or state feedback — never fake affordances.
 
@@ -23,8 +69,8 @@ What makes the system distinctive is the mix of **buyer-honest conversion UI** (
 - Cool ink on near-white canvas; primary action is saturated blue, not near-black pill enterprise.
 - Space Grotesk display + DM Sans body + Geist Mono for commands/paths.
 - Pill CTAs (`rounded-full`) for primary marketing actions; install uses a terminal-style card + blue Copy.
-- Lean section anatomy: split hero + preview · three steps · skills mono list · dark close. (Optional full-marketing surfaces live under Components as non-ship defaults.)
-- One strong artifact (sample report at `/report`) beats four explanation zones on the homepage.
+- Lean section anatomy: centered hero + install · three steps · skills mono list · dark close. (Optional full-marketing surfaces live under Components as non-ship defaults.)
+- One strong artifact (sample report at `/report`) beats fake demo widgets and four explanation zones.
 - Real install path only — no fake CTAs.
 - Install card always sets its own ink (`text-foreground` on `bg-card`) so the command stays readable inside the dark close band.
 
@@ -159,10 +205,10 @@ Large empty space is for **scan path and focal proof**, not for enterprise “tr
 | Pattern | Spec |
 |---------|------|
 | **Page max** | `max-w-5xl` centered (marketing) |
-| **Nav** | Logo left · How · Skills · GitHub (`aria-label` when label hidden on mobile) · Install · sticky blur header |
-| **Hero** | 2-col desktop (`lg:grid-cols-2`): copy+install \| `ProductPreview` |
-| **How / Three steps** | Full width; 3-col short steps on `sm+` |
-| **Skills** | Mono file list (`rounded-2xl` bordered rows) + Browse skills/ link |
+| **Nav** | Logo left · How · Files · GitHub (`aria-label` when label hidden on mobile) · Install · sticky blur header |
+| **Hero** | Centered single column (`max-w-2xl`): H1 · plain sub · install · Sample + What gets installed — no fake product demo |
+| **How / Three steps** | Full width; Install · Ask · Fix — buyer words, not crew jargon |
+| **Files** | Mono file list (`rounded-2xl` bordered rows) + Browse on GitHub |
 | **Close** | Narrow `max-w-md` centered install on `bg-foreground` band |
 | **Optional (off homepage)** | Problem split · pipeline demo · sample excerpt band · crew roster · org chart — only if council re-opens full marketing |
 
@@ -180,15 +226,15 @@ Whitespace protects the **install → sample** path. Do not fill every band with
 **Primary job:** understand → copy install.  
 **Secondary:** prove it’s real without a content museum.
 
-1. Nav — logo · How · Skills · GitHub · Install  
-2. Hero — H1 · one line · install + Copy · Sample report · Product preview  
-3. Three steps (Init / Run / Fix) — short lines only  
-4. Skills as mono file list (not card grids) + Browse skills/  
-5. Dark close install band (command stays on light card) 
+1. Nav — logo · How · Files · GitHub · Install  
+2. Hero — H1 · plain sub · install + Copy · **Sample report** (outline) · What gets installed (ghost). No fake path demo.  
+3. Three steps (Install / Ask / Fix) — buyer words only  
+4. What gets installed — mono file list + Browse on GitHub + quiet AGENTS.md link  
+5. Dark close: “Start in your project” + install (command stays on light card)  
 6. Thin footer (Sample · Agents · Skills · GitHub)
 
-**Still off the homepage:** full crew portraits, org chart pyramid, gap demos, long sample essay, sticky install bar.  
-**Sample page:** `/report`. **Crew depth:** GitHub `AGENTS.md`.
+**Still off the homepage:** full crew portraits, product-path tab demos, org chart pyramid, gap demos, long sample essay, sticky install bar.  
+**Sample page:** `/report` (primary proof). **Crew depth:** GitHub `AGENTS.md` (not homepage `AgentRoster`).
 
 ---
 
@@ -251,15 +297,19 @@ Terminal-style card: “install” header bar, `$` + mono command `npx @tysongre
 
 Short next-step under hero install only, e.g. “Then open Cursor or Claude → Run a panel”. Muted 11px. Dark close band has no caption — light card alone is enough.
 
-#### `product-preview`
+#### `product-preview` (optional / off homepage)
 
-Tabbed proof (Code · Agent · Report). Real buttons; optional auto-cycle when motion allowed. No traffic-light browser chrome. Report tab shows scores + P0 + file path.
+Tabbed Code · Agent · Report demo. **Not used on the launch homepage** — felt like fake product UI and did not serve Avery (install), Sam (real sample), or Jordan (real files). Prefer `/report` + skills mono list. Keep component only if a future full-marketing page re-approves it.
+
+#### `files-mono-list` (homepage depth)
+
+Bordered `rounded-2xl` list of mono file rows (`PANEL.md`, `ANTI-SLOP.md`, …) linking to GitHub. Section title **What gets installed** (not “skills/crew”). Footer: Browse on GitHub + quiet AGENTS.md structure link.
 
 ### Navigation & chrome
 
 #### `site-header`
 
-Sticky, blurred. Logo = `SiriOrb` (~26px) + wordmark. Links: How · Skills (hidden below `sm`) · GitHub (icon always; text `sm+`; **`aria-label="GitHub"` required**) · **Install** (always visible).
+Sticky, blurred. Logo = `SiriOrb` (~26px) + wordmark. Links: How · Files (hidden below `sm`) · GitHub (icon always; text `sm+`; **`aria-label="GitHub"` required**) · **Install** (always visible).
 
 #### `site-footer`
 
@@ -274,10 +324,6 @@ Decorative brand motion only. Colors from orb palette. Must honor `prefers-reduc
 Optional polish on **non-critical** labels (e.g. GitHub). **Never** on H1 or primary install.
 
 ### Proof & demos
-
-#### `product-preview`
-
-Tabbed card: Code · Agent · Report. Tabs switch real panels; optional auto-loop disabled under reduced motion. Footer helper: “click tabs or watch the loop.”
 
 #### `sample-excerpt`
 
@@ -349,13 +395,13 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 
 ### Do
 
-- Keep **one obvious primary action** per section; install path always recoverable (sticky + close).  
+- Keep **one obvious primary action** per section; install path always recoverable (nav Install + close).  
 - Prefer a working install CTA over a museum of secondary CTAs. 
-- Link to **proof** (sample) before deep crew/skills.  
-- Vary section anatomy (split / list / featured+list / dark close).  
+- Link to **proof** (sample) before deep crew/skills — hero secondary: Sample (outline) first, skills ghost second.  
+- Vary section anatomy (split / list / mono list / dark close).  
 - Use primary blue for conversion; mono for commands and paths.  
 - Keyboard focus rings (`ring` = primary).  
-- Mobile: keep Start/install reachable (nav + sticky).  
+- Mobile: keep Start/install reachable (nav Install always on).  
 - Run **ANTI-SLOP** after visual changes; **MOTION** when animating.
 
 ### Don’t
@@ -368,6 +414,8 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 - Uppercase mono eyebrow on **every** section.  
 - Identical 3–4 column feature/pipeline cards (01–04 decoration).  
 - Traffic-light browser chrome or letter-avatar empathy grids as default.  
+- Full crew **portrait** grids on the homepage (agent-roster is optional off-home / GitHub depth).  
+- Hero **product-path / tab demos** that re-enact the pipeline (corny fake UI; personas don’t need it).  
 - Same `rounded-2xl + border + soft shadow` on every block without hierarchy.  
 - Replace install with abstract “2 steps” prose.  
 - Ship redesigns without design brief answers from Orchestrator + Persona Managers (`FRONTEND.md` Step 0).
@@ -378,9 +426,11 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 
 - Short sentences. Krug: omit needless words.  
 - Specific over clever. Evidence over vibes.  
-- Admit V1: skill-first, agent-run.  
+- **Buyer words on the marketing page:** install, agent, report, file paths, GitHub.  
+- **Avoid on homepage (unless quiet footer/docs link):** Orchestrator, crew, seats, P0s, “manager,” “skill names,” “roster.”  
+- Admit V1: files in-repo, agent-run.  
 - Stop-slop prose: no “cool,” “actually,” “still want…?” filler — see `skills/stop-slop-prose/`.  
-- Primary conversion strings: `npx @tysongreenan/panel init`, `Run a panel`, sample CTAs **Read full sample** / **See sample report**.
+- Primary conversion strings: `npx @tysongreenan/panel init`, `Run a panel`, **Sample report**.
 
 ---
 
@@ -388,9 +438,9 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 
 | Range | Behavior |
 |-------|----------|
-| **&lt;640px** | Single column; hero stacks; nav: logo · GitHub icon (`aria-label`) · **Install**; How/Skills hidden |
-| **640–1024** | Wider single/two column; How · Skills · GitHub label show |
-| **≥1024** | Full nav; 2-col hero (copy \| `ProductPreview`); 3-col steps |
+| **&lt;640px** | Single column; hero stacks; nav: logo · GitHub icon (`aria-label`) · **Install**; How/Files hidden |
+| **640–1024** | Wider; How · Files · GitHub label show |
+| **≥1024** | Full nav; centered hero install; 3-col steps |
 
 ### Touch
 
@@ -399,7 +449,7 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 
 ### Collapse strategy
 
-- Nav: How/Skills hide below `sm`; **Install always on**.  
+- Nav: How/Files hide below `sm`; **Install always on**.  
 - Hero: 2-col → 1-col stack.  
 - Steps: 3-col → 1-col.
 
@@ -422,7 +472,7 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 
 1. **Start** from light canvas (or the single dark close band). No mid-tone full-page fill unless it is sample band `oklch(0.97 0.012 265)` or muted section.  
 2. **Primary action** = install or “Read full sample” — one filled primary; companion outline/ghost.  
-3. **Proof** = `product-preview` or `sample-excerpt` / `/report` — never invent fake dashboards.  
+3. **Proof** = Sample report CTA + `/report` (or a static excerpt of that report) — never invent fake dashboards or auto-cycling path demos.  
 4. **Depth** = roster list + skills rows + org — after conversion/proof.  
 5. **Components:** reuse `InstallBlock`, `ButtonCopy`, shadcn variants, SmoothUI only with jobs.  
 6. **Gate:** ANTI-SLOP screenshot test · MOTION if animated · preserve list (install, sample integrity, GitHub).  

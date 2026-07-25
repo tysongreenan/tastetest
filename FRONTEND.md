@@ -23,6 +23,7 @@ When designing, redesigning, or reviewing **frontend UI** (pages, components, co
 | Skill | Why |
 |-------|-----|
 | **`web/DESIGN.md`** | **Project source of truth** — tokens, type, components, page order (load before inventing UI) |
+| **`DESIGN-SYSTEM.md`** + `skills/design-md/` | **Design System Checker** owns doc health — you cite sections; you do not set alignment/doc_quality |
 | `ANTI-SLOP.md` | Library can suggest trendy templates that still read as AI slop |
 | `MOTION.md` | Motion must meet Emil frequency/easing bar |
 | `PANEL.md` | Buyer jobs and conversion honesty |
@@ -128,17 +129,30 @@ Orchestrator:
 
 If answers are missing → Frontend Design **stops** and posts `BLOCKED: design brief incomplete` — no library search, no UI implement.
 
-#### 0b. Load project DESIGN.md (mandatory when `web/` or marketing is in scope)
+#### 0b. Load project DESIGN.md (mandatory when UI is in scope)
 
-Read **`web/DESIGN.md`** (full file, not skim of H1s only). Extract:
+1. Resolve path via root **`DESIGN.md`** (Panel dogfood → **`web/DESIGN.md`**).  
+2. Read the **full** system file (not H1 skim). Honor **Agent contract** at top of `web/DESIGN.md`.  
+3. Extract and write into `panel-report/run-state.yaml` → `design_system`:
+
+| Field | Value |
+|-------|--------|
+| `path` | resolved path |
+| `status` | `loaded` (or `missing-drafted` if client gap) |
+| `constraints` | 3–5 bullets (tokens, layout order, bans, preserve UI) |
+| `sections_cited` | e.g. Colors, Components, Do’s and Don’ts |
+
+Must extract at minimum:
 
 - Preserve list touchpoints (install, sample, GitHub, orb rules)  
 - Color / type / radius tokens to reuse  
 - Component inventory to extend vs invent  
 - Launch structure if homepage  
-- Known gaps (e.g. npm honesty)  
+- Known gaps  
 
-If `DESIGN.md` is missing on a **client** project under review: draft a starter from tokens + patterns, note the gap in the report (Panel already requires this). Do **not** paste a third-party brand kit as the client’s system.
+If `status` is still null/`missing-blocked` → post `BLOCKED: design_system not loaded` — no library search, no layout invent.
+
+If `DESIGN.md` is missing on a **client** project under review: Design System Checker (or Frontend) drafts a starter from tokens + patterns, sets `status: missing-drafted`, notes the gap in the report. Do **not** paste Panel’s brand kit as the client’s system.
 
 #### 1. Translate brief → search keywords
 
@@ -184,14 +198,16 @@ Sparse ≠ refined. Unless managers explicitly asked for minimal:
 Add **Frontend Design System** section:
 
 - **Design brief Q&A** (Orchestrator + each Persona Manager answers)  
-- **`DESIGN.md` loaded?** path + 3–5 constraints applied (or “drafted starter — missing”)  
+- **`design_system` run-state** — path · status · 3–5 constraints · sections cited  
 - Query used + product type match  
 - Recommended pattern / style / palette / type (cite search)  
 - Anti-patterns from library  
-- What you **rejected** and why (anti-slop / motion / **persona preference** / **DESIGN.md**)  
-- Multi-persona impact table  
+- What you **rejected** and why (anti-slop / motion / **persona preference** / **DESIGN.md section**)  
+- Multi-persona impact table (include DESIGN.md align column)  
 - Stack notes  
-- **DESIGN.md updates proposed** (if new patterns shipped)
+- **DESIGN.md updates proposed** (if new patterns shipped — must land same PR as code)
+
+**Approve evidence (visual):** one line naming a DESIGN.md section, e.g. `Approve — Components · InstallBlock; Do’s and Don’ts · no glass`.
 
 ---
 

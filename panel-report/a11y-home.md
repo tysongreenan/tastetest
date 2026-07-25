@@ -1,0 +1,275 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - banner [ref=f1e3]:
+      - generic [ref=f1e4]:
+        - link "Panel" [ref=f1e5] [cursor=pointer]:
+          - /url: /
+        - navigation "Primary" [ref=f1e8]:
+          - link "How" [ref=f1e9] [cursor=pointer]:
+            - /url: "#how"
+          - link "Crew" [ref=f1e10] [cursor=pointer]:
+            - /url: "#crew"
+          - link "GitHub" [ref=f1e11] [cursor=pointer]:
+            - /url: https://github.com/tysongreenan/tastetest
+          - link "Install" [ref=f1e13] [cursor=pointer]:
+            - /url: "#start"
+    - main [ref=f1e14]:
+      - generic [ref=f1e17]:
+        - generic [ref=f1e18]:
+          - paragraph [ref=f1e19]: Lives in your repo
+          - heading "A design-review team so your product doesn’t look like AI slop" [level=1] [ref=f1e20]
+          - paragraph [ref=f1e21]: "Each seat brings its own skill files. You don’t memorize skill names — the Orchestrator runs the crew. You just ask: Run a panel."
+          - generic [ref=f1e23]:
+            - generic [ref=f1e24]:
+              - generic [ref=f1e25]:
+                - generic [ref=f1e28]: install
+                - generic [ref=f1e29]: npm
+              - generic [ref=f1e30]:
+                - generic [ref=f1e31]: $
+                - code [ref=f1e32]: npx @tysongreenan/panel init
+                - button "Copy" [ref=f1e34] [cursor=pointer]
+            - paragraph [ref=f1e40]: Then open Cursor or Claude → Run a panel · /panel
+          - generic [ref=f1e41]:
+            - link "Meet the crew" [ref=f1e42] [cursor=pointer]:
+              - /url: "#crew"
+            - link "Sample report" [ref=f1e43] [cursor=pointer]:
+              - /url: /report
+            - link "npm" [ref=f1e44] [cursor=pointer]:
+              - /url: https://www.npmjs.com/package/@tysongreenan/panel
+        - generic [ref=f1e46]:
+          - paragraph [ref=f1e48]: Product path
+          - generic [ref=f1e49]:
+            - button "Code" [ref=f1e50]
+            - button "Agent" [ref=f1e56]
+            - button "Report" [ref=f1e59]
+          - generic [ref=f1e394]:
+            - generic [ref=f1e395]:
+              - generic [ref=f1e396]:
+                - paragraph [ref=f1e397]: Fluidity
+                - paragraph [ref=f1e398]: 6/10
+              - generic [ref=f1e399]:
+                - paragraph [ref=f1e400]: Craft
+                - paragraph [ref=f1e401]: 5/10
+              - generic [ref=f1e402]:
+                - paragraph [ref=f1e403]: Conv.
+                - paragraph [ref=f1e404]: 4/10
+            - generic [ref=f1e405]:
+              - paragraph [ref=f1e406]: P0
+              - paragraph [ref=f1e407]: Pay below fold on mobile
+              - paragraph [ref=f1e408]: app/checkout/page.tsx
+      - generic [ref=f1e82]:
+        - heading "You talk to the manager. Skills stay in the repo." [level=2] [ref=f1e83]
+        - paragraph [ref=f1e84]: Init installs the pack. When you say Run a panel, the Orchestrator seats the right agents and loads the right files — craft, journey, copy, motion — without you hunting skill names.
+        - list [ref=f1e85]:
+          - listitem [ref=f1e86]:
+            - paragraph [ref=f1e87]: "1"
+            - paragraph [ref=f1e88]: Init
+            - paragraph [ref=f1e89]: One command drops the crew and their skills into your repo.
+          - listitem [ref=f1e90]:
+            - paragraph [ref=f1e91]: "2"
+            - paragraph [ref=f1e92]: Just ask
+            - paragraph [ref=f1e93]: Say “Run a panel.” The Orchestrator loads the right skills — you don’t memorize names.
+          - listitem [ref=f1e94]:
+            - paragraph [ref=f1e95]: "3"
+            - paragraph [ref=f1e96]: Ship the P0s
+            - paragraph [ref=f1e97]: Scored report with file paths. Fix what buyers would bounce on.
+      - generic [ref=f1e98]:
+        - generic [ref=f1e99]:
+          - heading "The crew in the package" [level=2] [ref=f1e100]
+          - paragraph [ref=f1e101]: Specialists with their own skill files — anti-slop craft, journeys, personas, StoryBrand copy, motion, frontend patterns. Open a seat to see what ships with init.
+        - generic [ref=f1e102]:
+          - generic [ref=f1e103]:
+            - paragraph [ref=f1e104]: Manager · persona seats
+            - list [ref=f1e105]:
+              - listitem [ref=f1e106]:
+                - article [ref=f1e107]:
+                  - generic [ref=f1e109]:
+                    - heading "Orchestrator" [level=3] [ref=f1e110]
+                    - paragraph [ref=f1e111]: Your manager for the crew
+                    - paragraph [ref=f1e112]: Reports to You
+                    - paragraph [ref=f1e113]: You just ask. Phase order, priority council, who loads which skill, final report. You never need to memorize skill file names.
+                    - list [ref=f1e114]:
+                      - listitem [ref=f1e115]:
+                        - link "PANEL.md" [ref=f1e116] [cursor=pointer]:
+                          - /url: https://github.com/tysongreenan/tastetest/blob/main/PANEL.md
+                      - listitem [ref=f1e121]:
+                        - link "COLLABORATION.md" [ref=f1e122] [cursor=pointer]:
+                          - /url: https://github.com/tysongreenan/tastetest/blob/main/COLLABORATION.md
+                      - listitem [ref=f1e127]:
+                        - link "AGENTS.md" [ref=f1e128] [cursor=pointer]:
+                          - /url: https://github.com/tysongreenan/tastetest/blob/main/AGENTS.md
+              - listitem [ref=f1e133]:
+                - article [ref=f1e134]:
+                  - generic [ref=f1e136]:
+                    - heading "PM-Avery" [level=3] [ref=f1e137]
+                    - paragraph [ref=f1e138]: Persona Manager
+                    - paragraph [ref=f1e139]: Avery · founder
+                    - paragraph [ref=f1e140]: Reports to Orchestrator
+                    - paragraph [ref=f1e141]: "Fights for the indie founder: obvious install, report clear in minutes. Vetoes anything that hides the CTA."
+                    - list [ref=f1e142]:
+                      - listitem [ref=f1e143]:
+                        - link "docs/personas.md" [ref=f1e144] [cursor=pointer]:
+                          - /url: https://github.com/tysongreenan/tastetest/blob/main/docs/personas.md
+                      - listitem [ref=f1e149]:
+                        - link "COLLABORATION.md" [ref=f1e150] [cursor=pointer]:
+                          - /url: https://github.com/tysongreenan/tastetest/blob/main/COLLABORATION.md
+              - listitem [ref=f1e155]:
+                - article [ref=f1e156]:
+                  - generic [ref=f1e158]:
+                    - heading "PM-Jordan" [level=3] [ref=f1e159]
+                    - paragraph [ref=f1e160]: Persona Manager
+                    - paragraph [ref=f1e161]: Jordan · eng
+                    - paragraph [ref=f1e162]: Reports to Orchestrator
+                    - paragraph [ref=f1e163]: "Fights for the engineer: real init, OSS credibility, skills that re-run. Vetoes toy demos."
+                    - list [ref=f1e164]:
+                      - listitem [ref=f1e165]:
+                        - link "docs/personas.md" [ref=f1e166] [cursor=pointer]:
+                          - /url: https://github.com/tysongreenan/tastetest/blob/main/docs/personas.md
+                      - listitem [ref=f1e171]:
+                        - link "AGENTS.md" [ref=f1e172] [cursor=pointer]:
+                          - /url: https://github.com/tysongreenan/tastetest/blob/main/AGENTS.md
+              - listitem [ref=f1e177]:
+                - article [ref=f1e178]:
+                  - generic [ref=f1e180]:
+                    - heading "PM-Sam" [level=3] [ref=f1e181]
+                    - paragraph [ref=f1e182]: Persona Manager
+                    - paragraph [ref=f1e183]: Sam · designer
+                    - paragraph [ref=f1e184]: Reports to Orchestrator
+                    - paragraph [ref=f1e185]: "Fights for the designer: client-safe sample, refined craft. Vetoes template UI."
+                    - list [ref=f1e186]:
+                      - listitem [ref=f1e187]:
+                        - link "docs/personas.md" [ref=f1e188] [cursor=pointer]:
+                          - /url: https://github.com/tysongreenan/tastetest/blob/main/docs/personas.md
+                      - listitem [ref=f1e193]:
+                        - link "ANTI-SLOP.md" [ref=f1e194] [cursor=pointer]:
+                          - /url: https://github.com/tysongreenan/tastetest/blob/main/ANTI-SLOP.md
+          - generic [ref=f1e199]:
+            - generic [ref=f1e200]:
+              - paragraph [ref=f1e201]: Specialists · each with their skill
+              - link "Full roster in AGENTS.md" [ref=f1e202] [cursor=pointer]:
+                - /url: https://github.com/tysongreenan/tastetest/blob/main/AGENTS.md
+            - list [ref=f1e203]:
+              - listitem [ref=f1e204]:
+                - generic [ref=f1e206]:
+                  - generic [ref=f1e207]:
+                    - heading "Product Analyst" [level=3] [ref=f1e208]
+                    - generic [ref=f1e209]: Promised vs shipped
+                  - paragraph [ref=f1e210]: Keeps copy honest. Ban list for claims the product cannot keep.
+                  - generic [ref=f1e211]:
+                    - generic [ref=f1e212]: → Orchestrator
+                    - link "PRODUCT.md" [ref=f1e213] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/blob/main/PRODUCT.md
+              - listitem [ref=f1e218]:
+                - generic [ref=f1e220]:
+                  - generic [ref=f1e221]:
+                    - heading "Empathy Mapper" [level=3] [ref=f1e222]
+                    - generic [ref=f1e223]: Maps & seats
+                  - paragraph [ref=f1e224]: Builds empathy maps and seats Persona Managers. Blocks stereotypes.
+                  - generic [ref=f1e225]:
+                    - generic [ref=f1e226]: → Orchestrator
+                    - link "EMPATHY.md" [ref=f1e227] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/blob/main/EMPATHY.md
+                    - link "docs/personas.md" [ref=f1e232] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/blob/main/docs/personas.md
+              - listitem [ref=f1e237]:
+                - generic [ref=f1e239]:
+                  - generic [ref=f1e240]:
+                    - heading "Journey Critic" [level=3] [ref=f1e241]
+                    - generic [ref=f1e242]: Whole-product flows
+                  - paragraph [ref=f1e243]: Walks flows for every in-scope persona. Priority weighted; secondary harm pass on.
+                  - generic [ref=f1e244]:
+                    - generic [ref=f1e245]: → Orchestrator
+                    - link "JOURNEY.md" [ref=f1e246] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/blob/main/JOURNEY.md
+                    - link "playbook.md" [ref=f1e251] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/blob/main/playbook.md
+              - listitem [ref=f1e256]:
+                - generic [ref=f1e258]:
+                  - generic [ref=f1e259]:
+                    - heading "Craft Critic" [level=3] [ref=f1e260]
+                    - generic [ref=f1e261]: Visual anti-slop
+                  - paragraph [ref=f1e262]: Catches template UI, equal-weight CTAs, empty decoration — so the page doesn’t look AI-made.
+                  - generic [ref=f1e263]:
+                    - generic [ref=f1e264]: → Orchestrator
+                    - link "ANTI-SLOP.md" [ref=f1e265] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/blob/main/ANTI-SLOP.md
+                    - link "playbook.md" [ref=f1e270] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/blob/main/playbook.md
+              - listitem [ref=f1e275]:
+                - generic [ref=f1e277]:
+                  - generic [ref=f1e278]:
+                    - heading "Isa" [level=3] [ref=f1e279]
+                    - generic [ref=f1e280]: Marketing copywriter
+                  - paragraph [ref=f1e281]: StoryBrand + Don’t Make Me Think. Selling hierarchy and how we show the product — not layout.
+                  - generic [ref=f1e282]:
+                    - generic [ref=f1e283]: → Orchestrator
+                    - link "COPY.md" [ref=f1e284] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/blob/main/COPY.md
+                    - link "skills/marketing-copy" [ref=f1e289] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/tree/main/skills/marketing-copy
+              - listitem [ref=f1e294]:
+                - generic [ref=f1e296]:
+                  - generic [ref=f1e297]:
+                    - heading "Prose Critic" [level=3] [ref=f1e298]
+                    - generic [ref=f1e299]: Writing anti-slop
+                  - paragraph [ref=f1e300]: Kills AI cadence in microcopy after the story is right.
+                  - generic [ref=f1e301]:
+                    - generic [ref=f1e302]: → Orchestrator
+                    - link "stop-slop-prose" [ref=f1e303] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/tree/main/skills/stop-slop-prose
+              - listitem [ref=f1e308]:
+                - generic [ref=f1e310]:
+                  - generic [ref=f1e311]:
+                    - heading "Motion Critic" [level=3] [ref=f1e312]
+                    - generic [ref=f1e313]: Animation craft
+                  - paragraph [ref=f1e314]: Purposeful motion, real easing, reduced-motion respect.
+                  - generic [ref=f1e315]:
+                    - generic [ref=f1e316]: → Orchestrator
+                    - link "MOTION.md" [ref=f1e317] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/blob/main/MOTION.md
+                    - link "skills/motion" [ref=f1e322] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/tree/main/skills/motion
+              - listitem [ref=f1e327]:
+                - generic [ref=f1e329]:
+                  - generic [ref=f1e330]:
+                    - heading "Frontend Design" [level=3] [ref=f1e331]
+                    - generic [ref=f1e332]: Pattern library
+                  - paragraph [ref=f1e333]: Cannot invent taste. Interviews managers first, then proposes from the pattern library.
+                  - generic [ref=f1e334]:
+                    - generic [ref=f1e335]: → Orchestrator + all PMs
+                    - link "FRONTEND.md" [ref=f1e336] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/blob/main/FRONTEND.md
+                    - link "web/DESIGN.md" [ref=f1e341] [cursor=pointer]:
+                      - /url: https://github.com/tysongreenan/tastetest/tree/main/web/DESIGN.md
+      - generic [ref=f1e347]:
+        - heading "Install the crew. Just ask." [level=2] [ref=f1e348]
+        - paragraph [ref=f1e349]: Copy the install. Say Run a panel. Open the sample report if you want proof first.
+        - generic [ref=f1e352]:
+          - generic [ref=f1e353]:
+            - generic [ref=f1e356]: install
+            - generic [ref=f1e357]: npm
+          - generic [ref=f1e358]:
+            - generic [ref=f1e359]: $
+            - code [ref=f1e360]: npx @tysongreenan/panel init
+            - button "Copy" [ref=f1e362] [cursor=pointer]
+        - link "Sample report →" [ref=f1e368] [cursor=pointer]:
+          - /url: /report
+    - contentinfo [ref=f1e369]:
+      - generic [ref=f1e370]:
+        - generic [ref=f1e373]:
+          - paragraph [ref=f1e374]: Panel
+          - paragraph [ref=f1e375]:
+            - text: © 2026 ·
+            - link "MIT" [ref=f1e376] [cursor=pointer]:
+              - /url: https://github.com/tysongreenan/tastetest/blob/main/LICENSE
+        - navigation "Footer" [ref=f1e377]:
+          - link "Sample" [ref=f1e378] [cursor=pointer]:
+            - /url: /report
+          - link "Agents" [ref=f1e379] [cursor=pointer]:
+            - /url: https://github.com/tysongreenan/tastetest/blob/main/AGENTS.md
+          - link "Skills" [ref=f1e380] [cursor=pointer]:
+            - /url: https://github.com/tysongreenan/tastetest/tree/main/skills
+          - link "GitHub" [ref=f1e381] [cursor=pointer]:
+            - /url: https://github.com/tysongreenan/tastetest
+  - button "Open Next.js Dev Tools" [ref=f1e389] [cursor=pointer]
+  - alert [ref=f1e409]

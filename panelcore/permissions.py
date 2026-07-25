@@ -70,11 +70,18 @@ GATES: tuple[ApprovalGate, ...] = (
         veto_roles=(),
     ),
     ApprovalGate(
+        action="design_md_update",
+        proposers=("Design System Checker",),
+        must_consult=("Frontend Design", "Craft Critic"),
+        must_approve=(ORCHESTRATOR, "Design System Checker"),
+        veto_roles=("Design System Checker",),
+    ),
+    ApprovalGate(
         action="implement_layout",
         proposers=("Frontend Design", "Craft Critic"),
-        must_consult=("Journey Critic", "Empathy Mapper"),
-        must_approve=(ORCHESTRATOR, "Craft Critic", PRIORITY_PM),
-        veto_roles=("Craft Critic",),
+        must_consult=("Journey Critic", "Empathy Mapper", "Design System Checker"),
+        must_approve=(ORCHESTRATOR, "Craft Critic", "Design System Checker", PRIORITY_PM),
+        veto_roles=("Craft Critic", "Design System Checker"),
     ),
     ApprovalGate(
         action="implement_motion",
@@ -107,8 +114,9 @@ GATES: tuple[ApprovalGate, ...] = (
             "Journey Critic",
             "Craft Critic",
             "Motion Critic",
+            "Design System Checker",
         ),
-        veto_roles=("Craft Critic", "Motion Critic", PRIORITY_PM),
+        veto_roles=("Craft Critic", "Motion Critic", "Design System Checker", PRIORITY_PM),
     ),
     ApprovalGate(
         action="ship_report",
