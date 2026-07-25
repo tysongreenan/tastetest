@@ -1,14 +1,14 @@
-# TasteTest agent roster
+# Panel agent roster
 
 Skills are the source of truth. Collaboration law: **`COLLABORATION.md`**.
 
 ## Install
 
 ```bash
-npx @tysongreenan/tastetest init
+npx @tysongreenan/panel init
 ```
 
-Then: **Run EmpathFlow** or Cursor **`/tastetest`**.
+Then: **Run a panel** or Cursor **`/panel`**.
 
 ---
 
@@ -16,15 +16,15 @@ Then: **Run EmpathFlow** or Cursor **`/tastetest`**.
 
 | Pack | Load | When |
 |------|------|------|
-| **short** | `EMPATHFLOW.md` + `playbook.md` (+ craft/motion skills as needed) | Buyer density pass, single surface, lite craft |
-| **full** | short + `EMPATHFLOW.full.md` + `COLLABORATION.md` + this file + `docs/personas.md` | Multi-persona council, homepage/marketing, implement after report |
+| **short** | `PANEL.md` + `playbook.md` (+ craft/motion skills as needed) | Buyer density pass, single surface, lite craft |
+| **full** | short + `PANEL.full.md` + `COLLABORATION.md` + this file + `docs/personas.md` + `COPY.md` (marketing) | Multi-persona council, homepage/marketing, implement after report |
 
-Write the choice into **`tastetest-report/run-state.yaml`** (`protocol: short | full`).  
+Write the choice into **`panel-report/run-state.yaml`** (`protocol: short | full`).  
 Do not half-load the full crew while pretending it is a short pass.
 
 ### Shared run-state (context engineering)
 
-At Phase 0, copy `docs/run-state.template.yaml` → `tastetest-report/run-state.yaml` and fill it.
+At Phase 0, copy `docs/run-state.template.yaml` → `panel-report/run-state.yaml` and fill it.
 
 Every specialist **reads** run-state before working. Orchestrator **updates** priority, preserve, brief, scores, approves, artifact paths.  
 Handoffs reference artifacts and run-state fields — they do not re-tell the whole run (anti–telephone-game).
@@ -37,7 +37,7 @@ Handoffs reference artifacts and run-state fields — they do not re-tell the wh
 |-------|------|----------------|
 | **lite** | One component / focus ring / tiny craft fix | Orchestrator + 1 domain critic |
 | **standard** | Single page or flow UX | Orchestrator + Product + Journey + Heuristic + **priority PM only** + relevant critics |
-| **full** | Homepage / marketing redesign / multi-surface | Full roster + **all** Persona Managers + design brief |
+| **full** | Homepage / marketing redesign / multi-surface | Full roster + **all** Persona Managers + **Isa (copy)** + design brief |
 | **implement** | After report PROCEED | Only Approves required for touched surfaces; one **Executor**; critics re-score only |
 
 Full crew is **expensive** — default to **standard** unless the surface is conversion-critical marketing or the user asks for full.
@@ -50,20 +50,21 @@ Set `run_class` in run-state at preflight. Skipping run-class selection on a mul
 
 | # | Agent | Skill | Job |
 |---|--------|-------|-----|
-| 1 | **Orchestrator Manager** | `EMPATHFLOW.md` | Preflight, phase order, mediate, report ship |
+| 1 | **Orchestrator Manager** | `PANEL.md` | Preflight, phase order, mediate, report ship |
 | 1b | **Persona Managers (×N)** | `docs/personas.md` | One per persona — advocate, negotiate priority, veto harm |
-| 2 | **Product Analyst** | Codebase | Purpose, features, promised vs shipped |
-| 3 | **Empathy Mapper** | EmpathFlow | Draft/quality of maps; seats with Persona Managers |
-| 4 | **Journey Critic** | EmpathFlow | Flows for **all** in-scope personas |
-| 5 | **Heuristic Auditor** | `playbook.md` | Hard gates |
+| 2 | **Product Analyst** | `PRODUCT.md` | Promised vs shipped · copy ban list · benefits Isa may use |
+| 3 | **Empathy Mapper** | `EMPATHY.md` | Maps + quality; seat PM-* |
+| 4 | **Journey Critic** | `JOURNEY.md` | Flows for **all** in-scope personas; persona-as-success measure |
+| 5 | **Heuristic Auditor** | `playbook.md` | Hard gates · Occam · a11y smoke · states |
 | 6 | **Design System Checker** | `web/DESIGN.md` | Tokens / system vs shipped UI |
-| 7 | **Craft Critic** | `ANTI-SLOP.md` | Visual craft |
-| 8 | **Prose Critic** | stop-slop-prose | Copy |
-| 9 | **Motion Critic** | `MOTION.md` | Motion |
+| 7 | **Craft Critic** | `ANTI-SLOP.md` | Visual craft · evidence-based anti-slop · +/− refs |
+| 8 | **Prose Critic** | `skills/stop-slop-prose/` | Anti-slop writing polish |
+| 8b | **Isa · Marketing Copywriter** | `COPY.md` + `skills/marketing-copy/` | StoryBrand · DMMT · WHO/WHY/WHAT · PAS · product-show · CTA |
+| 9 | **Motion Critic** | `MOTION.md` + `skills/motion/` | Motion |
 | 10 | **Frontend Design** | `FRONTEND.md` + `web/DESIGN.md` | Brief first · load DESIGN.md · then library proposals only |
-| 11 | **Report Writer** | Report template | Assemble; multi-persona coverage |
+| 11 | **Report Writer** | `REPORT.md` | Assemble; multi-persona coverage; no invented scores |
 
-### TasteTest default Persona Managers
+### Panel default Persona Managers
 
 | Seat | Persona | Non-negotiable if secondary |
 |------|---------|------------------------------|
@@ -93,8 +94,11 @@ Set `run_class` in run-state at preflight. Skipping run-class selection on a mul
    (craft ∥ motion ∥ prose ∥ heuristics on frozen journey artifacts)
    then Orchestrator / Report Writer merges; any Block holds
          ▼
+4b. **Marketing surfaces:** Isa (COPY) — SB7 map · scan hierarchy · product-show options
+   (before Frontend redesign; Prose polishes after story is right)
+         ▼
 5. Frontend Design **asks** Orchestrator + all PMs for visual prefs (design brief)
-   then library search · Craft · Motion · Prose · Design System
+   then library search · Craft · Motion · Prose · Isa · Design System
    (multi-persona impact on each proposal)
          ▼
 6. Report
@@ -126,8 +130,8 @@ Set `run_class` in run-state at preflight. Skipping run-class selection on a mul
 
 ### Homepage / marketing redesign Approves
 
-Orchestrator · **all Persona Managers** · Journey · Craft · Motion  
-(+ Prose if copy-heavy). Frontend proposes only.
+Orchestrator · **all Persona Managers** · Journey · Craft · Motion · **Isa**  
+(+ Prose if long-form polish). Frontend proposes layout only; Isa owns selling narrative.
 
 ---
 
@@ -143,10 +147,18 @@ Before implement, always include **multi-persona impact**.
 
 | Path | Domain |
 |------|--------|
-| `EMPATHFLOW.md` | **Default** buyer review — reduction bias, density-first (short) |
-| `EMPATHFLOW.full.md` | Full multi-agent crew (personas, council, craft/motion gates) |
+| `PANEL.md` | **Default** buyer review — reduction bias, density-first (short) |
+| `PANEL.full.md` | Full multi-agent crew (personas, council, craft/motion gates) |
 | `COLLABORATION.md` | Permissions, Persona Managers, consensus |
+| `PRODUCT.md` | Product Analyst — promised vs shipped |
+| `EMPATHY.md` | Empathy Mapper — maps + PM seats |
+| `JOURNEY.md` | Journey Critic — paths + persona success measure |
+| `playbook.md` | Heuristic Auditor — DMMT, Occam, a11y, states |
+| `REPORT.md` | Report Writer — assemble only |
 | `docs/personas.md` | Product humans + PM seats |
-| `web/DESIGN.md` | Marketing design system (tokens, type, components, page order) |
-| `ANTI-SLOP` / `MOTION` / `FRONTEND` | Domain skills — Frontend loads `web/DESIGN.md` before library search |
+| `docs/crew-isa.md` | Isa hire brief |
+| `docs/skills-audit.md` | Why these skills (X + market sources) |
+| `web/DESIGN.md` | Marketing design system |
+| `ANTI-SLOP` / `MOTION` / `FRONTEND` / `COPY` | Domain skills |
+| `skills/marketing-copy/` | Isa deep pack: SB7, DMMT, product-show, frameworks-x |
 | `skills/*` | Deep packs |

@@ -73,7 +73,7 @@ function TypingPrompt({ text }: { text: string }) {
 }
 
 function AgentPanel({ reduceMotion }: { reduceMotion: boolean | null }) {
-  const full = "Run EmpathFlow";
+  const full = "Run a panel";
 
   return (
     <div className="flex h-full flex-col gap-3">
@@ -81,20 +81,21 @@ function AgentPanel({ reduceMotion }: { reduceMotion: boolean | null }) {
         {reduceMotion ? full : <TypingPrompt text={full} />}
       </div>
       <div className="max-w-[92%] rounded-2xl rounded-bl-md border border-border/80 bg-muted/50 px-3 py-2.5 text-xs leading-relaxed text-foreground">
-        <p className="font-medium text-primary">EmpathFlow</p>
+        <p className="font-medium text-primary">Panel</p>
         <p className="mt-1 text-muted-foreground">
-          Reading checkout flow… building persona{" "}
-          <span className="text-foreground">Riley</span>… scoring fluidity.
+          Seating{" "}
+          <span className="text-foreground">Riley</span> (first-time buyer)…
+          walking checkout… priority council.
         </p>
         <ul className="mt-2 space-y-1 text-muted-foreground">
           <li className="flex gap-2">
-            <span className="text-primary">✓</span> Personas + journeys
+            <span className="text-primary">✓</span> Seats + journeys
           </li>
           <li className="flex gap-2">
-            <span className="text-primary">✓</span> Craft + motion gates
+            <span className="text-primary">✓</span> Secondary harm pass
           </li>
           <li className="flex gap-2">
-            <span className="text-amber-600">…</span> Writing report.md
+            <span className="text-amber-600">…</span> Writing panel-report/
           </li>
         </ul>
       </div>

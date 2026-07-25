@@ -1,7 +1,7 @@
-# EMPATHFLOW.md
-## TasteTest / EmpathFlow — Buyer-Level UX Review
+# PANEL.md
+## Panel — Buyer-Level UX Review
 
-When the user asks to “run EmpathFlow”, “TasteTest”, “UX review”, or similar, follow these rules exactly.
+When the user asks to “run a panel”, “Panel”, “UX review”, or similar, follow these rules exactly.
 
 **This file is always on** — source of truth for buyer job and reduction bias.  
 Optimize. Do not expand.
@@ -10,18 +10,23 @@ Optimize. Do not expand.
 
 | User says | Load |
 |-----------|------|
-| Run EmpathFlow / TasteTest | **this file** + `playbook.md` |
+| Run a panel / Panel review | **this file** + `playbook.md` |
 | UI / craft / anti-slop | + `ANTI-SLOP.md` |
 | Animations / motion | + `MOTION.md` |
+| Marketing / landing / StoryBrand / sell / product demo | + `COPY.md` (+ `skills/marketing-copy` when present) — seat **Isa** |
+| Product truth / promised vs shipped | + `PRODUCT.md` |
+| Journeys / flows | + `JOURNEY.md` |
+| Personas / maps | + `EMPATHY.md` + `docs/personas.md` |
 | Design system / colors / type | + `FRONTEND.md` + `skills/ui-ux-pro-max` |
 
 ### Priority of truth
 
-1. **EMPATHFLOW.md** — buyer job + reduction bias  
+1. **PANEL.md** — buyer job + reduction bias  
 2. **ANTI-SLOP.md** — does this look AI-made?  
 3. **MOTION.md** — Emil Kowalski standard  
 4. **playbook.md** — shared principles  
-5. Heavy packs — only when explicitly needed  
+5. **COPY.md** — marketing sell (Isa); never overrides reduction bias  
+6. Heavy packs — only when explicitly needed  
 
 ### Goal
 Act as a skeptical buyer. Improve the product so it feels **clear, light, and professional**.  
@@ -64,7 +69,7 @@ Optimize. Do not expand.
 
 **0. Run class (one line)**
 - `lite` · `standard` · `full` · `implement` — see `AGENTS.md`.  
-- Multi-persona / marketing redesign → load **full** pack (`EMPATHFLOW.full.md` + `COLLABORATION.md`) and write `tastetest-report/run-state.yaml` from `docs/run-state.template.yaml` (or the copy under `tastetest-report/`).  
+- Multi-persona / marketing redesign → load **full** pack (`PANEL.full.md` + `COLLABORATION.md`) and write `panel-report/run-state.yaml` from `docs/run-state.template.yaml` (or the copy under `panel-report/`).  
 - **No implement without consensus PROCEED** on standard/full (see `COLLABORATION.md`).
 
 **1. Intent**

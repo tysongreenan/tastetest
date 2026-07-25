@@ -41,7 +41,7 @@ export function SiteFooter({ className }: { className?: string }) {
           <SiriOrb size="24px" animationDuration={24} colors={ORB_COLORS} />
           <div>
             <p className="font-heading text-sm font-semibold tracking-tight">
-              TasteTest
+              Panel
             </p>
             <p className="text-xs text-muted-foreground">
               © {year} ·{" "}

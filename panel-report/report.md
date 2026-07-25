@@ -1,12 +1,12 @@
-# TasteTest Report — Homepage (lean launch)
+# Panel Report — Homepage (lean launch)
 
 **Target:** `web/` @ `http://localhost:3000` (+ `/report`)  
 **Date:** 2026-07-24  
 **Preflight:** **GO**  
 **Grounding:** strong (`docs/personas.md` + live Playwright + CLI/npm check)  
 **Persona coverage:** full (priority + secondary harm pass)  
-**Council:** `tastetest-report/council-homepage-lean.md`  
-**Skills:** EMPATHFLOW · COLLABORATION · playbook · ANTI-SLOP · MOTION · FRONTEND · stop-slop-prose · `web/DESIGN.md` · `docs/personas.md`
+**Council:** `panel-report/council-homepage-lean.md`  
+**Skills:** PANEL · COLLABORATION · playbook · ANTI-SLOP · MOTION · FRONTEND · stop-slop-prose · `web/DESIGN.md` · `docs/personas.md`
 
 ---
 
@@ -21,11 +21,11 @@
 | **Conversion readiness** | Journey + Empathy | **7 / 10** *(hero strong; close broken)* |
 | **Prose (landing)** | Prose Critic | **40 / 50** |
 
-**Primary job of this page:** Get a skeptical founder to understand TasteTest and copy `npx tastetest init` (or the honest repo fallback).
+**Primary job of this page:** Get a skeptical founder to understand Panel and copy `npx panel init` (or the honest repo fallback).
 
 **What works:** Lean structure matches the launch order in `DESIGN.md`. Hero install is obvious; honesty line labels npm reality; product path preview teaches Code → Agent → Report; sample lives in the hero; no crew/org card museum; prose is short and concrete.
 
-**What fails the buyer:** The dark **“Start in your repo”** band re-offers install, but **`npx tastetest init` is white text on a white card** (computed color ~lab 98 on light surface). Visually the command is missing — only `$` and **Copy** show. That is a P0 conversion/craft defect on the final CTA.
+**What fails the buyer:** The dark **“Start in your repo”** band re-offers install, but **`npx panel init` is white text on a white card** (computed color ~lab 98 on light surface). Visually the command is missing — only `$` and **Copy** show. That is a P0 conversion/craft defect on the final CTA.
 
 ### Persona priority (this run)
 
@@ -57,8 +57,8 @@
 
 | Item | Job |
 |------|-----|
-| `npx tastetest init` + labeled **Copy** | Primary conversion |
-| “Not on npm yet” + `node bin/tastetest.js init` | Honesty until publish |
+| `npx panel init` + labeled **Copy** | Primary conversion |
+| “Not on npm yet” + `node bin/panel.js init` | Honesty until publish |
 | Product path preview (real tabs) | Proof without museum |
 | Sample report → `/report` (Acme) | Avery + Sam JTBD |
 | Skills mono list + GitHub | Jordan credibility |
@@ -95,7 +95,7 @@
 - Skills list + blob links + Browse skills/ → credible.  
 - Honesty about npm → good.  
 - Mobile: Install survives; How/Skills nav hidden (OK for lean); GitHub icon lacks name (a11y).  
-- Init from repo works (`node bin/tastetest.js init --dry-run`).
+- Init from repo works (`node bin/panel.js init --dry-run`).
 
 ### Sam
 
@@ -109,8 +109,8 @@
 
 | Promised | Reality |
 |----------|---------|
-| `npx tastetest init` | Not on npm (404). Honesty present. Repo init real. |
-| Run EmpathFlow | Step 2 + agent panel |
+| `npx panel init` | Not on npm (404). Honesty present. Repo init real. |
+| Run a panel | Step 2 + agent panel |
 | Sample report | `web/content/sample-report.md` Acme Checkout; `/report` metadata correct |
 | Skills pack | Linked skill files exist in repo |
 
@@ -239,7 +239,7 @@ Library search (landing funnel patterns) does **not** override DESIGN.md. No App
 | P1 mobile GitHub name | `aria-label="GitHub"` on header link |
 | P1 doc drift | `web/DESIGN.md` + `FRONTEND.md` launch order aligned to lean ship |
 
-**Post-fix verify:** close command color ~lab(5) dark on light card; GH aria-label present; screenshot `tastetest-close-band-after.png`.
+**Post-fix verify:** close command color ~lab(5) dark on light card; GH aria-label present; screenshot `panel-close-band-after.png`.
 
 ---
 
@@ -248,12 +248,12 @@ Library search (landing funnel patterns) does **not** override DESIGN.md. No App
 | Check | Result |
 |-------|--------|
 | Live URL | `http://localhost:3000` 200 |
-| npm | `npm view tastetest` → 404 |
-| Init | `node bin/tastetest.js init --dry-run` → would-write/skip OK |
+| npm | `npm view panel` → 404 |
+| Init | `node bin/panel.js init --dry-run` → would-write/skip OK |
 | Close `code` color | ~lab(98) light on light card — invisible |
 | Hero `code` color | ~lab(5) dark — visible |
-| `/report` title | Sample report — Acme Checkout · TasteTest |
-| Screenshots | `tastetest-homepage-viewport.png`, `tastetest-homepage-full.png`, `tastetest-mobile-hero.png`, `tastetest-close-band.png` |
+| `/report` title | Sample report — Acme Checkout · Panel |
+| Screenshots | `panel-homepage-viewport.png`, `panel-homepage-full.png`, `panel-mobile-hero.png`, `panel-close-band.png` |
 
 ---
 

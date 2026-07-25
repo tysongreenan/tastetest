@@ -5,6 +5,7 @@ import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 
 const GH = "https://github.com/tysongreenan/tastetest/blob/main";
+const GH_TREE = "https://github.com/tysongreenan/tastetest/tree/main";
 
 export type Agent = {
   id: string;
@@ -17,20 +18,21 @@ export type Agent = {
   badge?: string;
 };
 
+/** Orchestrator first — the only seat the human talks to day-to-day */
 const LEAD: Agent[] = [
   {
     id: "orchestrator",
     name: "Orchestrator",
-    role: "Run lead",
+    role: "Your manager for the crew",
     blurb:
-      "Preflight, phase order, priority council, final ship. Breaks deadlocks without inventing taste.",
+      "You just ask. Phase order, priority council, who loads which skill, final report. You never need to memorize skill file names.",
     photo: "/agents/orchestrator.jpg",
     skills: [
-      { label: "EMPATHFLOW.md", href: `${GH}/EMPATHFLOW.md` },
+      { label: "PANEL.md", href: `${GH}/PANEL.md` },
       { label: "COLLABORATION.md", href: `${GH}/COLLABORATION.md` },
       { label: "AGENTS.md", href: `${GH}/AGENTS.md` },
     ],
-    reportsTo: "You (the human)",
+    reportsTo: "You",
   },
   {
     id: "pm-avery",
@@ -38,7 +40,7 @@ const LEAD: Agent[] = [
     role: "Persona Manager",
     badge: "Avery · founder",
     blurb:
-      "Advocates for the indie founder. Obvious install, report clear in minutes. Vetoes anything that hides the CTA.",
+      "Fights for the indie founder: obvious install, report clear in minutes. Vetoes anything that hides the CTA.",
     photo: "/agents/pm-avery.jpg",
     skills: [
       { label: "docs/personas.md", href: `${GH}/docs/personas.md` },
@@ -52,7 +54,7 @@ const LEAD: Agent[] = [
     role: "Persona Manager",
     badge: "Jordan · eng",
     blurb:
-      "Advocates for the product engineer. Real init, OSS credibility, skills that re-run. Vetoes toy demos.",
+      "Fights for the engineer: real init, OSS credibility, skills that re-run. Vetoes toy demos.",
     photo: "/agents/pm-jordan.jpg",
     skills: [
       { label: "docs/personas.md", href: `${GH}/docs/personas.md` },
@@ -66,7 +68,7 @@ const LEAD: Agent[] = [
     role: "Persona Manager",
     badge: "Sam · designer",
     blurb:
-      "Advocates for the agency designer. Client-safe sample, refined craft. Vetoes UI that looks like a template.",
+      "Fights for the designer: client-safe sample, refined craft. Vetoes template UI.",
     photo: "/agents/pm-sam.jpg",
     skills: [
       { label: "docs/personas.md", href: `${GH}/docs/personas.md` },
@@ -78,14 +80,22 @@ const LEAD: Agent[] = [
 
 const COUNCIL: Agent[] = [
   {
+    id: "product",
+    name: "Product Analyst",
+    role: "Promised vs shipped",
+    blurb: "Keeps copy honest. Ban list for claims the product cannot keep.",
+    photo: "/agents/persona.jpg",
+    skills: [{ label: "PRODUCT.md", href: `${GH}/PRODUCT.md` }],
+    reportsTo: "Orchestrator",
+  },
+  {
     id: "empathy",
     name: "Empathy Mapper",
     role: "Maps & seats",
-    blurb:
-      "Builds empathy maps and seats Persona Managers. Blocks stereotypes before journeys start.",
+    blurb: "Builds empathy maps and seats Persona Managers. Blocks stereotypes.",
     photo: "/agents/empathy.jpg",
     skills: [
-      { label: "EMPATHFLOW.md", href: `${GH}/EMPATHFLOW.md` },
+      { label: "EMPATHY.md", href: `${GH}/EMPATHY.md` },
       { label: "docs/personas.md", href: `${GH}/docs/personas.md` },
     ],
     reportsTo: "Orchestrator",
@@ -95,10 +105,10 @@ const COUNCIL: Agent[] = [
     name: "Journey Critic",
     role: "Whole-product flows",
     blurb:
-      "Walks flows for every in-scope persona. Priority weighted; secondary harm pass always on.",
+      "Walks flows for every in-scope persona. Priority weighted; secondary harm pass on.",
     photo: "/agents/journey.jpg",
     skills: [
-      { label: "EMPATHFLOW.md", href: `${GH}/EMPATHFLOW.md` },
+      { label: "JOURNEY.md", href: `${GH}/JOURNEY.md` },
       { label: "playbook.md", href: `${GH}/playbook.md` },
     ],
     reportsTo: "Orchestrator",
@@ -108,7 +118,7 @@ const COUNCIL: Agent[] = [
     name: "Craft Critic",
     role: "Visual anti-slop",
     blurb:
-      "Template UI, equal-weight CTAs, empty decoration. The eye designers hire for.",
+      "Catches template UI, equal-weight CTAs, empty decoration — so the page doesn’t look AI-made.",
     photo: "/agents/craft.jpg",
     skills: [
       { label: "ANTI-SLOP.md", href: `${GH}/ANTI-SLOP.md` },
@@ -117,18 +127,44 @@ const COUNCIL: Agent[] = [
     reportsTo: "Orchestrator",
   },
   {
+    id: "isa",
+    name: "Isa",
+    role: "Marketing copywriter",
+    blurb:
+      "StoryBrand + Don’t Make Me Think. Selling hierarchy and how we show the product — not layout.",
+    photo: "/agents/prose.jpg",
+    skills: [
+      { label: "COPY.md", href: `${GH}/COPY.md` },
+      {
+        label: "skills/marketing-copy",
+        href: `${GH_TREE}/skills/marketing-copy`,
+      },
+    ],
+    reportsTo: "Orchestrator",
+  },
+  {
+    id: "prose",
+    name: "Prose Critic",
+    role: "Writing anti-slop",
+    blurb: "Kills AI cadence in microcopy after the story is right.",
+    photo: "/agents/prose.jpg",
+    skills: [
+      {
+        label: "stop-slop-prose",
+        href: `${GH_TREE}/skills/stop-slop-prose`,
+      },
+    ],
+    reportsTo: "Orchestrator",
+  },
+  {
     id: "motion",
     name: "Motion Critic",
     role: "Animation craft",
-    blurb:
-      "Emil Kowalski bar: purposeful motion, real easing, reduced-motion respect.",
+    blurb: "Purposeful motion, real easing, reduced-motion respect.",
     photo: "/agents/motion.jpg",
     skills: [
       { label: "MOTION.md", href: `${GH}/MOTION.md` },
-      {
-        label: "emilkowalski/skills",
-        href: "https://github.com/emilkowalski/skills",
-      },
+      { label: "skills/motion", href: `${GH_TREE}/skills/motion` },
     ],
     reportsTo: "Orchestrator",
   },
@@ -137,25 +173,29 @@ const COUNCIL: Agent[] = [
     name: "Frontend Design",
     role: "Pattern library",
     blurb:
-      "Cannot invent taste. Interviews managers first, then proposes from UI UX Pro Max.",
+      "Cannot invent taste. Interviews managers first, then proposes from the pattern library.",
     photo: "/agents/frontend.jpg",
     skills: [
       { label: "FRONTEND.md", href: `${GH}/FRONTEND.md` },
-      {
-        label: "ui-ux-pro-max",
-        href: "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
-      },
+      { label: "web/DESIGN.md", href: `${GH_TREE}/web/DESIGN.md` },
     ],
     reportsTo: "Orchestrator + all PMs",
   },
 ];
 
-/** Full list for any consumer that still maps over all seats */
 export const AGENTS: Agent[] = [...LEAD, ...COUNCIL];
 
 function LeadCard({ agent }: { agent: Agent }) {
+  const isManager = agent.id === "orchestrator";
   return (
-    <article className="group flex flex-col overflow-hidden rounded-2xl border border-border/80 bg-card shadow-sm transition-[box-shadow] duration-200 hover:shadow-md sm:flex-row sm:items-stretch">
+    <article
+      className={cn(
+        "group flex flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-[box-shadow] duration-200 hover:shadow-md sm:flex-row sm:items-stretch",
+        isManager
+          ? "border-primary/35 ring-1 ring-primary/15"
+          : "border-border/80"
+      )}
+    >
       <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden bg-muted sm:aspect-auto sm:w-36 sm:min-h-[9.5rem]">
         <Image
           src={agent.photo}
@@ -226,7 +266,7 @@ function CouncilRow({ agent }: { agent: Agent }) {
           <span className="text-[11px] text-muted-foreground">
             → {agent.reportsTo}
           </span>
-          {agent.skills.slice(0, 2).map((s) => (
+          {agent.skills.slice(0, 3).map((s) => (
             <a
               key={s.href + s.label}
               href={s.href}
@@ -249,7 +289,7 @@ export function AgentRoster({ className }: { className?: string }) {
     <div className={cn("space-y-10", className)}>
       <div>
         <p className="mb-4 text-xs font-semibold tracking-wide text-muted-foreground">
-          Lead · managers
+          Manager · persona seats
         </p>
         <ul className="grid gap-4 lg:grid-cols-2">
           {LEAD.map((agent) => (
@@ -263,11 +303,16 @@ export function AgentRoster({ className }: { className?: string }) {
       <div className="rounded-2xl border border-border/80 bg-card/80 px-4 sm:px-6">
         <div className="flex items-baseline justify-between gap-3 border-b border-border/60 py-4">
           <p className="text-xs font-semibold tracking-wide text-muted-foreground">
-            Craft council · highlights
+            Specialists · each with their skill
           </p>
-          <p className="text-[11px] text-muted-foreground">
-            Full list in AGENTS.md
-          </p>
+          <a
+            href="https://github.com/tysongreenan/tastetest/blob/main/AGENTS.md"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[11px] font-medium text-primary hover:text-primary/80"
+          >
+            Full roster in AGENTS.md
+          </a>
         </div>
         <ul>
           {COUNCIL.map((agent) => (

@@ -48,7 +48,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* TasteTest marketing — cool ink + electric blue CTA (dev-tool adjacent, not dark IDE slop) */
+/* Panel marketing — cool ink + electric blue CTA (dev-tool adjacent, not dark IDE slop) */
 :root {
   --background: oklch(0.985 0.004 260);
   --foreground: oklch(0.18 0.02 265);

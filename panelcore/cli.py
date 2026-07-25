@@ -1,4 +1,4 @@
-"""CLI entrypoint: `python -m empathflow` or future `tastetest` command."""
+"""CLI entrypoint: `python -m panelcore` or future `panel` command."""
 
 from __future__ import annotations
 
@@ -6,15 +6,15 @@ import argparse
 import shutil
 from pathlib import Path
 
-from empathflow.config import EmpathFlowConfig
-from empathflow.crew import run
+from panelcore.config import PanelConfig
+from panelcore.crew import run
 
-# Package lives at <repo>/empathflow; skill files live at <repo>/
+# Package lives at <repo>/panelcore; skill files live at <repo>/
 _REPO_ROOT = Path(__file__).resolve().parent.parent
 
 
 _LEAN_SKILLS = (
-    "EMPATHFLOW.md",
+    "PANEL.md",
     "playbook.md",
     "ANTI-SLOP.md",
     "MOTION.md",
@@ -48,15 +48,15 @@ def _init_project(target: Path, *, full: bool = False) -> int:
 
     print()
     mode = "full" if full else "lean"
-    print(f"TasteTest skill entries installed ({mode}).")
+    print(f"Panel skill entries installed ({mode}).")
     print()
     print("For Cursor/Claude wiring + deep packs, prefer:")
-    print("  npx tastetest init" + (" --full" if full else ""))
+    print("  npx panel init" + (" --full" if full else ""))
     if not full:
-        print("  npx tastetest init --full   # FRONTEND + skills/ packs")
+        print("  npx panel init --full   # FRONTEND + skills/ packs")
     print()
-    print("Then in your AI agent:  Run EmpathFlow")
-    print("Cursor: /tastetest")
+    print("Then in your AI agent:  Run a panel")
+    print("Cursor: /panel")
     if not written:
         print("(No new files written — delete existing copies to refresh.)")
     return 0
@@ -64,8 +64,8 @@ def _init_project(target: Path, *, full: bool = False) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        prog="tastetest",
-        description="TasteTest / EmpathFlow — buyer-level UX review for your codebase.",
+        prog="panel",
+        description="Panel — buyer-level UX review for your codebase.",
     )
     parser.add_argument(
         "command",
@@ -84,7 +84,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--out",
         type=Path,
-        default=Path("tastetest-report"),
+        default=Path("panel-report"),
         help="Output directory for the report",
     )
     parser.add_argument(
@@ -105,7 +105,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "init":
         return _init_project(args.project, full=args.full)
 
-    config = EmpathFlowConfig(
+    config = PanelConfig(
         project_root=args.project.resolve(),
         base_url=args.base_url,
         browser_backend=args.browser,

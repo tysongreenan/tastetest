@@ -3,7 +3,7 @@ name: ui-ux-pro-max
 description: "UI/UX design intelligence — searchable library of styles, palettes, fonts, product patterns, UX rules across premium-app comparisons. Use when designing or reviewing frontend UI."
 ---
 
-> **TasteTest integration:** Entry skill is repo-root `FRONTEND.md`. This pack is the **Frontend Design** agent's library. Always still run `ANTI-SLOP.md` + `MOTION.md` after applying recommendations — the library can suggest trendy patterns (e.g. glassmorphism) that fail craft gates.
+> **Panel integration:** Entry skill is repo-root `FRONTEND.md`. This pack is the **Frontend Design** agent's library. Always still run `ANTI-SLOP.md` + `MOTION.md` after applying recommendations — the library can suggest trendy patterns (e.g. glassmorphism) that fail craft gates.
 
 # UI/UX Pro Max - Design Intelligence
 

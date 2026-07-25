@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * TasteTest CLI — primary entry for `npx @tysongreenan/tastetest init`
+ * Panel CLI — primary entry for `npx @tysongreenan/panel init`
  */
 import { main } from "../cli/main.js";
 

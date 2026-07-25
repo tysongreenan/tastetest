@@ -1,6 +1,6 @@
-"""Agent role definitions for the hierarchical EmpathFlow crew.
+"""Agent role definitions for the hierarchical Panel crew.
 
-Permissions & consensus: COLLABORATION.md + empathflow/permissions.py
+Permissions & consensus: COLLABORATION.md + panelcore/permissions.py
 Roster: AGENTS.md
 
 TODO: multi-agent runtime that enforces ApprovalGate before tools that write files.
@@ -30,7 +30,7 @@ MANAGER = AgentSpec(
         "Mediate, require consensus before execute, ship grounded multi-persona reports."
     ),
     backstory=(
-        "You run TasteTest process. Order and permissions are your job. "
+        "You run a panel process. Order and permissions are your job. "
         "Persona Managers advocate for each human; you help them negotiate priority "
         "without erasing secondaries. Specialists do not freestyle."
     ),

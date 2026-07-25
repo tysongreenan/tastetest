@@ -1,6 +1,6 @@
 # FRONTEND.md
 
-## TasteTest Frontend Design agent — premium pattern library
+## Panel Frontend Design agent — premium pattern library
 
 When designing, redesigning, or reviewing **frontend UI** (pages, components, color, type, layout, stack-specific patterns), load this skill and use the search library.
 
@@ -16,7 +16,7 @@ When designing, redesigning, or reviewing **frontend UI** (pages, components, co
 - “Make this look like a real product”  
 - Color / type / layout decisions  
 - Stack-specific UI (Next.js, shadcn, React, etc.)  
-- EmpathFlow **Frontend Design** agent step  
+- Panel **Frontend Design** agent step  
 
 **Not alone.** After library recommendations, still run:
 
@@ -25,26 +25,29 @@ When designing, redesigning, or reviewing **frontend UI** (pages, components, co
 | **`web/DESIGN.md`** | **Project source of truth** — tokens, type, components, page order (load before inventing UI) |
 | `ANTI-SLOP.md` | Library can suggest trendy templates that still read as AI slop |
 | `MOTION.md` | Motion must meet Emil frequency/easing bar |
-| `EMPATHFLOW.md` | Buyer jobs and conversion honesty |
+| `PANEL.md` | Buyer jobs and conversion honesty |
+| `COPY.md` (Isa) | Marketing pages: scan-layer copy locked before layout invent |
 | `docs/personas.md` | Who the UI is for; PM visual prefs |
+
+**Positive + negative references (with Craft):** name what good looks like and what slop to ban this run. Blank “make it premium” → default AI SaaS look.
 
 ---
 
-### Project design system card (TasteTest marketing)
+### Project design system card (Panel marketing)
 
 **Full system:** [`web/DESIGN.md`](web/DESIGN.md) — read it for any `web/` UI work.  
 **Tokens / fonts in code:** `web/src/app/globals.css` · `web/src/app/layout.tsx`.
 
-Library search is a **comparison bank**, not a license to replace TasteTest’s brand. When library and `DESIGN.md` conflict → **`DESIGN.md` + Craft win**.
+Library search is a **comparison bank**, not a license to replace Panel’s brand. When library and `DESIGN.md` conflict → **`DESIGN.md` + Craft win**.
 
-| Dimension | TasteTest default (summary) |
+| Dimension | Panel default (summary) |
 |-----------|------------------------------|
 | **Feel** | Calm, precise, buyer-honest. Dev-tool adjacent — not enterprise research-lab, not glass/dark IDE. |
 | **Canvas** | Cool near-white `background`; flat UI; soft blue hero wash only |
 | **Primary** | Blue `oklch(0.45 0.2 265)` — CTAs, Copy, focus ring |
 | **Type** | Space Grotesk (headings) · DM Sans (body) · Geist Mono (commands/paths) |
 | **CTAs** | Pill `rounded-full` primary blue; install = terminal card + labeled **Copy** |
-| **Conversion** | `npx @tysongreenan/tastetest init` · labeled Copy · dark close re-offer |
+| **Conversion** | `npx @tysongreenan/panel init` · labeled Copy · dark close re-offer |
 | **Proof** | `ProductPreview` (Code → Agent → Report) · Sample → `/report` (Acme — not dogfood chrome) |
 | **Depth** | Skills mono file list + GitHub · crew/org live off-homepage unless council re-opens |
 | **Motion** | Ambient orb OK; preview tab cycle OK; no fake affordances · `MOTION.md` |
@@ -57,12 +60,12 @@ Hero+install+preview → Three steps → Skills mono list → Dark final install
 
 ---
 
-### How to search (from TasteTest repo root)
+### How to search (from Panel repo root)
 
 ```bash
 # Full design system (start here for new pages)
 python3 skills/ui-ux-pro-max/scripts/search.py \
-  "developer tools SaaS modern minimal" --design-system -p "TasteTest" -f markdown
+  "developer tools SaaS modern minimal" --design-system -p "Panel" -f markdown
 
 # Domain deep-dives
 python3 skills/ui-ux-pro-max/scripts/search.py "hero social-proof" --domain landing
@@ -84,7 +87,7 @@ Persist a design system into the project (optional):
 ```bash
 python3 skills/ui-ux-pro-max/scripts/search.py \
   "developer tool UX review" --design-system --persist \
-  -p "TasteTest" --output-dir . -f markdown
+  -p "Panel" --output-dir . -f markdown
 ```
 
 Creates `design-system/<slug>/MASTER.md` (skip if exists unless `--force`).
@@ -99,7 +102,7 @@ Creates `design-system/<slug>/MASTER.md` (skip if exists unless `--force`).
 
 Before any `--design-system` search, mock, or redesign proposal, Frontend Design **interviews** Orchestrator + **every seated Persona Manager**.
 
-Write this handoff (transcript or `tastetest-report/council.md`):
+Write this handoff (transcript or `panel-report/council.md`):
 
 ```markdown
 ### Frontend Design → Orchestrator + Persona Managers | design brief | question
@@ -135,14 +138,14 @@ Read **`web/DESIGN.md`** (full file, not skim of H1s only). Extract:
 - Launch structure if homepage  
 - Known gaps (e.g. npm honesty)  
 
-If `DESIGN.md` is missing on a **client** project under review: draft a starter from tokens + patterns, note the gap in the report (EmpathFlow already requires this). Do **not** paste a third-party brand kit as the client’s system.
+If `DESIGN.md` is missing on a **client** project under review: draft a starter from tokens + patterns, note the gap in the report (Panel already requires this). Do **not** paste a third-party brand kit as the client’s system.
 
 #### 1. Translate brief → search keywords
 
 Map manager answers into multi-word queries (product + tone + density), e.g.  
 `developer tools SaaS calm premium sparse` vs `developer tools product demo interactive dense`.
 
-Bias keywords toward **`DESIGN.md` overview** when dogfooding TasteTest (e.g. `developer tools minimal light blue CTA typography-first` — not `enterprise green coral research lab`).
+Bias keywords toward **`DESIGN.md` overview** when dogfooding Panel (e.g. `developer tools minimal light blue CTA typography-first` — not `enterprise green coral research lab`).
 
 #### 2. Library search
 
@@ -176,7 +179,7 @@ Sparse ≠ refined. Unless managers explicitly asked for minimal:
 - Prefer **at least one built-out interactive proof section** (real JS, purposeful motion under MOTION.md) when the product’s artifact is visual (e.g. sample report, install demo).
 - Do not default to empty gray boxes because anti-slop forbids templates.
 
-### Output for EmpathFlow reports
+### Output for Panel reports
 
 Add **Frontend Design System** section:
 
@@ -196,7 +199,7 @@ Add **Frontend Design System** section:
 
 | Doc | Job |
 |-----|-----|
-| **`web/DESIGN.md`** | TasteTest marketing system (tokens, components, iteration) |
+| **`web/DESIGN.md`** | Panel marketing system (tokens, components, iteration) |
 | `skills/ui-ux-pro-max/SKILL.md` | Complete library workflow |
 | `skills/ui-ux-pro-max/references/quick-reference.md` | UX rule index |
 | `skills/ui-ux-pro-max/references/pro-rules.md` | Pre-delivery checklist |

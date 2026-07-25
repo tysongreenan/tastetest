@@ -6,9 +6,9 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Sample report — Acme Checkout · TasteTest",
+  title: "Sample report — Acme Checkout · Panel",
   description:
-    "Example EmpathFlow output for a fictional Acme Checkout — scores, personas, P0s, and file paths.",
+    "Example Panel output for a fictional Acme Checkout — scores, personas, P0s, and file paths.",
 };
 
 async function loadReport(): Promise<string> {
@@ -16,7 +16,7 @@ async function loadReport(): Promise<string> {
   try {
     return await readFile(file, "utf8");
   } catch {
-    return "# Report not found\n\nAdd `web/content/sample-report.md` or run EmpathFlow to generate a report.";
+    return "# Report not found\n\nAdd `web/content/sample-report.md` or run a panel to generate a report.";
   }
 }
 
@@ -122,7 +122,7 @@ export default async function ReportPage() {
             <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
               Sample output · fictional product
             </p>
-            <h1 className="text-lg font-semibold">Acme Checkout — EmpathFlow report</h1>
+            <h1 className="text-lg font-semibold">Acme Checkout — Panel report</h1>
           </div>
           <div className="flex gap-2">
             <Link

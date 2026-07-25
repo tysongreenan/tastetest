@@ -1,6 +1,6 @@
 # Council — Full homepage rebuild
 
-**Skills:** EMPATHFLOW · COLLABORATION · FRONTEND Step 0 · ANTI-SLOP · MOTION · personas.md  
+**Skills:** PANEL · COLLABORATION · FRONTEND Step 0 · ANTI-SLOP · MOTION · personas.md  
 **Date:** 2026-07-24
 
 ## Phase 0 — Orchestrator preflight
@@ -9,7 +9,7 @@
 |------|--------|
 | Personas | `docs/personas.md` — Avery, Jordan, Sam |
 | PMs seated | PM-Avery, PM-Jordan, PM-Sam |
-| Preserve | `npx tastetest init` + labeled Copy |
+| Preserve | `npx panel init` + labeled Copy |
 | **GO** | Yes |
 
 ### Persona priority (this run)

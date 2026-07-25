@@ -1,12 +1,13 @@
 "use client";
 
 /**
- * Homepage — Don’t Make Me Think, but still a product page
- * - Primary job: copy install (obvious)
- * - Secondary: prove it’s real (preview + short steps + sample)
- * - Depth lives in GitHub / /report — not a museum of sections
+ * Homepage — benefit + crew + just ask
+ * - Primary job: copy install
+ * - Prove: managed team with real skills (you don’t memorize skill names)
+ * - Sample report for deliverable shape
  */
 
+import { AgentRoster } from "@/components/marketing/agent-roster";
 import { ProductPreview } from "@/components/marketing/product-preview";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import ButtonCopy from "@/components/smoothui/button-copy";
@@ -18,10 +19,9 @@ import { ArrowRight, BookOpen, ExternalLink, Terminal } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 
-const INIT_COMMAND = "npx @tysongreenan/tastetest init";
+const INIT_COMMAND = "npx @tysongreenan/panel init";
 const EASE = [0.23, 1, 0.32, 1] as const;
 const GH = "https://github.com/tysongreenan/tastetest";
-const GH_BLOB = `${GH}/blob/main`;
 
 const ORB_COLORS = {
   bg: "oklch(0.98 0.01 265)",
@@ -34,26 +34,18 @@ const STEPS = [
   {
     n: "1",
     title: "Init",
-    body: "Drop skills into your repo.",
+    body: "One command drops the crew and their skills into your repo.",
   },
   {
     n: "2",
-    title: "Run",
-    body: "Tell your agent: Run EmpathFlow.",
+    title: "Just ask",
+    body: "Say “Run a panel.” The Orchestrator loads the right skills — you don’t memorize names.",
   },
   {
     n: "3",
-    title: "Fix",
-    body: "Ship from scores, P0s, and file paths.",
+    title: "Ship the P0s",
+    body: "Scored report with file paths. Fix what buyers would bounce on.",
   },
-] as const;
-
-const SKILL_LINKS = [
-  { file: "EMPATHFLOW.md", href: `${GH_BLOB}/EMPATHFLOW.md` },
-  { file: "ANTI-SLOP.md", href: `${GH_BLOB}/ANTI-SLOP.md` },
-  { file: "MOTION.md", href: `${GH_BLOB}/MOTION.md` },
-  { file: "FRONTEND.md", href: `${GH_BLOB}/FRONTEND.md` },
-  { file: "AGENTS.md", href: `${GH_BLOB}/AGENTS.md` },
 ] as const;
 
 function GitHubIcon({ className }: { className?: string }) {
@@ -74,12 +66,10 @@ function InstallBlock({
   caption,
 }: {
   className?: string;
-  /** Helper under the card (light bg). Omit on dark close band. */
   caption?: string;
 }) {
   return (
     <div className={cn("w-full", className)}>
-      {/* text-foreground on card so command stays dark even inside dark close band */}
       <div
         className={cn(
           "overflow-hidden rounded-2xl border border-border/80 bg-card text-foreground",
@@ -97,7 +87,6 @@ function InstallBlock({
         </div>
         <div className="flex items-center gap-2 p-2 pl-3.5 sm:pl-4">
           <span className="select-none font-mono text-sm text-primary/80">$</span>
-          {/* Scoped name is long — wrap on narrow, single line from sm up */}
           <code className="min-w-0 flex-1 whitespace-normal break-all font-mono text-[12px] font-medium leading-snug tracking-tight text-foreground sm:truncate sm:whitespace-nowrap sm:text-[13px] sm:leading-normal">
             {INIT_COMMAND}
           </code>
@@ -129,7 +118,7 @@ export function HomePage() {
           <Link href="/" className="flex items-center gap-2.5">
             <SiriOrb size="26px" animationDuration={22} colors={ORB_COLORS} />
             <span className="font-heading text-[15px] font-semibold tracking-tight">
-              TasteTest
+              Panel
             </span>
           </Link>
           <nav
@@ -144,9 +133,9 @@ export function HomePage() {
             </a>
             <a
               className="hidden rounded-full px-3 py-1.5 transition-colors hover:bg-muted hover:text-foreground sm:inline"
-              href="#skills"
+              href="#crew"
             >
-              Skills
+              Crew
             </a>
             <a
               href={GH}
@@ -178,7 +167,6 @@ export function HomePage() {
       </header>
 
       <main className="flex-1">
-        {/* Hero — primary conversion + animated gradient */}
         <section id="start" className="relative overflow-hidden">
           <AnimatedGradientBackground
             breathing
@@ -188,88 +176,108 @@ export function HomePage() {
             topOffset={12}
             containerClassName="z-0"
           />
-          {/* Fade gradient into page canvas so body sections stay clean */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-32 bg-gradient-to-b from-transparent to-background"
           />
 
           <div className="relative z-10 mx-auto max-w-5xl px-5 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-20">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
-            <motion.div
-              className="text-center lg:text-left"
-              initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={
-                reduceMotion ? { duration: 0 } : { duration: 0.3, ease: EASE }
-              }
-            >
-              <h1 className="font-heading text-balance text-[2.35rem] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-5xl sm:leading-[1.05]">
-                The UX review that{" "}
-                <span className="bg-gradient-to-r from-primary to-[oklch(0.55_0.16_250)] bg-clip-text text-transparent">
-                  lives in your repo
-                </span>
-              </h1>
-              <p className="mx-auto mt-4 max-w-md text-pretty text-lg text-muted-foreground lg:mx-0">
-                Acts like a skeptical buyer. Scores, file paths, fixes you can
-                ship tonight.
-              </p>
+            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
+              <motion.div
+                className="text-center lg:text-left"
+                initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={
+                  reduceMotion ? { duration: 0 } : { duration: 0.3, ease: EASE }
+                }
+              >
+                <p className="font-mono text-[11px] font-medium tracking-wide text-primary uppercase">
+                  Lives in your repo
+                </p>
+                <h1 className="font-heading mt-3 text-balance text-[2.2rem] font-semibold leading-[1.1] tracking-[-0.035em] sm:text-5xl sm:leading-[1.05]">
+                  A design-review team so your product{" "}
+                  <span className="bg-gradient-to-r from-primary to-[oklch(0.55_0.16_250)] bg-clip-text text-transparent">
+                    doesn’t look like AI slop
+                  </span>
+                </h1>
+                <p className="mx-auto mt-4 max-w-md text-pretty text-lg text-muted-foreground lg:mx-0">
+                  Each seat brings its own skill files. You don’t memorize skill
+                  names — the{" "}
+                  <span className="font-medium text-foreground">
+                    Orchestrator
+                  </span>{" "}
+                  runs the crew. You just ask:{" "}
+                  <span className="font-medium text-foreground">
+                    Run a panel
+                  </span>
+                  .
+                </p>
 
-              <div className="mx-auto mt-8 max-w-lg lg:mx-0">
-                <InstallBlock caption="Then open Cursor or Claude → Run EmpathFlow" />
-              </div>
+                <div className="mx-auto mt-8 max-w-lg lg:mx-0">
+                  <InstallBlock caption="Then open Cursor or Claude → Run a panel · /panel" />
+                </div>
 
-              <div className="mt-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
-                <Link
-                  href="/report"
-                  className={cn(
-                    buttonVariants({ variant: "outline", size: "lg" }),
-                    "h-10 gap-2 rounded-full px-5"
-                  )}
-                >
-                  <BookOpen className="size-4" aria-hidden />
-                  Sample report
-                </Link>
-                <a
-                  href="https://www.npmjs.com/package/@tysongreenan/tastetest"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={cn(
-                    buttonVariants({ variant: "ghost", size: "lg" }),
-                    "h-10 gap-1.5 rounded-full px-4 text-muted-foreground"
-                  )}
-                >
-                  npm
-                  <ExternalLink className="size-3.5 opacity-60" aria-hidden />
-                </a>
-              </div>
-            </motion.div>
+                <div className="mt-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+                  <a
+                    href="#crew"
+                    className={cn(
+                      buttonVariants({ variant: "outline", size: "lg" }),
+                      "h-10 gap-2 rounded-full px-5"
+                    )}
+                  >
+                    Meet the crew
+                  </a>
+                  <Link
+                    href="/report"
+                    className={cn(
+                      buttonVariants({ variant: "ghost", size: "lg" }),
+                      "h-10 gap-2 rounded-full px-4 text-muted-foreground"
+                    )}
+                  >
+                    <BookOpen className="size-4" aria-hidden />
+                    Sample report
+                  </Link>
+                  <a
+                    href="https://www.npmjs.com/package/@tysongreenan/panel"
+                    target="_blank"
+                    rel="noreferrer"
+                    className={cn(
+                      buttonVariants({ variant: "ghost", size: "lg" }),
+                      "h-10 gap-1.5 rounded-full px-4 text-muted-foreground"
+                    )}
+                  >
+                    npm
+                    <ExternalLink className="size-3.5 opacity-60" aria-hidden />
+                  </a>
+                </div>
+              </motion.div>
 
-            <motion.div
-              className="mx-auto w-full max-w-md lg:max-w-none"
-              initial={reduceMotion ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={
-                reduceMotion
-                  ? { duration: 0 }
-                  : { duration: 0.32, delay: 0.05, ease: EASE }
-              }
-            >
-              <ProductPreview />
-            </motion.div>
-          </div>
+              <motion.div
+                className="mx-auto w-full max-w-md lg:max-w-none"
+                initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={
+                  reduceMotion
+                    ? { duration: 0 }
+                    : { duration: 0.32, delay: 0.05, ease: EASE }
+                }
+              >
+                <ProductPreview />
+              </motion.div>
+            </div>
           </div>
         </section>
 
-        {/* How — three short steps */}
-        <section
-          id="how"
-          className="border-y border-border/50 bg-card/40"
-        >
+        <section id="how" className="border-y border-border/50 bg-card/40">
           <div className="mx-auto max-w-5xl px-5 py-14 sm:px-6 sm:py-16">
             <h2 className="font-heading text-center text-2xl font-semibold tracking-tight sm:text-left sm:text-3xl">
-              Three steps
+              You talk to the manager. Skills stay in the repo.
             </h2>
+            <p className="mt-3 max-w-2xl text-center text-sm text-muted-foreground sm:text-left">
+              Init installs the pack. When you say Run a panel, the Orchestrator
+              seats the right agents and loads the right files — craft, journey,
+              copy, motion — without you hunting skill names.
+            </p>
             <ol className="mt-8 grid gap-6 sm:grid-cols-3 sm:gap-8">
               {STEPS.map((step) => (
                 <li key={step.n}>
@@ -288,56 +296,41 @@ export function HomePage() {
           </div>
         </section>
 
-        {/* Skills — mono list, not a card museum */}
-        <section id="skills" className="mx-auto max-w-5xl px-5 py-14 sm:px-6 sm:py-16">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <section
+          id="crew"
+          className="mx-auto max-w-5xl px-5 py-14 sm:px-6 sm:py-16"
+        >
+          <div className="mb-10 max-w-2xl">
             <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
-              Skills in the pack
+              The crew in the package
             </h2>
-            <a
-              href={`${GH}/tree/main/skills`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80"
-            >
-              Browse skills/
-              <ExternalLink className="size-3.5 opacity-60" aria-hidden />
-            </a>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              Specialists with their own skill files — anti-slop craft, journeys,
+              personas, StoryBrand copy, motion, frontend patterns. Open a seat
+              to see what ships with init.
+            </p>
           </div>
-          <ul className="mt-8 divide-y divide-border/60 rounded-2xl border border-border/80 bg-card">
-            {SKILL_LINKS.map((s) => (
-              <li key={s.file}>
-                <a
-                  href={s.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-between gap-3 px-4 py-3.5 transition-colors hover:bg-muted/40 sm:px-5"
-                >
-                  <span className="font-mono text-sm font-medium text-foreground">
-                    {s.file}
-                  </span>
-                  <ExternalLink
-                    className="size-3.5 shrink-0 text-muted-foreground"
-                    aria-hidden
-                  />
-                </a>
-              </li>
-            ))}
-          </ul>
+          <AgentRoster />
         </section>
 
-        {/* Close — install again, short */}
         <section className="border-t border-border/50 bg-foreground text-background">
           <div className="mx-auto flex max-w-md flex-col items-stretch gap-5 px-5 py-16 text-center sm:px-6 sm:py-20">
             <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-3xl">
-              Start in your repo
+              Install the crew. Just ask.
             </h2>
             <p className="text-sm text-background/65">
-              One command. Skills land in your project.
+              Copy the install. Say Run a panel. Open the sample report if you
+              want proof first.
             </p>
             <div className="text-left">
               <InstallBlock />
             </div>
+            <Link
+              href="/report"
+              className="text-sm font-medium text-background/80 underline-offset-4 hover:underline"
+            >
+              Sample report →
+            </Link>
           </div>
         </section>
       </main>

@@ -1,6 +1,6 @@
 """Playwright browser backend for live journey testing.
 
-Default browser backend for TasteTest. Browserbase is the higher-quality optional path.
+Default browser backend for Panel. Browserbase is the higher-quality optional path.
 
 TODO:
 - launch/close browser

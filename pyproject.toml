@@ -3,14 +3,14 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tastetest"
+name = "panel"
 version = "0.1.0"
-description = "The UX review that lives in your repo — buyer-level EmpathFlow audits"
+description = "A buyer panel that lives in your repo — persona review and scored UX report"
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.11"
 authors = [{ name = "Tyson Greenan" }]
-keywords = ["ux", "ui", "empathy", "playwright", "design-review", "tastetest"]
+keywords = ["ux", "ui", "buyer-panel", "persona", "playwright", "design-review"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "License :: OSI Approved :: MIT License",
@@ -24,11 +24,11 @@ browser = ["playwright>=1.40"]
 dev = ["pytest>=8.0"]
 
 [project.scripts]
-tastetest = "empathflow.cli:main"
+panel = "panelcore.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/tysongreenan/tastetest"
 Repository = "https://github.com/tysongreenan/tastetest"
 
 [tool.setuptools.packages.find]
-include = ["empathflow*"]
+include = ["panelcore*"]

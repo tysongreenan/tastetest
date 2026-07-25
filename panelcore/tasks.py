@@ -1,6 +1,6 @@
-"""Task definitions for EmpathFlow review stages.
+"""Task definitions for Panel review stages.
 
-Manager enforces order (EMPATHFLOW.md Phase 0–6):
+Manager enforces order (PANEL.md Phase 0–6):
 0. Preflight (blocking) → 1–2 product + personas → 3 journeys → 4 critique → 5 specialists → 6 report
 
 TODO: wire into multi-agent task graph with hard edges (no critique before personas GO).
@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from empathflow.agents import AgentSpec
+from panelcore.agents import AgentSpec
 
 
 @dataclass(frozen=True)
@@ -149,7 +149,7 @@ TASKS: tuple[TaskSpec, ...] = (
             "If preflight was NO-GO, report is preflight + personas only — not a fake complete audit. "
             "Scores must be owned by domain roles — Report Writer does not invent scores."
         ),
-        expected_output="Complete TasteTest report as Markdown (or NO-GO preflight package).",
+        expected_output="Complete Panel report as Markdown (or NO-GO preflight package).",
         blocking=True,
     ),
     TaskSpec(

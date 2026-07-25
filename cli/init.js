@@ -9,25 +9,35 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-/** Package root (repo root when developing; node_modules/tastetest when published) */
+/** Package root (repo root when developing; node_modules/@tysongreenan/panel when published) */
 export const PACKAGE_ROOT = path.resolve(__dirname, "..");
 
 /** Always installed — thin core (locked structure) */
 const ROOT_SKILLS_LEAN = [
-  "EMPATHFLOW.md",
+  "PANEL.md",
   "playbook.md",
   "ANTI-SLOP.md",
   "MOTION.md",
+  "COPY.md",
+  "PRODUCT.md",
+  "EMPATHY.md",
+  "JOURNEY.md",
+  "REPORT.md",
 ];
 
 /** Optional companion for design-system work — only with --full */
 const ROOT_SKILLS_FULL_EXTRA = ["FRONTEND.md"];
 
 /** Deep packs only with --full */
-const SKILL_PACKS = ["ui-ux-pro-max", "motion", "stop-slop-prose"];
+const SKILL_PACKS = [
+  "ui-ux-pro-max",
+  "motion",
+  "stop-slop-prose",
+  "marketing-copy",
+];
 
 /**
- * Onboard TasteTest into a project.
+ * Onboard Panel into a project.
  * Default is lean (thin skills + agent wiring). Pass full: true for deep packs.
  * @param {{
  *   dir?: string,
@@ -51,8 +61,8 @@ export async function initProject(opts = {}) {
   const log = [];
 
   console.log("");
-  console.log("  TasteTest onboarding");
-  console.log("  ────────────────────");
+  console.log("  Panel onboarding");
+  console.log("  ────────────────");
   console.log(`  Target: ${target}`);
   console.log(
     `  Mode:   ${full ? "full (thin skills + deep packs)" : "lean (thin skills only)"}`
@@ -123,12 +133,12 @@ export async function initProject(opts = {}) {
   // 4) Cursor wiring
   if (wantCursor) {
     console.log("  → Cursor (rules + command)");
-    const ruleDest = path.join(target, ".cursor", "rules", "tastetest.mdc");
-    const cmdDest = path.join(target, ".cursor", "commands", "tastetest.md");
+    const ruleDest = path.join(target, ".cursor", "rules", "panel.mdc");
+    const cmdDest = path.join(target, ".cursor", "commands", "panel.md");
     log.push(writeText(ruleDest, cursorRuleContent({ full }), { force, dryRun }));
     log.push(writeText(cmdDest, cursorCommandContent(), { force, dryRun }));
-    console.log(`    ${log.at(-2).status.padEnd(8)} .cursor/rules/tastetest.mdc`);
-    console.log(`    ${log.at(-1).status.padEnd(8)} .cursor/commands/tastetest.md`);
+    console.log(`    ${log.at(-2).status.padEnd(8)} .cursor/rules/panel.mdc`);
+    console.log(`    ${log.at(-1).status.padEnd(8)} .cursor/commands/panel.md`);
   }
 
   // 5) Claude Code wiring
@@ -138,33 +148,33 @@ export async function initProject(opts = {}) {
       target,
       ".claude",
       "skills",
-      "tastetest",
+      "panel",
       "SKILL.md"
     );
     log.push(writeText(skillDest, claudeSkillContent({ full }), { force, dryRun }));
-    console.log(`    ${log.at(-1).status.padEnd(8)} .claude/skills/tastetest/SKILL.md`);
+    console.log(`    ${log.at(-1).status.padEnd(8)} .claude/skills/panel/SKILL.md`);
   }
 
   // 6) Onboarding note
-  const onboardDest = path.join(target, "TASTETEST.md");
+  const onboardDest = path.join(target, "ONBOARDING.md");
   log.push(
     writeText(onboardDest, onboardReadmeContent({ full }), { force, dryRun })
   );
-  console.log(`  → ${log.at(-1).status.padEnd(8)} TASTETEST.md (how to run)`);
+  console.log(`  → ${log.at(-1).status.padEnd(8)} ONBOARDING.md (how to run)`);
 
   // 7) Report folder + shared run-state template
-  const reportDir = path.join(target, "tastetest-report");
+  const reportDir = path.join(target, "panel-report");
   if (!dryRun) mkdirSync(reportDir, { recursive: true });
   const keep = path.join(reportDir, ".gitkeep");
   if (!dryRun && !existsSync(keep)) writeFileSync(keep, "");
-  console.log("  →         tastetest-report/");
+  console.log("  →         panel-report/");
 
   const runStateSrc = path.join(PACKAGE_ROOT, "docs", "run-state.template.yaml");
   if (existsSync(runStateSrc)) {
     const runStateDest = path.join(reportDir, "run-state.template.yaml");
     const r = copyOne(runStateSrc, runStateDest, { force, dryRun });
     log.push(r);
-    console.log(`  → ${r.status.padEnd(8)} tastetest-report/run-state.template.yaml`);
+    console.log(`  → ${r.status.padEnd(8)} panel-report/run-state.template.yaml`);
   }
 
   // Collaboration law + roster (needed for full multi-agent protocol)
@@ -182,7 +192,7 @@ export async function initProject(opts = {}) {
   const would = log.filter((x) => x.status === "would").length;
 
   console.log("");
-  console.log("  ────────────────────");
+  console.log("  ────────────────");
   console.log(
     dryRun
       ? `  Dry run: ${would} would write, ${skipped} skip`
@@ -193,25 +203,25 @@ export async function initProject(opts = {}) {
   console.log("  1. Open this project in Cursor or Claude Code");
   console.log("  2. Run a review:");
   console.log("");
-  console.log("       Run EmpathFlow");
-  console.log("       Do a TasteTest review");
+  console.log("       Run a panel");
+  console.log("       Do a Panel review");
   if (wantCursor) {
     console.log("");
-    console.log("     Cursor: type /tastetest  (custom command)");
+    console.log("     Cursor: type /panel  (custom command)");
   }
   if (wantClaude) {
     console.log(
-      "     Claude Code: invoke the tastetest skill, or say Run EmpathFlow"
+      "     Claude Code: invoke the panel skill, or say Run a panel"
     );
   }
   if (!full) {
     console.log("");
     console.log("  Deep packs later:");
-    console.log("    npx @tysongreenan/tastetest init --full");
+    console.log("    npx @tysongreenan/panel init --full");
   }
   console.log("");
-  console.log("  Load map: EMPATHFLOW + playbook · craft → ANTI-SLOP · motion → MOTION");
-  console.log("  Docs: TASTETEST.md · EMPATHFLOW.md");
+  console.log("  Load map: PANEL + playbook · craft → ANTI-SLOP · motion → MOTION · sell → COPY (Isa)");
+  console.log("  Docs: ONBOARDING.md · PANEL.md · docs/crew-isa.md");
   console.log("");
 
   return { ok: true, log, target, full };
@@ -249,48 +259,51 @@ function writeText(dest, body, { force, dryRun }) {
 
 function cursorRuleContent({ full }) {
   return `---
-description: TasteTest / EmpathFlow — buyer-level UX review, craft, motion
+description: Panel — buyer-level UX review, craft, motion
 globs:
 alwaysApply: false
 ---
 
-# TasteTest
+# Panel
 
 **Lean core always on. Heavy packs optional. Reduction over addition.**
 
-1. \`EMPATHFLOW.md\` is source of truth (buyer job + reduction bias).
-2. Load \`playbook.md\` with every EmpathFlow run.
+1. \`PANEL.md\` is source of truth (buyer job + reduction bias).
+2. Load \`playbook.md\` with every panel run.
 3. UI / craft → + \`ANTI-SLOP.md\`. Motion → + \`MOTION.md\`.
-4. Design system / colors / type → + \`FRONTEND.md\` + \`skills/ui-ux-pro-max\` only${full ? "" : " (needs `npx @tysongreenan/tastetest init --full`)"}.
-5. Prefer delete / merge / cut. Preserve install / primary CTA.
+4. Marketing / StoryBrand / sell / product demo → + \`COPY.md\` (Isa)${full ? " + \`skills/marketing-copy\`" : " (deep pack: `init --full`)"}.
+5. Design system / colors / type → + \`FRONTEND.md\` + \`skills/ui-ux-pro-max\` only${full ? "" : " (needs `npx @tysongreenan/panel init --full`)"}.
+6. Prefer delete / merge / cut. Preserve install / primary CTA.
 
 ## Load map
 
 | User says | Load |
 |-----------|------|
-| Run EmpathFlow / TasteTest | \`EMPATHFLOW.md\` + \`playbook.md\` |
+| Run a panel / Panel review | \`PANEL.md\` + \`playbook.md\` |
 | UI / craft / anti-slop | + \`ANTI-SLOP.md\` |
 | Animations / motion | + \`MOTION.md\` |
+| Marketing / landing / StoryBrand | + \`COPY.md\` (Isa) |
 | Design system / colors / type | + \`FRONTEND.md\` + \`skills/ui-ux-pro-max\` |
 
 ## Priority of truth
 
-1. EMPATHFLOW · 2. ANTI-SLOP · 3. MOTION · 4. playbook · 5. heavy packs (only when needed)
+1. PANEL · 2. ANTI-SLOP · 3. MOTION · 4. playbook · 5. COPY (marketing) · 6. heavy packs (only when needed)
 `;
 }
 
 function cursorCommandContent() {
   return `---
-description: Run TasteTest / EmpathFlow buyer-level UX review on this project
+description: Run a Panel buyer-level UX review on this project
 ---
 
-Run a TasteTest (EmpathFlow) review on this codebase.
+Run a Panel review on this codebase.
 
-1. Follow \`EMPATHFLOW.md\` (reduction bias, density-first). Use \`playbook.md\`.
+1. Follow \`PANEL.md\` (reduction bias, density-first). Use \`playbook.md\`.
 2. Prefer cuts over additions. Do not add marketing text to “fix” density.
 3. Craft issues → \`ANTI-SLOP.md\`. Motion → \`MOTION.md\`.
-4. Do not load \`FRONTEND.md\` or \`skills/ui-ux-pro-max\` unless design-system work is in scope.
-5. Preserve install / primary CTA. Report to \`tastetest-report/report.md\`.
+4. Marketing / landing sell → seat **Isa** with \`COPY.md\` (+ \`skills/marketing-copy\` if present).
+5. Do not load \`FRONTEND.md\` or \`skills/ui-ux-pro-max\` unless design-system work is in scope.
+6. Preserve install / primary CTA. Report to \`panel-report/report.md\`.
 
 If the user named a URL or path, focus there. Otherwise review the main app/UI entrypoints.
 `;
@@ -298,93 +311,98 @@ If the user named a URL or path, focus there. Otherwise review the main app/UI e
 
 function claudeSkillContent({ full }) {
   return `---
-name: tastetest
+name: panel
 description: >
-  Buyer-level UX review (EmpathFlow / TasteTest). Use when the user says Run EmpathFlow,
-  TasteTest, UX review, anti-slop, or motion critic.
+  Buyer-level UX review (Panel). Use when the user says Run a panel,
+  Panel review, UX review, anti-slop, or motion critic.
 ---
 
-# TasteTest
+# Panel
 
 **Lean core always on. Heavy packs optional. Reduction over addition.**
 
-1. **Source of truth:** \`EMPATHFLOW.md\` + \`playbook.md\`
+1. **Source of truth:** \`PANEL.md\` + \`playbook.md\`
 2. UI / craft → + \`ANTI-SLOP.md\` · Motion → + \`MOTION.md\`
-3. Design system / colors / type → + \`FRONTEND.md\` + \`skills/ui-ux-pro-max/\`${full ? "" : " (needs `init --full`)"}
-4. Priority of truth: EMPATHFLOW → ANTI-SLOP → MOTION → playbook → packs
-5. Delete before add. Preserve install/CTA.
+3. Marketing / StoryBrand / sell → + \`COPY.md\` (Isa)${full ? " + \`skills/marketing-copy/\`" : ""}
+4. Design system / colors / type → + \`FRONTEND.md\` + \`skills/ui-ux-pro-max/\`${full ? "" : " (needs `init --full`)"}
+5. Priority of truth: PANEL → ANTI-SLOP → MOTION → playbook → COPY → packs
+6. Delete before add. Preserve install/CTA.
 
 ## Output
 
-\`tastetest-report/report.md\`
+\`panel-report/report.md\`
 `;
 }
 
 function onboardReadmeContent({ full }) {
-  return `# TasteTest is installed
+  return `# Panel is installed
 
-This project was onboarded with \`npx @tysongreenan/tastetest init${full ? " --full" : ""}\`.
+This project was onboarded with \`npx @tysongreenan/panel init${full ? " --full" : ""}\`.
 
 **Lean core always on. Heavy packs optional. Reduction over addition.**
 
 ## Run a review
 
 \`\`\`
-Run EmpathFlow
+Run a panel
 \`\`\`
 
 ### What to load
 
 | User says | Load |
 |-----------|------|
-| Run EmpathFlow / TasteTest | \`EMPATHFLOW.md\` + \`playbook.md\` |
+| Run a panel / Panel review | \`PANEL.md\` + \`playbook.md\` |
 | UI / craft / anti-slop | + \`ANTI-SLOP.md\` |
 | Animations / motion | + \`MOTION.md\` |
+| Marketing / StoryBrand / sell | + \`COPY.md\` (Isa) |
 | Design system / colors / type | + \`FRONTEND.md\` + \`skills/ui-ux-pro-max\` |
 
 ### Priority of truth
 
-1. \`EMPATHFLOW.md\` — buyer job + reduction bias  
+1. \`PANEL.md\` — buyer job + reduction bias  
 2. \`ANTI-SLOP.md\` — does this look AI-made?  
 3. \`MOTION.md\` — Emil motion standard  
 4. \`playbook.md\` — shared principles  
-5. Heavy packs — only when explicitly needed  
+5. \`COPY.md\` — marketing sell (Isa)  
+6. Heavy packs — only when explicitly needed  
 
 ### Cursor / Claude
 
-- Cursor: **\`/tastetest\`** · \`.cursor/rules/tastetest.mdc\`
-- Claude Code: \`.claude/skills/tastetest/\`
+- Cursor: **\`/panel\`** · \`.cursor/rules/panel.mdc\`
+- Claude Code: \`.claude/skills/panel/\`
 
 ## Files
 
 | Path | Role |
 |------|------|
-| \`EMPATHFLOW.md\` | Core — always on |
+| \`PANEL.md\` | Core — always on |
 | \`playbook.md\` | Don’t Make Me Think + density |
 | \`ANTI-SLOP.md\` | Craft / anti-template |
 | \`MOTION.md\` | Motion (when anything moves) |
+| \`COPY.md\` | Isa — marketing / StoryBrand / product-show |
+| \`PRODUCT.md\` / \`EMPATHY.md\` / \`JOURNEY.md\` / \`REPORT.md\` | Specialist seats |
 ${
   full
     ? `| \`FRONTEND.md\` | Design-system work only |
-| \`skills/\` | Deep packs (ui-ux-pro-max, motion, prose) |
+| \`skills/\` | Deep packs (ui-ux-pro-max, motion, prose, marketing-copy) |
 `
-    : `| *(lean)* | \`npx @tysongreenan/tastetest init --full\` for packs + FRONTEND |
+    : `| *(lean)* | \`npx @tysongreenan/panel init --full\` for packs + FRONTEND + marketing-copy refs |
 `
 }| \`AGENTS.md\` | Roster · run classes · protocol pack |
 | \`COLLABORATION.md\` | Handoffs · Approves · consensus |
-| \`tastetest-report/\` | Reports + \`run-state.template.yaml\` |
+| \`panel-report/\` | Reports + \`run-state.template.yaml\` |
 
 ### Full multi-agent runs
 
-1. Copy \`tastetest-report/run-state.template.yaml\` → \`run-state.yaml\`  
+1. Copy \`panel-report/run-state.template.yaml\` → \`run-state.yaml\`  
 2. Set \`run_class\` + \`protocol\`  
 3. No implement without consensus **PROCEED** (see \`COLLABORATION.md\`)
 
 ## Re-run
 
 \`\`\`bash
-npx @tysongreenan/tastetest init --force
-npx @tysongreenan/tastetest init --full --force
+npx @tysongreenan/panel init --force
+npx @tysongreenan/panel init --full --force
 \`\`\`
 `;
 }

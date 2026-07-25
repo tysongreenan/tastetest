@@ -77,7 +77,7 @@
 **Context:** Homepage not launch-ready; icons were missing; sections felt thin.  
 **Personas:** Avery priority; Jordan/Sam non-negotiables honored.  
 **Changes requested:** Full rebuild of `home-page.tsx` per proposal above.  
-**Preserve:** `npx tastetest init` + Copy labels.  
+**Preserve:** `npx panel init` + Copy labels.  
 **PM Approves:** Avery ✓ Jordan ✓ Sam ✓  
 
 ### Orchestrator Manager decision

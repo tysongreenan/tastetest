@@ -1,4 +1,4 @@
-# DESIGN.md — TasteTest marketing site (`web/`)
+# DESIGN.md — Panel marketing site (`web/`)
 
 **Scope:** Marketing homepage, sample report route, shared chrome (nav/footer).  
 **Stack:** Next.js · Tailwind v4 · shadcn/ui · SmoothUI · Motion (Framer).  
@@ -6,13 +6,13 @@
 **Companion skills:** root `ANTI-SLOP.md`, `MOTION.md`, `FRONTEND.md` (agent card + workflow Step 0b), `docs/personas.md`.  
 **Agents:** Frontend Design and Design System Checker load this file before proposing or scoring UI.
 
-This file is **TasteTest’s** system — not a third-party brand kit. Structure is inspired by deep product design extracts (overview → tokens → type → layout → components → do/don’t → iteration). Values are taken from what ships in `web/`.
+This file is **Panel’s** system — not a third-party brand kit. Structure is inspired by deep product design extracts (overview → tokens → type → layout → components → do/don’t → iteration). Values are taken from what ships in `web/`.
 
 ---
 
 ## Overview
 
-TasteTest’s marketing presence should feel like a **precise developer tool that still has taste** — calm light canvas, electric blue actions, typography-first hierarchy, and one obvious conversion path: copy install → run EmpathFlow → see a real report shape.
+Panel’s marketing presence should feel like a **precise developer tool** — calm light canvas, electric blue actions, typography-first hierarchy, and one obvious conversion path: copy install → run a panel → see a real report shape. Not a craft-taste skill site; a buyer-panel product page.
 
 The homepage opens on a value claim and an **install block** (not a demo request). Proof is a **product path preview** (code → agent → report) plus a **Sample report** link to `/report` (Acme Checkout). Skills depth is a mono file list; crew/org live on GitHub, not the homepage. Dark bands appear only as the closing install CTA, not as a default product skin. Color is mostly flat UI; soft blue radial wash sits behind the hero as atmosphere, not decoration chrome.
 
@@ -89,12 +89,12 @@ Tokens live as CSS variables in `:root` (`globals.css`). Prefer **token names** 
 
 ### Gradient system
 
-TasteTest does **not** use gradients as generic card fills.
+Panel does **not** use gradients as generic card fills.
 
 | Allowed | Forbidden |
 |---------|-----------|
 | Soft radial hero wash (low opacity) | Glassmorphic multi-stop panels |
-| `AnimatedGradientBackground` on hero only — TasteTest blue palette, reduced-motion static | Full-page rainbow / dark neon gradients from third-party demos |
+| `AnimatedGradientBackground` on hero only — Panel blue palette, reduced-motion static | Full-page rainbow / dark neon gradients from third-party demos |
 | Gradient **text** on a short H1 phrase | Gradient full-section backgrounds as brand |
 | Dark close band is flat `foreground` | Neon mesh / aurora SaaS templates |
 
@@ -240,7 +240,7 @@ Major media/product cards: **`rounded-2xl`**. Primary marketing buttons: **`roun
 
 #### `install-block`
 
-Terminal-style card: “install” header bar, `$` + mono command `npx @tysongreenan/tastetest init`, primary **Copy** via `ButtonCopy` with visible labels (`Copy` / `Copied`).
+Terminal-style card: “install” header bar, `$` + mono command `npx @tysongreenan/panel init`, primary **Copy** via `ButtonCopy` with visible labels (`Copy` / `Copied`).
 
 - Soft primary-tinted shadow  
 - Card root: `bg-card text-foreground` — **required** so the command stays dark when the block sits on the dark close band  
@@ -249,7 +249,7 @@ Terminal-style card: “install” header bar, `$` + mono command `npx @tysongre
 
 #### `install-caption` (optional)
 
-Short next-step under hero install only, e.g. “Then open Cursor or Claude → Run EmpathFlow”. Muted 11px. Dark close band has no caption — light card alone is enough.
+Short next-step under hero install only, e.g. “Then open Cursor or Claude → Run a panel”. Muted 11px. Dark close band has no caption — light card alone is enough.
 
 #### `product-preview`
 
@@ -301,7 +301,7 @@ Three steps (init → agent → report) with live preview panel. Click selects s
 
 #### `skills-showcase`
 
-- **Featured (2):** EmpathFlow + Anti-slop — large cards  
+- **Featured (2):** Panel + Anti-slop — large cards  
 - **Also in the pack:** mono file rows for motion, frontend, prose, collaboration  
 
 #### `org-structure`
@@ -321,10 +321,10 @@ Marketing often overrides size to `h-11` + `rounded-full` + `px-5`/`px-6` for he
 
 ### Report route (`/report`)
 
-- Chrome: “Sample output · fictional product” + **Acme Checkout — EmpathFlow report**  
+- Chrome: “Sample output · fictional product” + **Acme Checkout — Panel report**  
 - Body: `content/sample-report.md`  
 - Meta must not say “dogfood”  
-- Dogfood process reports stay in repo `tastetest-report/`, not marketing sample chrome  
+- Dogfood process reports stay in repo `panel-report/`, not marketing sample chrome  
 
 ---
 
@@ -332,7 +332,7 @@ Marketing often overrides size to `h-11` + `rounded-full` + `px-5`/`px-6` for he
 
 Canonical rules: root **`MOTION.md`** + `skills/motion/STANDARDS.md`.
 
-| Principle | TasteTest application |
+| Principle | Panel application |
 |-----------|------------------------|
 | Frequency | Marketing loops OK (tabs/pipeline ~3s); never animate keyboard/high-frequency UI |
 | Easing | Custom ease-out `cubic-bezier(0.23, 1, 0.32, 1)` for UI enter/exit |
@@ -380,7 +380,7 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 - Specific over clever. Evidence over vibes.  
 - Admit V1: skill-first, agent-run.  
 - Stop-slop prose: no “cool,” “actually,” “still want…?” filler — see `skills/stop-slop-prose/`.  
-- Primary conversion strings: `npx @tysongreenan/tastetest init`, `Run EmpathFlow`, sample CTAs **Read full sample** / **See sample report**.
+- Primary conversion strings: `npx @tysongreenan/panel init`, `Run a panel`, sample CTAs **Read full sample** / **See sample report**.
 
 ---
 
@@ -435,7 +435,7 @@ Hover motion: gate with `@media (hover: hover) and (pointer: fine)` when scaling
 
 | Gap | Status / rule |
 |-----|----------------|
-| Install command | `npx @tysongreenan/tastetest init` (scoped — bare `tastetest` blocked as too similar to `taste-test`) |
+| Install command | `npx @tysongreenan/panel init` (scoped — bare `panel` blocked as too similar to `taste-test`) |
 | Sample is fictional Acme | Label as example; never dogfood chrome on `/report` |
 | Agent portraits are illustrative | Not real employees; craft still applies (no toy UI) |
 | Full AGENTS.md roster larger than marketing highlights | Link AGENTS.md; say “highlights” |

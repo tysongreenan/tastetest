@@ -17,7 +17,7 @@ const STAGES = [
   {
     id: "agent" as const,
     title: "Tell your agent",
-    blurb: "Run EmpathFlow — or /tastetest in Cursor.",
+    blurb: "Run a panel — or /panel in Cursor.",
     icon: Sparkles,
   },
   {
@@ -36,11 +36,11 @@ function StageVisual({ id }: { id: StageId }) {
       <div className="rounded-xl border border-border/80 bg-background p-4 font-mono text-xs">
         <p className="text-muted-foreground">$</p>
         <p className="mt-1 text-foreground">
-          npx @tysongreenan/tastetest init
+          npx @tysongreenan/panel init
           <span className="ml-1 inline-block h-3 w-0.5 animate-pulse bg-primary align-middle" />
         </p>
         <p className="mt-3 text-[11px] text-emerald-700">
-          ✓ EMPATHFLOW.md · ANTI-SLOP.md · Cursor /tastetest
+          ✓ PANEL.md · ANTI-SLOP.md · Cursor /panel
         </p>
       </div>
     );
@@ -49,7 +49,7 @@ function StageVisual({ id }: { id: StageId }) {
     return (
       <div className="space-y-2 p-1">
         <div className="ml-auto max-w-[90%] rounded-2xl rounded-br-md bg-primary px-3 py-2 text-xs text-primary-foreground">
-          Run EmpathFlow
+          Run a panel
         </div>
         <div className="rounded-2xl rounded-bl-md border border-border/80 bg-muted/40 px-3 py-2 text-xs text-muted-foreground">
           Walking checkout as Riley…

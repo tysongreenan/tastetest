@@ -12,7 +12,7 @@
 
 **Claim:** Full GO for homepage conversion review.  
 **Evidence:** Personas file present · DESIGN.md present · live browser · npm 404 confirmed · init dry-run works from repo.  
-**Preserve:** `npx tastetest init` + labeled Copy · honesty line · Sample report path · Product path preview · skill mono list · dark close install · SiriOrb brand.
+**Preserve:** `npx panel init` + labeled Copy · honesty line · Sample report path · Product path preview · skill mono list · dark close install · SiriOrb brand.
 
 | Item | Result |
 |------|--------|
@@ -60,8 +60,8 @@
 
 | Promised | Reality |
 |----------|---------|
-| `npx tastetest init` | **Not on npm** (404). Repo path works: `node bin/tastetest.js init` dry-run → writes. Honesty line present. |
-| Run EmpathFlow | Documented in steps + agent panel |
+| `npx panel init` | **Not on npm** (404). Repo path works: `node bin/panel.js init` dry-run → writes. Honesty line present. |
+| Run a panel | Documented in steps + agent panel |
 | Sample report | `/report` = Acme Checkout; metadata fixed |
 | Skills in repo | Mono list links to real blobs |
 
@@ -235,12 +235,12 @@ No identical agent grids. Soft blue wash is brand-allowed. Gradient text limited
 
 ## Consensus: ship report (review only)
 
-- **Proposal:** Publish homepage lean TasteTest report; recommend P0 close contrast fix before any redesign.
+- **Proposal:** Publish homepage lean Panel report; recommend P0 close contrast fix before any redesign.
 - **Approves:** Orchestrator ✓ · Craft ✓ · Motion ✓ · Journey ✓ · Prose ✓ · PM-Avery ✓ · PM-Jordan ✓ · PM-Sam ✓  
 - **Implement:** **not authorized** this turn — review only. User may request fix.
 
 ## Consensus: P0 close install contrast (if implement later)
 
-- **Proposal:** Make `npx tastetest init` visible on dark close band; keep Copy + honesty.
+- **Proposal:** Make `npx panel init` visible on dark close band; keep Copy + honesty.
 - **Required Approves:** Orchestrator · Journey · Craft · PM-Avery (+ PM-Sam harm pass)
 - **Status:** Proposed — awaiting implement request

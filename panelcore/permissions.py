@@ -1,4 +1,4 @@
-"""Permission matrix for EmpathFlow crew — mirror of COLLABORATION.md.
+"""Permission matrix for Panel crew — mirror of COLLABORATION.md.
 
 Used by multi-agent runtime and soft checks before implement.
 Skills remain source of truth for agents; this module is the code-side gate.
@@ -183,10 +183,10 @@ _PROCEED_RE = re.compile(
 
 
 def consensus_artifact_allows_write(project_root: Path) -> tuple[bool, str]:
-    """Check tastetest-report for PROCEED signal (soft gate for agent runs)."""
-    report_dir = project_root / "tastetest-report"
+    """Check panel-report for PROCEED signal (soft gate for agent runs)."""
+    report_dir = project_root / "panel-report"
     if not report_dir.is_dir():
-        return False, "no tastetest-report/ directory"
+        return False, "no panel-report/ directory"
 
     run_state = report_dir / "run-state.yaml"
     if run_state.is_file():
@@ -203,4 +203,4 @@ def consensus_artifact_allows_write(project_root: Path) -> tuple[bool, str]:
         except OSError:
             continue
 
-    return False, "no PROCEED consensus in run-state.yaml or tastetest-report/*.md"
+    return False, "no PROCEED consensus in run-state.yaml or panel-report/*.md"

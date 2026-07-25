@@ -1,11 +1,24 @@
 # playbook.md
+## Heuristic Auditor + shared gates
 
-## Don’t Make Me Think
+Used by **Heuristic Auditor** and as the shared short checklist for every panel.
+
+---
+
+## Don’t Make Me Think (Krug)
 - Self-evident design
 - Design for scanning
 - Conventions over novelty
 - Omit needless words
 - Obvious next action
+
+## Occam’s Razor (UX)
+Prefer the simplest structure that still does the job.
+- Simplify navigation and section count
+- Reduce cognitive load (less simultaneous info)
+- Minimize required input
+- Remove elements that don’t serve the primary job
+- Usability before decorative aesthetics
 
 ## Density
 - Every block must earn its place
@@ -14,9 +27,33 @@
 
 ## Hierarchy
 - One primary action per view
-- Clear visual order: what → why → proof → action
+- Clear visual order: **what → why → proof → action**
 
 ## Professionalism
 - Consistent spacing and type
-- Real empty/loading/error states
+- Real empty / loading / error / disabled states
 - No fake controls
+- No invented metrics or social proof
+
+## Accessibility baseline (hard gate smoke)
+- Focus states visible
+- Interactive elements have names/labels
+- Contrast sufficient for body and CTA
+- Keyboard can reach primary actions
+- Motion respects reduced-motion when decorative
+
+## Hard-gate scores (1–10)
+
+| Gate | Question |
+|------|----------|
+| Clarity | Self-evident in 3s? |
+| Density | Anything cuttable? |
+| Hierarchy | Primary action obvious? |
+| Trust | Real states + honest claims? |
+| A11y smoke | Baseline above passable? |
+
+Any gate ≤ 4 on a conversion surface → **Block** implement of “polish only”; fix the gate.
+
+## Preserve-first
+Do not delete install / signup / primary CTA to “clean” the audit.  
+Label incomplete implementation honestly.

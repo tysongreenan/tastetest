@@ -1,6 +1,6 @@
 /**
- * Lightweight live audit for TasteTest homepage EmpathFlow dogfood.
- * Run: node scripts/empathflow-audit.mjs
+ * Lightweight live audit for Panel homepage Panel dogfood.
+ * Run: node scripts/panelcore-audit.mjs
  */
 import { chromium } from "playwright";
 import { mkdir } from "node:fs/promises";
@@ -8,7 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const OUT = path.join(__dirname, "../tastetest-report");
+const OUT = path.join(__dirname, "../panel-report");
 const URL = process.env.AUDIT_URL || "http://localhost:3000";
 
 async function main() {
@@ -68,8 +68,8 @@ async function main() {
       headings,
       copyButtons,
       hasInitCommand:
-        text.includes("npx @tysongreenan/tastetest init") ||
-        text.includes("npx tastetest init"),
+        text.includes("npx @tysongreenan/panel init") ||
+        text.includes("npx panel init"),
       hasGithub: links.some((l) => l.href?.includes("github")),
     };
   });

@@ -17,9 +17,11 @@ web/.next/
 web/out/
 web/.turbo/
 web/next-env.d.ts
+web/.vercel
 *.tsbuildinfo
+.vercel
 
-# CLI / npm (root package is the tastetest npx entry — do not ignore package.json)
+# CLI / npm (root package is the panel npx entry — do not ignore package.json)
 node_modules/
 npm-debug.log*
 
@@ -28,4 +30,4 @@ npm-debug.log*
 overhaul-*.png
 tastetest-*.png
 tastetest-*.md
-!tastetest-report/
+!panel-report/

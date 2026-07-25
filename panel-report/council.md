@@ -1,26 +1,26 @@
-# Council log — Full crew TasteTest run
+# Council log — Full crew Panel run
 
 **Date:** 2026-07-24  
 **Target:** `web/` homepage (`http://localhost:3000`) + `/report`  
-**Protocol:** `COLLABORATION.md` + `EMPATHFLOW.md` Phase 0–7 · `AGENTS.md` full crew  
-**Method:** Live browser (Playwright) + static analysis + `init --dry-run` + `npm view tastetest`  
+**Protocol:** `COLLABORATION.md` + `PANEL.md` Phase 0–7 · `AGENTS.md` full crew  
+**Method:** Live browser (Playwright) + static analysis + `init --dry-run` + `npm view panel`  
 **Implement this run:** residual P0 only (`/report` chrome). Larger IA/craft = proposals pending Approves.
 
 ---
 
 ## Orchestrator → crew | Phase 0 | preflight
 
-**Claim:** Full marketing TasteTest of TasteTest’s own site.  
+**Claim:** Full marketing Panel of Panel’s own site.  
 **Scope:** Product marketing (homepage + sample report), not third-party app audit.  
 **Intent pack:**
-- README: `npx tastetest init` → agent **Run EmpathFlow** → report
+- README: `npx panel init` → agent **Run a panel** → report
 - `DESIGN.md`: calm, honest, Avery-first structure (hero → problem → how → sample → trust → CTA)
 - Primary conversion: copy install command
 - Constraints: SmoothUI brand pieces, preserve install, no delete conversion path  
 **Personas:** `docs/personas.md` ≥2, grounded, PM seats named.  
 **Preserve list:**
-1. `npx tastetest init` + labeled **Copy**
-2. Agent prompt **Run EmpathFlow** (copyable)
+1. `npx panel init` + labeled **Copy**
+2. Agent prompt **Run a panel** (copyable)
 3. SiriOrb brand mark; ScrambleHover on non-H1 only
 4. Acme sample story (not dogfood meta as the *product sample*)
 5. GitHub / open-source path
@@ -41,7 +41,7 @@
 
 ### PM-Jordan | pitch
 **Claim:** Engineer will try the CTA and open GitHub. Broken public init = instant credibility death.  
-**Evidence:** `npm view tastetest` → **404**; local `init --dry-run` works (15 would-write).  
+**Evidence:** `npm view panel` → **404**; local `init --dry-run` works (15 would-write).  
 **Non-negotiable if secondary:** Init looks real; skills on GitHub not theater.
 
 ### PM-Sam | pitch
@@ -68,7 +68,7 @@
 ## Product Analyst → Orchestrator | Phase 1
 
 **Claim:** Product = skill packs + crew process dropped into a repo; agent runs review; output = Markdown report.  
-**Promised:** `npx tastetest init`, Cursor `/tastetest`, Claude skill, report with scores/P0s/paths.  
+**Promised:** `npx panel init`, Cursor `/panel`, Claude skill, report with scores/P0s/paths.  
 **Shipped:** CLI `init` real in-repo; marketing site rich; **not on npm**.  
 **Surfaces:** `home-page.tsx`, marketing/*, `content/sample-report.md`, `cli/init.js`.  
 **Orchestrator:** approve.
@@ -101,7 +101,7 @@
 | Journey | Verdict | Evidence |
 |---------|---------|----------|
 | J1 | **Partial** | Hero install strong; sticky helps; page length + “Meet the crew” compete with try path |
-| J2 | **Fail** | Body Acme ✓; chrome “TasteTest dogfood report” + meta dogfood; sample buried (“Still want…?”) |
+| J2 | **Fail** | Body Acme ✓; chrome “Panel dogfood report” + meta dogfood; sample buried (“Still want…?”) |
 | J3 | **Partial** | Skills link GitHub; crew incomplete vs `AGENTS.md`; public npm 404 |
 | J4 | **Partial** | Install in hero; **Get started** nav `hidden sm:inline-flex`; sticky recovers |
 
@@ -111,7 +111,7 @@
 
 | Gate | Result |
 |------|--------|
-| CTA honesty | **Fail** — public `npx tastetest init` 404; not labeled |
+| CTA honesty | **Fail** — public `npx panel init` 404; not labeled |
 | False affordances | **Pass** — tabs/pipeline/Before-After real |
 | Heading semantics | **Pass** — real H1 |
 | Primary action visibility | **Pass** desktop; **Partial** mobile nav |
@@ -255,7 +255,7 @@
 ## Report Writer → Orchestrator | Phase 6
 
 **Claim:** Full report assembled with multi-persona coverage, hard gates, craft/motion/prose, recommendations.  
-**Path:** `tastetest-report/report.md`  
+**Path:** `panel-report/report.md`  
 **Coverage check:** Avery priority + Jordan/Sam secondary harm — present.  
 **Orchestrator:** **Approve ship report.**
 
@@ -293,4 +293,4 @@
 | 9 DESIGN.md | launch structure | ✓ |
 | Footer | sample earlier in product links | ✓ |
 
-**Preserved:** `npx tastetest init` + Copy · Run EmpathFlow · orb · Acme story · sticky · GitHub
+**Preserved:** `npx panel init` + Copy · Run a panel · orb · Acme story · sticky · GitHub

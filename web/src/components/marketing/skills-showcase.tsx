@@ -28,9 +28,9 @@ type Skill = {
 const SKILLS: Skill[] = [
   {
     icon: Workflow,
-    name: "EmpathFlow",
-    file: "EMPATHFLOW.md",
-    href: `${GH}/EMPATHFLOW.md`,
+    name: "Panel",
+    file: "PANEL.md",
+    href: `${GH}/PANEL.md`,
     pitch:
       "Buyer-level process: personas, journeys, priority council, preserve-first, scored report.",
     badge: "Core process",

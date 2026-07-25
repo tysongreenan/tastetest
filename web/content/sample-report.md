@@ -1,10 +1,10 @@
-# TasteTest sample report — Acme Checkout
+# Panel sample report — Acme Checkout
 
 **Example output** (fictional product).  
-This is what a run can look like after `npx @tysongreenan/tastetest init` and **Run EmpathFlow**.
+This is what a run can look like after `npx @tysongreenan/panel init` and **Run a panel**.
 
 **Target:** Acme web checkout  
-**Method:** EmpathFlow full crew (preflight GO, personas, journeys, craft, motion)  
+**Method:** Panel full crew (preflight GO, personas, journeys, craft, motion)  
 **Primary persona (for Acme):** Riley — first-time mobile buyer  
 
 ---
@@ -121,4 +121,4 @@ Checkout works in happy path but first-time mobile buyers miss the primary actio
 
 ---
 
-*Generated as a **sample** of TasteTest / EmpathFlow output. Your report will cite your real files and journeys.*
+*Generated as a **sample** of Panel output. Your report will cite your real files and journeys.*

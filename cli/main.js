@@ -5,14 +5,14 @@ const require = createRequire(import.meta.url);
 const { version } = require("../package.json");
 
 const HELP = `
-TasteTest — the UX review that lives in your repo
+Panel — a buyer panel that lives in your repo
 
 Usage:
-  npx @tysongreenan/tastetest init [options]
-  npx @tysongreenan/tastetest --help
+  npx @tysongreenan/panel init [options]
+  npx @tysongreenan/panel --help
 
 Commands:
-  init     Onboard TasteTest into a project (default)
+  init     Onboard Panel into a project (default)
   run      Placeholder — use your AI agent after init
 
 Init options:
@@ -25,13 +25,13 @@ Init options:
   --dry-run        Print actions without writing
 
 Default install is lean (locked structure):
-  EMPATHFLOW.md · playbook.md · ANTI-SLOP.md · MOTION.md + Cursor/Claude wiring
+  PANEL.md · playbook.md · ANTI-SLOP.md · MOTION.md · COPY.md (Isa) + Cursor/Claude wiring
 
 After init, open your AI coding agent and say:
 
-  Run EmpathFlow
+  Run a panel
 
-Cursor: /tastetest
+Cursor: /panel
 `.trim();
 
 /**
@@ -72,10 +72,10 @@ export async function main(argv) {
         "Automated multi-agent `run` is still in progress.",
         "After init, use your coding agent:",
         "",
-        "  Run EmpathFlow",
-        "  Do a TasteTest review",
+        "  Run a panel",
+        "  Do a Panel review",
         "",
-        "Cursor: /tastetest",
+        "Cursor: /panel",
       ].join("\n")
     );
     return;

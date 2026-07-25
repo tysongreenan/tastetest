@@ -1,10 +1,10 @@
-# TasteTest product personas
+# Panel product personas
 
 **Owner:** Orchestrator preflight + **Persona Managers** (one per persona below).  
 **Last updated:** 2026-07-24  
 **Default priority proposal (homepage conversion):** P1 — Avery — *must be re-negotiated each full run; secondaries always keep non-negotiables.*
 
-These are **TasteTest’s** users (who install and run EmpathFlow), not personas EmpathFlow invents for a third-party app under review.
+These are **Panel’s** users (who install and run a panel), not personas Panel invents for a third-party app under review.
 
 ### Persona Managers (seat every full run)
 
@@ -16,7 +16,7 @@ These are **TasteTest’s** users (who install and run EmpathFlow), not personas
 
 **Frontend Design must ask each PM** for feel / references / depth / motion before redesigning (`FRONTEND.md` Step 0), then load **`web/DESIGN.md`** (Step 0b) before library search.
 
-Priority for a run is decided in the **persona priority council** (EMPATHFLOW 0C-bis). Do not optimize only for the winner.
+Priority for a run is decided in the **persona priority council** (PANEL 0C-bis). Do not optimize only for the winner.
 
 ---
 
@@ -32,10 +32,10 @@ Priority for a run is decided in the **persona priority council** (EMPATHFLOW 0C
 | **Does** | Skims hero → copies install command → looks for sample output → tries on their repo. |
 | **Feels** | Time-poor, skeptical of pretty marketing, allergic to empty demos. |
 | **Pains** | Vague design feedback; agents that rewrite the brand; tools that need a PhD to start. |
-| **Gains** | `npx tastetest init` works; report with file paths; fixes they can paste into issues. |
+| **Gains** | `npx @tysongreenan/panel init` works; report with file paths; fixes they can paste into issues. |
 | **Success** | Install in &lt;2 minutes; understands the report in &lt;5; ships 1–2 P0 fixes same day. |
 | **Homepage must prove** | Obvious install; real sample report; not AI slop; honest about skill-first workflow. |
-| **Code anchors** | Hero CTA, `npx tastetest init`, sample report, TASTETEST.md |
+| **Code anchors** | Hero CTA, `npx @tysongreenan/panel init`, sample report, ONBOARDING.md |
 
 ---
 
@@ -54,7 +54,7 @@ Priority for a run is decided in the **persona priority council** (EMPATHFLOW 0C
 | **Gains** | Skills in-repo; playbook; preserve-first; craft + motion scores. |
 | **Success** | Init wires Cursor/Claude; full review maps to PRs; re-runnable. |
 | **Homepage must prove** | Open source credibility; agent roster depth; init does real onboarding. |
-| **Code anchors** | `EMPATHFLOW.md`, `AGENTS.md`, skill packs, GitHub |
+| **Code anchors** | `PANEL.md`, `AGENTS.md`, skill packs, GitHub |
 
 ---
 
@@ -81,9 +81,9 @@ Priority for a run is decided in the **persona priority council** (EMPATHFLOW 0C
 
 | Priority | Journey | Primary persona |
 |----------|---------|-----------------|
-| 1 | Land → understand → copy `npx tastetest init` | Avery |
+| 1 | Land → understand → copy `npx @tysongreenan/panel init` | Avery |
 | 2 | See sample report → trust output shape | Avery + Sam |
-| 3 | Init → Run EmpathFlow → get report.md | Avery + Jordan |
+| 3 | Init → Run a panel → get report.md | Avery + Jordan |
 | 4 | Re-run / skill depth / GitHub | Jordan |
 
 ---

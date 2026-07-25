@@ -14,7 +14,7 @@ metadata:
 
 Eliminate predictable AI writing patterns from prose.
 
-**TasteTest note:** This is the *writing* skill. Visual “AI slop” UI is [`ANTI-SLOP.md`](../../ANTI-SLOP.md). Motion is [`MOTION.md`](../../MOTION.md). Run prose stop-slop on microcopy, landing sections, error strings, and report narrative.
+**Panel note:** This is the *writing* skill. Visual “AI slop” UI is [`ANTI-SLOP.md`](../../ANTI-SLOP.md). Motion is [`MOTION.md`](../../MOTION.md). Run prose stop-slop on microcopy, landing sections, error strings, and report narrative.
 
 ## Core Rules
 

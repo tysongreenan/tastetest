@@ -20,7 +20,7 @@ export interface AnimatedGradientBackgroundProps {
 
   /**
    * Colors for radial stops. Must match `gradientStops` length.
-   * TasteTest default: cool light canvas + brand blues (not rainbow dark).
+   * Panel default: cool light canvas + brand blues (not rainbow dark).
    */
   gradientColors?: string[];
 
@@ -51,8 +51,8 @@ export interface AnimatedGradientBackgroundProps {
   topOffset?: number;
 }
 
-/** TasteTest brand-aligned defaults (DESIGN.md: cool ink, electric blue) */
-const TASTETEST_COLORS = [
+/** Panel brand-aligned defaults (DESIGN.md: cool ink, electric blue) */
+const PANEL_COLORS = [
   "oklch(0.995 0.004 260)",
   "oklch(0.88 0.06 265)",
   "oklch(0.62 0.16 257)",
@@ -61,7 +61,7 @@ const TASTETEST_COLORS = [
   "oklch(0.985 0.008 260)",
 ];
 
-const TASTETEST_STOPS = [28, 42, 55, 68, 82, 100];
+const PANEL_STOPS = [28, 42, 55, 68, 82, 100];
 
 /**
  * Animated radial gradient background with optional breathing.
@@ -70,8 +70,8 @@ const TASTETEST_STOPS = [28, 42, 55, 68, 82, 100];
 export function AnimatedGradientBackground({
   startingGap = 115,
   breathing = true,
-  gradientColors = TASTETEST_COLORS,
-  gradientStops = TASTETEST_STOPS,
+  gradientColors = PANEL_COLORS,
+  gradientStops = PANEL_STOPS,
   animationSpeed = 0.018,
   breathingRange = 4,
   containerStyle = {},

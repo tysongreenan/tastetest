@@ -20,9 +20,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TasteTest — The UX review that lives in your repo",
+  title: "Panel — A design-review team so your product doesn’t look like AI slop",
   description:
-    "Buyer-level UX review for products shipped with AI agents. Init in your repo, run EmpathFlow, get a scored report with file-level fixes.",
+    "A managed review crew in your repo. Each seat brings skill files. The Orchestrator runs them — you just ask: Run a panel. npx @tysongreenan/panel init",
 };
 
 export default function RootLayout({

@@ -1,21 +1,26 @@
 {
-  "name": "@tysongreenan/tastetest",
-  "version": "0.1.1",
-  "description": "The UX review that lives in your repo — EmpathFlow buyer audits, craft, motion, frontend design skills",
+  "name": "@tysongreenan/panel",
+  "version": "0.2.2",
+  "description": "A buyer panel that lives in your repo — persona review, craft, motion, scored report",
   "license": "MIT",
   "author": "Tyson Greenan",
   "type": "module",
   "bin": {
-    "tastetest": "bin/tastetest.js"
+    "panel": "bin/panel.js"
   },
   "files": [
     "bin",
     "cli",
-    "EMPATHFLOW.md",
-    "EMPATHFLOW.full.md",
+    "PANEL.md",
+    "PANEL.full.md",
     "playbook.md",
     "ANTI-SLOP.md",
     "MOTION.md",
+    "COPY.md",
+    "PRODUCT.md",
+    "EMPATHY.md",
+    "JOURNEY.md",
+    "REPORT.md",
     "FRONTEND.md",
     "AGENTS.md",
     "COLLABORATION.md",
@@ -23,8 +28,8 @@
     "skills"
   ],
   "scripts": {
-    "tastetest": "node bin/tastetest.js",
-    "init": "node bin/tastetest.js init"
+    "panel": "node bin/panel.js",
+    "init": "node bin/panel.js init"
   },
   "engines": {
     "node": ">=18"
@@ -32,15 +37,19 @@
   "keywords": [
     "ux",
     "ui",
-    "empathflow",
+    "buyer-panel",
+    "persona",
     "cursor",
     "claude",
     "design-review",
-    "anti-slop"
+    "user-testing"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tysongreenan/tastetest.git"
   },
-  "homepage": "https://github.com/tysongreenan/tastetest"
+  "homepage": "https://github.com/tysongreenan/tastetest",
+  "publishConfig": {
+    "access": "public"
+  }
 }

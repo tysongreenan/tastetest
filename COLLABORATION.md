@@ -1,6 +1,6 @@
 # Agent collaboration, permissions & consensus
 
-TasteTest is a **crew**, not a pile of freelancers.  
+Panel is a **crew**, not a pile of freelancers.  
 No role may act outside its lane or ship work without the required approvals.
 
 **When one model plays all roles:** still simulate this protocol in the transcript — write explicit handoffs, proposals, objections, and a consensus line before implementing. Skipping the protocol is a process failure.
@@ -44,6 +44,8 @@ Priority is **collaborative** for each run. Secondaries stay in the room — see
 | Craft score / redesign recs | Craft Critic | Frontend Design, Journey Critic, **priority PM** | **Orchestrator** + **Craft Critic** | Craft Critic |
 | Motion Block/Approve | Motion Critic | Craft Critic | **Orchestrator** + **Motion Critic** | Motion Critic |
 | Prose rewrites | Prose Critic | Empathy Mapper, **affected Persona Managers** | **Orchestrator** + **Prose Critic** | Prose Critic; PM if voice harms their human |
+| **Marketing narrative / SB7 / CTA strategy** | **Isa · Marketing Copywriter** | Product Analyst, **priority PM**, Prose Critic | **Orchestrator** + **Isa** + **priority PM** | Isa (slogan fog / brand-as-hero); PM if voice wrong |
+| **Product-show concept (how we demo)** | **Isa** | Craft, Frontend, Journey, priority PM | **Orchestrator** + **Isa** + **Craft** (if visual) + **priority PM** | Craft (template demo); Isa (no proof) |
 | **Design brief (visual prefs)** | Frontend Design | — | **Orchestrator** + **all seated Persona Managers** (must answer) | Frontend cannot proceed without answers |
 | Design system / library pick | Frontend Design | Craft, Motion, Empathy Mapper, **all PMs** (after brief) | **Orchestrator** + **Craft** + **Motion** + **priority PM** | Craft or Motion; PM if brief ignored |
 | Full report ship | Report Writer | All score owners + **all Persona Managers** (coverage check) | **Orchestrator** | Domain owner if misquoted; PM if persona coverage missing |
@@ -53,13 +55,14 @@ Priority is **collaborative** for each run. Secondaries stay in the room — see
 
 | Change type | Approve required | Notes |
 |-------------|------------------|-------|
-| Copy only | Prose + Orchestrator + **Persona Managers for voices touched** | |
-| Visual layout / new sections | Craft + Orchestrator + **priority PM** | Secondary PM if non-negotiable surface |
+| Copy only (microcopy) | Prose + Orchestrator + **Persona Managers for voices touched** | |
+| Marketing / landing narrative | **Isa** + Prose + Orchestrator + **priority PM** | SB7 + product-show in `panel-report/copy.md` first |
+| Visual layout / new sections | Craft + Orchestrator + **priority PM** (+ **Isa** if marketing) | Secondary PM if non-negotiable surface |
 | Motion / animation | Motion + Orchestrator | |
 | Install / primary CTA | Orchestrator + Journey Critic + **priority PM** | Preserve-first |
 | Remove feature / section | Orchestrator + Journey + Empathy Mapper + **all PMs who used it** | Never Craft alone |
 | Tokens / DESIGN.md | Design System + Orchestrator | |
-| Full homepage redesign | Orchestrator + **all Persona Managers** + Journey + Craft + Motion | Frontend proposes only; multi-persona impact required |
+| Full homepage redesign | Orchestrator + **all Persona Managers** + Journey + Craft + Motion + **Isa** | Frontend proposes layout; Isa proposes narrative + product-show; multi-persona impact required |
 
 **Default:** If unsure who must approve → **Orchestrator + domain owner + priority Persona Manager**.
 
@@ -87,7 +90,7 @@ Priority is **collaborative** for each run. Secondaries stay in the room — see
 
 ### Design brief (Frontend Design — mandatory)
 
-Before any visual redesign or ui-ux-pro-max search, Frontend Design **must ask** Orchestrator + every Persona Manager for preferences (feel, trust, references, depth, motion) — `FRONTEND.md` Step 0 — then load project **`DESIGN.md`** (`web/DESIGN.md` for TasteTest marketing) — Step 0b. Library cannot override DESIGN.md without Craft + Orchestrator.
+Before any visual redesign or ui-ux-pro-max search, Frontend Design **must ask** Orchestrator + every Persona Manager for preferences (feel, trust, references, depth, motion) — `FRONTEND.md` Step 0 — then load project **`DESIGN.md`** (`web/DESIGN.md` for Panel marketing) — Step 0b. Library cannot override DESIGN.md without Craft + Orchestrator.
 
 ```markdown
 ### Frontend Design → Managers | design brief | question
@@ -108,7 +111,7 @@ Optimizing only for priority while harming a secondary without that PM’s Appro
 
 ## 3. Talk protocol (how agents communicate)
 
-Every handoff uses this shape (in the working transcript or `tastetest-report/council.md`).
+Every handoff uses this shape (in the working transcript or `panel-report/council.md`).
 
 ### Handoff schema (required fields)
 
@@ -133,7 +136,7 @@ Thin “Claim only” handoffs are a process failure on **full** / **standard** 
 ### Rules of engagement
 
 1. **No silent execution** — before implementing, there must be a written **proposal**, required **approves**, and an updated **run-state** (`consensus.decision: PROCEED`).  
-2. **ApprovalGate** — treat implement as blocked unless Approves for that change type are met (see §4 and `empathflow/permissions.py`). Soft gate today (model + artifacts); runtime will hard-block when wired.  
+2. **ApprovalGate** — treat implement as blocked unless Approves for that change type are met (see §4 and `panelcore/permissions.py`). Soft gate today (model + artifacts); runtime will hard-block when wired.  
 3. **Consult before parallel work** — specialists may draft in parallel only after Orchestrator opens the phase; tasks must be **non-overlapping**.  
 4. **One conversation thread per decision** — e.g. “Homepage What you get section” — not drive-by edits.  
 5. **Objections are mandatory when you disagree** — domain owners must veto or approve; “whatever” is invalid for Approve roles.  
@@ -174,7 +177,7 @@ Thin “Claim only” handoffs are a process failure on **full** / **standard** 
 - **Decision:** PROCEED | REVISE | BLOCK
 ```
 
-**No consensus log → no code change** on standard/full EmpathFlow runs.  
+**No consensus log → no code change** on standard/full Panel runs.  
 **Bare ✓ without evidence → consensus invalid** (anti rubber-stamp / theater).
 
 ### After PROCEED (write path)
@@ -193,6 +196,9 @@ Thin “Claim only” handoffs are a process failure on **full** / **standard** 
 | Motion vs Frontend (heavy motion) | **Motion wins** on frequency/easing; delete or reduce |
 | Journey vs Craft (ugly but converts) | Orchestrator: fix craft **without** removing conversion; both + priority PM approve final |
 | Prose vs Persona Manager (voice) | **Persona Manager** on that human’s truth; Prose on anti-slop writing |
+| Isa vs Prose (story vs polish) | **Isa** owns SB7 / sell structure; **Prose** owns AI-cadence kill — Prose must not delete the plan or CTA |
+| Isa vs Craft (demo concept) | **Craft** wins if demo looks like template slop; Isa picks another product-show mode |
+| Isa vs Frontend | Frontend does not invent hero/CTA copy; implements Isa’s approved scan layer after design brief |
 | Two Persona Managers want priority | Negotiate for **this run**; losers get non-negotiables, not silence |
 | Priority win harms secondary | Must get **hurt** PM Approve or revise — tunnel vision ban |
 | Two Approves disagree | Orchestrator mediates with playbook; if still split → **BLOCK** and ask user |
@@ -207,7 +213,8 @@ Thin “Claim only” handoffs are a process failure on **full** / **standard** 
 | Frontend Design | Ship layout/code; override Craft/Motion; invent ICP; **search library or redesign without design brief from Orchestrator + Persona Managers** |
 | Craft Critic | Delete install CTA; rewrite journeys; ship code without Manager |
 | Motion Critic | Redesign IA; change copy strategy |
-| Prose Critic | Change layout structure |
+| Prose Critic | Change layout structure; rewrite StoryBrand plan without Isa |
+| **Isa · Marketing Copywriter** | Ship layout/code; invent customers/metrics; override Craft on visual DNA; skip PM voice check |
 | Journey Critic | Implement UI without Craft if visual surface changes |
 | Empathy Mapper | Ship marketing page; approve craft scores alone |
 | Persona Manager | Demand sole-priority always; rubber-stamp harm to their human |
@@ -223,7 +230,7 @@ Thin “Claim only” handoffs are a process failure on **full** / **standard** 
 When one model is the whole crew:
 
 1. Label sections with role names (`## Orchestrator Manager`, `## Craft Critic`, …).  
-2. Create / update `tastetest-report/run-state.yaml` at Phase 0.  
+2. Create / update `panel-report/run-state.yaml` at Phase 0.  
 3. Run phases in order; do not merge “I decided everything” into one blob.  
 4. Before any file edit on a standard/full run, write the **Consensus** block with evidence-cited Approves.  
 5. If you catch yourself redesigning without personas → **stop**, open Phase 0.  
@@ -245,7 +252,7 @@ User: “Only fix this button’s focus ring.”
 
 ## 9. Process quality checklist (after full/standard runs)
 
-Write `tastetest-report/process-score.md` (binary yes/no):
+Write `panel-report/process-score.md` (binary yes/no):
 
 1. Preflight GO + run_class + protocol set?  
 2. Priority table + secondary non-negotiables in run-state?  
@@ -262,8 +269,8 @@ Any **no** → note as process debt in the report.
 
 ## Related
 
-- Phase order / short buyer protocol: `EMPATHFLOW.md`  
-- Full crew + phases: `EMPATHFLOW.full.md` · roster: `AGENTS.md`  
+- Phase order / short buyer protocol: `PANEL.md`  
+- Full crew + phases: `PANEL.full.md` · roster: `AGENTS.md`  
 - Run-state template: `docs/run-state.template.yaml`  
 - Personas: `docs/personas.md`  
-- Runtime gates (stub → hard): `empathflow/permissions.py`
+- Runtime gates (stub → hard): `panelcore/permissions.py`

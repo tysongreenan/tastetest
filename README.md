@@ -1,49 +1,49 @@
-# TasteTest (EmpathFlow)
+# Panel
 
-**The UX review that lives in your repo.**
+**A buyer panel that lives in your repo.**
 
-TasteTest acts like a real buyer.  
-It reads your codebase, builds empathy maps, checks against proven UX principles, and tells you whether your product feels fluid and professional.
+Panel seats personas on your product.  
+They walk the flows, argue priority, and leave a scored report with file-level fixes — not another AI redesign.
 
 ---
 
 ## Quick Start
 
-### Recommended: one-command onboarding
+### One-command onboarding
 
 In **any project** you want to review:
 
 ```bash
-npx @tysongreenan/tastetest init
+npx @tysongreenan/panel init
 ```
 
 That installs the **lean** skill set (buyer review + craft + motion), Cursor rules/commands, and a Claude Code skill. Deep packs stay optional.
 
 Then open your AI agent and say:
 
-> Run EmpathFlow  
+> Run a panel  
 > or  
-> Do a TasteTest review
+> Do a Panel review
 
-**Cursor:** type `/tastetest`  
-**Claude Code:** use the `tastetest` skill, or the same phrases above
+**Cursor:** type `/panel`  
+**Claude Code:** use the `panel` skill, or the same phrases above
 
 ```bash
 # Options
-npx @tysongreenan/tastetest init                  # lean (default)
-npx @tysongreenan/tastetest init --full           # + FRONTEND.md + skills/ packs
-npx @tysongreenan/tastetest init --dir ./my-app   # explicit path
-npx @tysongreenan/tastetest init --force          # overwrite existing files
-npx @tysongreenan/tastetest init --dry-run        # preview
+npx @tysongreenan/panel init                  # lean (default)
+npx @tysongreenan/panel init --full           # + FRONTEND.md + skills/ packs
+npx @tysongreenan/panel init --dir ./my-app   # explicit path
+npx @tysongreenan/panel init --force          # overwrite existing files
+npx @tysongreenan/panel init --dry-run        # preview
 ```
 
 ### Manual / Python
 
 ```bash
-python -m empathflow init --project /path/to/your/app
+python -m panelcore init --project /path/to/your/app
 ```
 
-We dogfood this on our own homepage — see `tastetest-report/report.md` or the sample at the marketing site `/report`.
+We dogfood this on our own homepage — see `panel-report/report.md` or the sample at the marketing site `/report`.
 
 ---
 
@@ -62,13 +62,14 @@ Missing personas or skipped priority council on a full review → **NO-GO**.
 ### Locked structure
 
 ```text
-EMPATHFLOW.md          ← Core (always on)
+PANEL.md               ← Core (always on)
 playbook.md            ← Don’t Make Me Think + density
 ANTI-SLOP.md           ← Craft / anti-template (UI)
 MOTION.md              ← Emil motion rules
+COPY.md                ← Isa — marketing / StoryBrand / product-show
 FRONTEND.md            ← Optional — design-system only (--full)
 skills/                ← Deep packs (NOT default; --full)
-  ui-ux-pro-max/ | motion/ | stop-slop-prose/
+  ui-ux-pro-max/ | motion/ | stop-slop-prose/ | marketing-copy/
 cli/ · docs/ · web/
 ```
 
@@ -76,20 +77,21 @@ cli/ · docs/ · web/
 
 | User says | Load |
 |-----------|------|
-| Run EmpathFlow / TasteTest | `EMPATHFLOW.md` + `playbook.md` |
+| Run a panel / Panel review | `PANEL.md` + `playbook.md` |
 | UI / craft / anti-slop | + `ANTI-SLOP.md` |
 | Animations / motion | + `MOTION.md` |
+| Marketing / StoryBrand / sell | + `COPY.md` (Isa) |
 | Design system / colors / type | + `FRONTEND.md` + `skills/ui-ux-pro-max` |
 
-**Priority of truth:** EMPATHFLOW → ANTI-SLOP → MOTION → playbook → heavy packs (only when needed).
+**Priority of truth:** PANEL → ANTI-SLOP → MOTION → playbook → COPY → heavy packs (only when needed).
 
-**Default install:** four thin files + Cursor/Claude wiring.  
-**`--full`:** also `FRONTEND.md` + `skills/{ui-ux-pro-max,motion,stop-slop-prose}/`.
+**Default install:** five thin files + Cursor/Claude wiring.  
+**`--full`:** also `FRONTEND.md` + `skills/{ui-ux-pro-max,motion,stop-slop-prose,marketing-copy}/`.
 
 ```bash
 # Design system from the premium pattern library (after --full)
 python3 skills/ui-ux-pro-max/scripts/search.py \
-  "developer tools SaaS" --design-system -p "TasteTest" -f markdown
+  "developer tools SaaS" --design-system -p "Panel" -f markdown
 ```
 
 ---
@@ -107,14 +109,14 @@ See `playbook.md` for the short evaluation criteria agents use.
 
 ## Project Status
 
-This is **V1**.  
+This is **V0.2** (rebrand to Panel).  
 Core vision, skill file, UX playbook, and structure are ready.
 
 ---
 
 ## Marketing site
 
-Quick homepage (Next.js + SmoothUI) lives in `web/`:
+Homepage (Next.js) lives in `web/`:
 
 ```bash
 cd web

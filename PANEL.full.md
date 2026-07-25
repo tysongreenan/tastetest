@@ -1,8 +1,8 @@
-# EMPATHFLOW.md
+# PANEL.full.md
 
-## EmpathFlow / TasteTest – Buyer-Level UX/UI Review
+## Panel — full multi-agent buyer review
 
-When the user asks to “run EmpathFlow”, “do a UX review”, “TasteTest”, “empathy audit”, or similar, follow these instructions precisely.
+When the user asks to “run a panel”, “do a UX review”, “Panel review”, or similar with full crew, follow these instructions precisely.
 
 ### Goal
 Act as a realistic buyer or end-user. Understand the product from the codebase, generate personas + empathy maps, derive critical user goals and journeys, then rigorously evaluate whether the experience feels fluid, professional, and conversion-ready. Produce a clear, actionable Markdown report.
@@ -21,10 +21,11 @@ Act as a realistic buyer or end-user. Understand the product from the codebase, 
 |-------|------|
 | `ANTI-SLOP.md` | Visual UI — template DNA / “AI-looking” layout |
 | `MOTION.md` + `skills/motion/` | Any motion, transitions, marketing animation |
-| `skills/stop-slop-prose/` | Microcopy, landing prose, report narrative |
+| `COPY.md` + `skills/marketing-copy/` | **Isa** — StoryBrand, selling hierarchy, product-show concepts |
+| `skills/stop-slop-prose/` | Microcopy anti-slop polish (after Isa sets the story) |
 | `FRONTEND.md` + `skills/ui-ux-pro-max/` | Design system / premium pattern library before build |
 
-EmpathFlow covers buyer/UX. Frontend Design grounds style in a searchable library. Anti-slop, motion, and prose still gate what ships. Full roster: `AGENTS.md`.
+Panel covers buyer/UX. Frontend Design grounds style in a searchable library. Anti-slop, motion, and prose still gate what ships. Full roster: `AGENTS.md`.
 
 ### Core Philosophy (Don’t Make Me Think)
 - Design should be self-evident. If the user has to stop and think, we failed.
@@ -40,7 +41,7 @@ EmpathFlow covers buyer/UX. Frontend Design grounds style in a searchable librar
 
 ### Failure modes to avoid (dogfood lessons)
 
-TasteTest’s first self-review made the homepage *more pure* and *less useful*. Encode these mistakes:
+Panel’s first self-review made the homepage *more pure* and *less useful*. Encode these mistakes:
 
 | What went wrong | Why it hurt | Correct behavior |
 |-----------------|-------------|------------------|
@@ -49,7 +50,7 @@ TasteTest’s first self-review made the homepage *more pure* and *less useful*.
 | **Purity over intent** | Hard gates outranked landing copy, README, and user constraints | Intent and constraints are **inputs**, not optional flavor |
 | **Removed components instead of giving them jobs** | SmoothUI widgets judged “demo tax” → stripped | Prefer **repurpose** (real job + clear copy) over delete |
 | **Confused brand motion with false affordance** | Scramble/orb treated as defects | Decorative polish is fine; **lying controls** are not |
-| **Auditor rewrote the product** | Report → rewrite that no longer matched TasteTest’s story | Recommend fixes that still feel like *this* product |
+| **Auditor rewrote the product** | Report → rewrite that no longer matched Panel’s story | Recommend fixes that still feel like *this* product |
 | **No preserve list** | Nothing marked “do not remove” | Explicitly list sacred paths before recommending cuts |
 | **Narrative without craft** | Strong scroll story + template section DNA (eyebrows, 01–04 cards, fake window chrome) | Score **Craft / Anti-slop** separately; redesign structure, not only copy |
 | **Explaining ≠ designing** | “Show what the product does” became four identical explanation zones | Prefer one excellent real artifact over many generic demo grids |
@@ -100,7 +101,7 @@ Before recommending removal of any primary CTA, install command, pricing block, 
 4. Run **0C-bis** priority council.  
 5. Only then proceed to journeys and critique.
 
-**If the user asks only for a quick craft pass** on one component: preflight may be **lite** (intent + preserve list only), but the report must say `Preflight: lite — personas not established`. Full TasteTest / EmpathFlow / homepage / marketing work = **full preflight, no exceptions**.
+**If the user asks only for a quick craft pass** on one component: preflight may be **lite** (intent + preserve list only), but the report must say `Preflight: lite — personas not established`. Full Panel / homepage / marketing work = **full preflight, no exceptions**.
 
 #### 0C-bis — Persona priority council (blocking on full runs)
 
@@ -162,7 +163,7 @@ Also list **secondary persona non-negotiables** from 0C-bis.
 3. **Consensus log** — Approves / vetoes / **priority persona** / **secondary harm check** / preserve list.  
 4. **Only then Execute** — implement or publish scores.  
 
-If one model plays all roles, **still write** proposals and consensus (or `tastetest-report/council.md`). Silent multi-role telepathy is forbidden. **Label each Persona Manager** when speaking for that human.
+If one model plays all roles, **still write** proposals and consensus (or `panel-report/council.md`). Silent multi-role telepathy is forbidden. **Label each Persona Manager** when speaking for that human.
 
 **Conflict defaults:** Craft > Frontend on slop · Motion > Frontend on animation · Persona Managers own their human’s truth · Empathy Mapper owns map quality · Orchestrator mediates priority · unresolved → BLOCK and ask user.
 
@@ -217,7 +218,8 @@ Check every time. These flag *problems* — they do not automatically authorize 
 7. **Mobile parity** — Critical nav/CTAs available without a desktop-only dead end.
 8. **Anti-slop (craft)** — Run `ANTI-SLOP.md` slop test. If craft score ≤ 5, professionalism cannot exceed 6. Template DNA (identical cards, fake browser chrome, eyebrow-every-section) is a P0 craft issue even when the story is clear.
 9. **Motion craft** — Run `MOTION.md`. Feel-breaking easing, `scale(0)`, animated keyboard/high-frequency actions, or missing reduced-motion → cap professionalism ≤ 6. Prefer delete over decorate.
-10. **Prose craft** — Run `skills/stop-slop-prose/` on visible copy. Marketing/report text that scores &lt; 35/50 on stop-slop dimensions should be revised (not only UI).
+10. **Marketing narrative (Isa)** — On homepage/landing, fill SB7 + product-show options via `COPY.md` before Frontend redesign.  
+11. **Prose craft** — Run `skills/stop-slop-prose/` on visible copy after story is right. Marketing/report text that scores &lt; 35/50 on stop-slop dimensions should be revised (not only UI).
 
 ---
 
@@ -233,7 +235,7 @@ Check every time. These flag *problems* — they do not automatically authorize 
 7. **No slop-for-slop rewrites** — Replacing one template section with another template section is not a fix. See `ANTI-SLOP.md` bans.
 8. **When implementing UI**, follow `ANTI-SLOP.md` build mode (anti-references, varied section anatomy, slop test before done). **Craft Critic Approve required.**
 9. **When touching motion**, follow `MOTION.md` remedial hierarchy. **Motion Critic Approve required.**
-10. **When writing or editing copy**, prose stop-slop + **Prose Critic Approve**; persona-facing headlines also need **Empathy Mapper** consult.
+10. **When writing or editing marketing copy**, seat **Isa** (`COPY.md`) for SB7 + product-show; then prose stop-slop + **Prose Critic Approve**; persona-facing headlines need **priority PM** / Empathy Mapper consult.
 
 ---
 
@@ -316,7 +318,7 @@ If craft ≤ **5**, professionalism ≤ **6** even when fluidity is high — **n
 If motion is **Block**, professionalism ≤ **6** until motion is fixed or deleted.  
 If personas were skipped on a full review, professionalism ≤ **6** and mark `Grounding: weak`.
 
-### Definition of done for a full EmpathFlow run
+### Definition of done for a full Panel run
 - **Preflight GO** (personas established + Persona Managers + priority negotiated + preserve list) **and**
 - Journeys linked to personas with **secondary coverage** (not priority-only) **and**
 - Hard gates addressed **and**
