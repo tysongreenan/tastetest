@@ -37,6 +37,38 @@ npx @tysongreenan/panel init --force          # overwrite existing files
 npx @tysongreenan/panel init --dry-run        # preview
 ```
 
+### Upgrade an existing project
+
+```bash
+npx @tysongreenan/panel@latest upgrade
+npx @tysongreenan/panel@latest upgrade --dry-run
+```
+
+`upgrade` refreshes managed Panel files and preserves locally changed versions under `.panel/backups/<timestamp>/`. It remembers whether the project was lean or full; pass `--full` to upgrade and add the full protocol pack. The installed version and managed-file hashes are recorded in `.panel/manifest.json`.
+
+`update` is an alias for `upgrade`. Use the explicit `@latest` form above to bypass stale `npx` cache resolution. After these changes are published, existing projects must run this command once; npm packages cannot silently rewrite files in another repository.
+
+### Check installation and output quality
+
+```bash
+npx @tysongreenan/panel doctor
+npx @tysongreenan/panel validate
+npx @tysongreenan/panel validate --json
+```
+
+`doctor` checks version drift, missing protocol files, local customizations, pack completeness, run-state health, and browser readiness. `validate` checks run-class requirements, seat artifacts, skill proof, structured findings, feedback-loop closure, and the evidence required to claim `SHIPPABLE`.
+
+### Execution harness
+
+```bash
+npx @tysongreenan/panel harness start --run-class full
+npx @tysongreenan/panel harness status
+npx @tysongreenan/panel harness advance --phase preflight
+npx @tysongreenan/panel harness events
+```
+
+The runtime enforces phase order, required artifacts, hash-chained events, project-scoped artifact paths, single-writer mutation, fail-closed approval gates, and single-use implementation permits. See [`docs/harness.md`](docs/harness.md) for the full workflow and current host-adapter limitation.
+
 ### Manual / Python
 
 ```bash

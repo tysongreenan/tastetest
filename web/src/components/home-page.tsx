@@ -16,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { ArrowRight, BookOpen, ExternalLink, Terminal } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
+import { useRef } from "react";
 
 const INIT_COMMAND = "npx @tysongreenan/panel init";
 const EASE = [0.23, 1, 0.32, 1] as const;
@@ -48,6 +49,14 @@ const STEPS = [
   },
 ] as const;
 
+const HARNESS_STEPS = [
+  { phase: "01", label: "Hypothesis", artifact: "hypotheses.md" },
+  { phase: "02", label: "Specialists", artifact: "craft.md · copy.md" },
+  { phase: "03", label: "Cross-critique", artifact: "findings.json" },
+  { phase: "04", label: "Decision", artifact: "council.md" },
+  { phase: "05", label: "Verify + learn", artifact: "learning.md" },
+] as const;
+
 /** Mono file list — eng proof without jargon */
 const SHIPPED_FILES = [
   { label: "PANEL.md", href: `${GH_BLOB}/PANEL.md` },
@@ -78,6 +87,23 @@ function InstallBlock({
   className?: string;
   caption?: string;
 }) {
+  const commandRef = useRef<HTMLElement>(null);
+
+  const selectCommand = () => {
+    const command = commandRef.current;
+    if (!command) return;
+    const range = document.createRange();
+    range.selectNodeContents(command);
+    const selection = window.getSelection();
+    selection?.removeAllRanges();
+    selection?.addRange(range);
+  };
+
+  const copyCommand = async () => {
+    if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
+    await navigator.clipboard.writeText(INIT_COMMAND);
+  };
+
   return (
     <div className={cn("w-full", className)}>
       <div
@@ -97,14 +123,13 @@ function InstallBlock({
         </div>
         <div className="flex items-center gap-2 p-2 pl-3.5 sm:pl-4">
           <span className="select-none font-mono text-sm text-primary/80">$</span>
-          <code className="min-w-0 flex-1 whitespace-normal break-all font-mono text-[12px] font-medium leading-snug tracking-tight text-foreground sm:truncate sm:whitespace-nowrap sm:text-[13px] sm:leading-normal">
+          <code ref={commandRef} className="min-w-0 flex-1 whitespace-normal break-all font-mono text-[12px] font-medium leading-snug tracking-tight text-foreground sm:truncate sm:whitespace-nowrap sm:text-[13px] sm:leading-normal">
             {INIT_COMMAND}
           </code>
           <ButtonCopy
-            labels={{ idle: "Copy", loading: "…", success: "Copied" }}
-            onCopy={async () => {
-              await navigator.clipboard.writeText(INIT_COMMAND);
-            }}
+            labels={{ idle: "Copy", loading: "…", success: "Copied", error: "Select text" }}
+            onCopy={copyCommand}
+            onError={selectCommand}
             className="shrink-0 border-transparent bg-primary text-primary-foreground shadow-sm hover:bg-primary/90"
           />
         </div>
@@ -185,6 +210,12 @@ export function HomePage() {
               Files
             </a>
             <a
+              className="hidden rounded-full px-3 py-1.5 transition-colors hover:bg-muted hover:text-foreground md:inline"
+              href="/harness"
+            >
+              Harness
+            </a>
+            <a
               href={GH}
               target="_blank"
               rel="noreferrer"
@@ -247,13 +278,13 @@ export function HomePage() {
                 </span>
               </h1>
               <p className="mx-auto mt-4 max-w-md text-pretty text-lg text-muted-foreground">
-                Install once. Tell Cursor or Claude{" "}
+                Install once. Tell Cursor or Claude Code{" "}
                 <span className="font-medium text-foreground">Run a panel</span>.
                 Get a scored report with file paths — not vague redesign notes.
               </p>
 
               <div className="mx-auto mt-8 max-w-lg text-left">
-                <InstallBlock caption="Works with Cursor and Claude Code · /panel" />
+                <InstallBlock caption="Shipped today: Cursor and Claude Code · /panel" />
               </div>
 
               <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -278,6 +309,37 @@ export function HomePage() {
                 </a>
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        <section
+          id="harness"
+          data-panel-proof="harness"
+          className="border-y border-border/60 bg-[oklch(0.965_0.018_265)]"
+        >
+          <div className="mx-auto max-w-5xl px-5 py-14 sm:px-6 sm:py-20">
+            <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+              <div className="max-w-md">
+                <h2 className="font-heading text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
+                  A harness, not a group chat.
+                </h2>
+                <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground">
+                  Every specialist must change an artifact, decision, hypothesis, or test. Phase order, evidence hashes, approval gates, and single-use write permits keep the review accountable.
+                </p>
+                <Link href="/report" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary/80">
+                  Inspect a finished run <ArrowRight className="size-3.5" aria-hidden />
+                </Link>
+              </div>
+              <ol className="border-t border-foreground/15">
+                {HARNESS_STEPS.map((step) => (
+                  <li key={step.phase} className="grid grid-cols-[2rem_1fr] gap-3 border-b border-foreground/15 py-4 sm:grid-cols-[2.5rem_0.8fr_1.2fr] sm:items-center">
+                    <span className="font-mono text-[11px] text-primary">{step.phase}</span>
+                    <span className="font-heading font-semibold">{step.label}</span>
+                    <code className="col-start-2 font-mono text-xs text-muted-foreground sm:col-start-auto">panel-report/{step.artifact}</code>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
         </section>
 

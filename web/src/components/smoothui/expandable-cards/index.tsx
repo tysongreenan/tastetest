@@ -1,9 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const _AVATAR_SIZE = 96;
 // ease-out-quint for entering/exiting elements
 const EASE_OUT_QUINT = [0.23, 1, 0.32, 1] as const;
 
@@ -97,7 +97,7 @@ export default function ExpandableCards({
               width: selectedCard === card.id ? "500px" : "200px",
             }}
             aria-label={`${card.title} card${selectedCard === card.id ? ", expanded" : ""}`}
-            aria-selected={selectedCard === card.id}
+            aria-pressed={selectedCard === card.id}
             className={`relative mr-4 h-[300px] shrink-0 cursor-pointer overflow-hidden rounded-2xl border bg-background shadow-lg focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${cardClassName}`}
             data-card-id={card.id}
             key={card.id}
@@ -124,7 +124,7 @@ export default function ExpandableCards({
             }
           >
             <div className="relative h-full w-[200px]">
-              <img
+              <Image
                 alt={card.title}
                 className="h-full w-full object-cover"
                 draggable={false}
@@ -206,7 +206,7 @@ export default function ExpandableCards({
                     {card.author && (
                       <div className="mt-4 flex items-center gap-3">
                         <div className="h-12 w-12 overflow-hidden rounded-full border bg-primary">
-                          <img
+                          <Image
                             alt={card.author.name}
                             className="h-full w-full object-cover"
                             draggable={false}

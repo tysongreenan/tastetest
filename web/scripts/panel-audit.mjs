@@ -1,119 +1,85 @@
-/**
- * Lightweight live audit for Panel homepage Panel dogfood.
- * Run: node scripts/panelcore-audit.mjs
- */
 import { chromium } from "playwright";
-import { mkdir } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const OUT = path.join(__dirname, "../panel-report");
-const URL = process.env.AUDIT_URL || "http://localhost:3000";
+const outDir = path.join(__dirname, "../panel-report");
+const baseUrl = process.env.AUDIT_URL || "http://127.0.0.1:3000";
 
-async function main() {
-  await mkdir(OUT, { recursive: true });
-  const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({
-    viewport: { width: 1280, height: 800 },
-  });
-  const page = await context.newPage();
-  const findings = [];
-
-  page.on("console", (msg) => {
-    if (msg.type() === "error") findings.push(`console.error: ${msg.text()}`);
-  });
-  page.on("pageerror", (err) => findings.push(`pageerror: ${err.message}`));
-
-  const res = await page.goto(URL, { waitUntil: "networkidle", timeout: 30000 });
-  findings.push(`status: ${res?.status()}`);
-
-  await page.screenshot({ path: path.join(OUT, "desktop-hero.png"), fullPage: false });
-  await page.screenshot({ path: path.join(OUT, "desktop-full.png"), fullPage: true });
-
-  // Mobile
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.screenshot({ path: path.join(OUT, "mobile-hero.png"), fullPage: false });
-
-  // Structure
-  const audit = await page.evaluate(() => {
-    const text = document.body.innerText;
-    const h1 = document.querySelector("h1");
-    const buttons = [...document.querySelectorAll("button")].map((b) => ({
-      label: (b.getAttribute("aria-label") || b.textContent || "").trim().slice(0, 80),
-      type: b.type,
-    }));
-    const links = [...document.querySelectorAll("a")].map((a) => ({
-      text: (a.textContent || "").trim().slice(0, 60),
-      href: a.getAttribute("href"),
-    }));
-    const playVideo = text.includes("Play video");
-    const navLinks = document.querySelectorAll("header nav a").length;
-    const headerVisible = getComputedStyle(document.querySelector("header nav") || document.body).display;
-    const h1IsButton = !!h1?.querySelector("button");
-    const copyButtons = buttons.filter((b) => /copy/i.test(b.label));
-    const headings = [...document.querySelectorAll("h1,h2,h3")].map((h) =>
-      h.textContent?.trim().slice(0, 80)
-    );
-    return {
-      title: document.title,
-      h1: h1?.textContent?.trim(),
-      h1IsButton,
-      playVideo,
-      navLinkCount: navLinks,
-      navDisplay: headerVisible,
-      buttonCount: buttons.length,
-      buttons: buttons.slice(0, 30),
-      links: links.slice(0, 30),
-      headings,
-      copyButtons,
-      hasInitCommand:
-        text.includes("npx @tysongreenan/panel init") ||
-        text.includes("npx panel init"),
-      hasGithub: links.some((l) => l.href?.includes("github")),
-    };
-  });
-
-  // Keyboard: tab through a few times
-  await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto(URL, { waitUntil: "domcontentloaded" });
-  const focused = [];
-  for (let i = 0; i < 12; i++) {
-    await page.keyboard.press("Tab");
-    const info = await page.evaluate(() => {
-      const el = document.activeElement;
-      if (!el || el === document.body) return null;
-      return {
-        tag: el.tagName,
-        label: (el.getAttribute("aria-label") || el.textContent || "").trim().slice(0, 60),
-        outline: getComputedStyle(el).outlineStyle,
-        outlineWidth: getComputedStyle(el).outlineWidth,
-      };
-    });
-    if (info) focused.push(info);
-  }
-
-  // Click first expandable card if present
-  const card = page.locator('[role="button"][data-card-id]').first();
-  if (await card.count()) {
-    await card.click();
-    await page.screenshot({ path: path.join(OUT, "card-expanded.png") });
-  }
-
-  const report = {
-    url: URL,
-    findings,
-    audit,
-    keyboardSample: focused,
-  };
-
-  const { writeFile } = await import("node:fs/promises");
-  await writeFile(path.join(OUT, "live-audit.json"), JSON.stringify(report, null, 2));
-  console.log(JSON.stringify(report, null, 2));
-  await browser.close();
+async function inspect(page, pathname, viewport) {
+  await page.setViewportSize(viewport);
+  const response = await page.goto(`${baseUrl}${pathname}`, { waitUntil: "networkidle", timeout: 30_000 });
+  return page.evaluate((status) => ({
+    status,
+    title: document.title,
+    h1Count: document.querySelectorAll("h1").length,
+    unnamedLinks: [...document.querySelectorAll("a")].filter((element) => !element.textContent?.trim() && !element.getAttribute("aria-label")).length,
+    unnamedButtons: [...document.querySelectorAll("button")].filter((element) => !element.textContent?.trim() && !element.getAttribute("aria-label")).length,
+    overflow: document.documentElement.scrollWidth > window.innerWidth,
+  }), response?.status() || 0);
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
+async function main() {
+  await mkdir(outDir, { recursive: true });
+  let browser;
+  try {
+    browser = await chromium.launch({ headless: true });
+  } catch (error) {
+    if (!String(error).includes("Executable doesn't exist")) throw error;
+    browser = await chromium.launch({ channel: "chrome", headless: true });
+  }
+  const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, permissions: ["clipboard-read", "clipboard-write"] });
+  const page = await context.newPage();
+  const runtimeErrors = [];
+  page.on("console", (message) => { if (message.type() === "error") runtimeErrors.push(message.text()); });
+  page.on("pageerror", (error) => runtimeErrors.push(error.message));
+
+  const desktop = await inspect(page, "/", { width: 1280, height: 800 });
+  if (await page.locator('[data-panel-proof="harness"]').count() !== 1) {
+    runtimeErrors.push("Harness proof section is missing or duplicated");
+  }
+  await page.screenshot({ path: path.join(outDir, "desktop-home.png"), fullPage: true });
+  const copy = page.locator("#start button");
+  await copy.click();
+  await copy.getByText("Copied").waitFor({ timeout: 3_000 });
+  const clipboard = await page.evaluate(() => navigator.clipboard.readText());
+
+  const report = await inspect(page, "/report", { width: 1280, height: 800 });
+  const semanticTableCount = await page.locator("table").count();
+  const harness = await inspect(page, "/harness", { width: 1280, height: 800 });
+  const mobile = await inspect(page, "/", { width: 375, height: 667 });
+  const harnessMobile = await inspect(page, "/harness", { width: 375, height: 667 });
+  await page.screenshot({ path: path.join(outDir, "mobile-home.png"), fullPage: true });
+
+  const checks = {
+    desktop,
+    mobile,
+    report,
+    harness,
+    harnessMobile,
+    semanticTableCount,
+    clipboard,
+    runtimeErrors,
+  };
+  const failures = [];
+  for (const [name, result] of Object.entries({ desktop, mobile, report, harness, harnessMobile })) {
+    if (result.status !== 200) failures.push(`${name}: HTTP ${result.status}`);
+    if (result.h1Count !== 1) failures.push(`${name}: expected one h1, found ${result.h1Count}`);
+    if (result.overflow) failures.push(`${name}: horizontal overflow`);
+    if (result.unnamedLinks || result.unnamedButtons) failures.push(`${name}: unnamed controls`);
+  }
+  if (clipboard !== "npx @tysongreenan/panel init") failures.push("install command was not copied");
+  if (!semanticTableCount) failures.push("sample report has no semantic tables");
+  if (runtimeErrors.length) failures.push(`runtime errors: ${runtimeErrors.join(" | ")}`);
+
+  await writeFile(path.join(outDir, "homepage-smoke.json"), `${JSON.stringify({ ...checks, failures }, null, 2)}\n`);
+  console.log(JSON.stringify({ ...checks, failures }, null, 2));
+  await browser.close();
+  if (failures.length) process.exitCode = 1;
+}
+
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
 });

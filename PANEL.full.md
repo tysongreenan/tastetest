@@ -216,7 +216,7 @@ Check every time. These flag *problems* — they do not automatically authorize 
 5. **Demos earn their place** — Interactive chrome should teach, preview, or filter something real. If not: give it a job or demote — delete only if it blocks the primary path.
 6. **Show the artifact** — Products that produce reports/exports should preview them.
 7. **Mobile parity** — Critical nav/CTAs available without a desktop-only dead end.
-8. **Anti-slop (craft)** — Run `ANTI-SLOP.md` slop test. If craft score ≤ 5, professionalism cannot exceed 6. Template DNA (identical cards, fake browser chrome, eyebrow-every-section) is a P0 craft issue even when the story is clear.
+8. **Anti-slop (craft)** — Run `ANTI-SLOP.md` slop test. If craft score ≤ 5, professionalism cannot exceed 6. Template DNA (identical cards, fake browser chrome, eyebrow-every-section) is P0 when it materially damages the primary surface or trust; otherwise classify it P1/P2 by the shared severity rules.
 9. **Motion craft** — Run `MOTION.md`. Feel-breaking easing, `scale(0)`, animated keyboard/high-frequency actions, or missing reduced-motion → cap professionalism ≤ 6. Prefer delete over decorate.
 10. **Marketing narrative (Isa)** — On homepage/landing, fill SB7 + product-show options via `COPY.md` before Frontend redesign.  
 11. **Prose craft** — Run `skills/stop-slop-prose/` on visible copy after story is right. Marketing/report text that scores &lt; 35/50 on stop-slop dimensions should be revised (not only UI).

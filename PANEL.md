@@ -38,6 +38,7 @@ Optimize. Do not expand.
 
 1. **Reduction bias**
    - Prefer delete, merge, or restructure over adding text or sections.
+   - If the page is missing a required buyer job, you may add **one targeted section** or structural block, but only if you name the missing job and what it replaces or simplifies elsewhere.
    - If you cannot improve the page without adding words, say so and stop.
    - Never “improve” by dumping more explanation.
 
@@ -69,6 +70,7 @@ Optimize. Do not expand.
 
 **0. Run class (one line)**
 - `lite` · `standard` · `full` · `implement` — see `AGENTS.md`.  
+- Section-level visual modernization or “make this feel more modern” work should usually stay **standard**, not escalate to **full**, unless it also changes narrative, multiple surfaces, or persona priority coverage.
 - Multi-persona / marketing redesign → load **full** pack (`PANEL.full.md` + `COLLABORATION.md`) and write `panel-report/run-state.yaml` from `docs/run-state.template.yaml` (or the copy under `panel-report/`).  
 - **No implement without consensus PROCEED** on standard/full (see `COLLABORATION.md`).
 
@@ -81,6 +83,7 @@ Optimize. Do not expand.
 - Mark what is competing for attention.
 - Identify repeated explanations, redundant sections, and low-value text.
 - Propose cuts and merges before any new content.
+- Identify missing structural jobs: orientation, proof, trust, comparison, or next-step clarity.
 
 **3. Buyer walkthrough**
 Walk the primary path only:
@@ -111,6 +114,13 @@ Every recommendation must state:
 - What changes
 - What is removed or reduced
 - Why this helps a skeptical buyer
+- Where the problem is visible and what evidence supports it
+- How the final browser experience will be checked
+
+If a recommendation adds a section, it must also state:
+- Which buyer or persona job is currently unserved
+- Why restructure alone is insufficient
+- What gets reduced, merged, or displaced to keep the page honest
 
 ---
 
@@ -144,6 +154,7 @@ Every recommendation must state:
 ### Hard bans
 
 - Do not add new sections “for completeness.”
+- Do not refuse a needed new section when the current page is structurally missing a buyer job.
 - Do not add marketing paragraphs that restate what’s already visible.
 - Do not create more cards, more steps, or more badges unless something essential is missing.
 - Do not rewrite the product’s story into a different product.
@@ -155,3 +166,4 @@ Every recommendation must state:
 
 A good run makes the page **lighter, clearer, and more obvious** — not longer.
 If the page has more words after your recommendations than before, you failed this skill.
+For implementation work, success also requires rendered desktop/mobile proof, applicable state coverage, and no unresolved preserve or visual regression. A complete report attached to a generic or worse interface is still a failed run.

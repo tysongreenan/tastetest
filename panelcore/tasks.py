@@ -1,7 +1,8 @@
 """Task definitions for Panel review stages.
 
-Manager enforces order (PANEL.md Phase 0–6):
-0. Preflight (blocking) → 1–2 product + personas → 3 journeys → 4 critique → 5 specialists → 6 report
+Manager enforces order (PANEL.md Phase 0–9):
+preflight → product/personas → journeys → critique → proposals → cross-critique/hypotheses →
+report/consensus → implement → verify → learning
 
 TODO: wire into multi-agent task graph with hard edges (no critique before personas GO).
 """
@@ -116,14 +117,15 @@ TASKS: tuple[TaskSpec, ...] = (
     TaskSpec(
         name="frontend_design_brief",
         description=(
-            "BLOCKING for Frontend Design. Interview Orchestrator + every seated Persona Manager "
+            "BLOCKING for Frontend Design. Interview Orchestrator + required Persona Managers "
+            "for the run class (priority PM by default on standard; all seated PMs on full) "
             "for visual preferences: feel, trust/bounce, references, section depth, motion appetite. "
             "Orchestrator confirms priority + secondary non-negotiables + preserve list. "
             "No ui-ux-pro-max search or layout proposal until answers are written AND "
             "design_system.status is loaded or missing-drafted (FRONTEND.md Step 0 + 0b). "
             "See COLLABORATION design brief."
         ),
-        expected_output="Design brief Q&A log with answers from Orchestrator and each PM-*.",
+        expected_output="Design brief Q&A log with answers from Orchestrator and required PM-* seats.",
         blocking=True,
     ),
     TaskSpec(
@@ -166,14 +168,41 @@ TASKS: tuple[TaskSpec, ...] = (
         expected_output="Prose evaluation with scores and concrete rewrite suggestions.",
     ),
     TaskSpec(
+        name="marketing_copy",
+        description=(
+            "For marketing surfaces, Isa loads COPY.md + skills/marketing-copy, checks product truth, "
+            "and owns SB7, scan hierarchy, product-show, and CTA strategy before Frontend layout."
+        ),
+        expected_output="panel-report/copy.md with narrative, product-show, CTA, and evidence.",
+    ),
+    TaskSpec(
+        name="draft_hypotheses",
+        description=(
+            "Orchestrator assigns H-IDs to every material proposal. Record persona, evidence, expected "
+            "outcome, secondary harm risk, falsifiable signal, owner, and adjacent challenger."
+        ),
+        expected_output="panel-report/hypotheses.md with testable proposal ledger.",
+        blocking=True,
+    ),
+    TaskSpec(
+        name="cross_critique",
+        description=(
+            "Adjacent specialists challenge frozen proposals. Each challenge must mutate or reject a "
+            "proposal/hypothesis/test, or uphold it with new evidence. Bare agreement is invalid."
+        ),
+        expected_output="Cross-critique outcomes recorded against H-IDs in panel-report/hypotheses.md.",
+        blocking=True,
+    ),
+    TaskSpec(
         name="write_report",
         description=(
             "Assemble full Markdown report including Preflight status, persona grounding, "
             "Executive Summary scores, all prior sections, prioritized recommendations, ideal flows. "
+            "Deduplicate recommendations into panel-report/findings.json using the shipped schema; "
             "If preflight was NO-GO, report is preflight + personas only — not a fake complete audit. "
             "Scores must be owned by domain roles — Report Writer does not invent scores."
         ),
-        expected_output="Complete Panel report as Markdown (or NO-GO preflight package).",
+        expected_output="panel-report/report.md + validated panel-report/findings.json (or NO-GO preflight package).",
         blocking=True,
     ),
     TaskSpec(
@@ -195,5 +224,27 @@ TASKS: tuple[TaskSpec, ...] = (
             "Domain owners re-check their lane after edit if material."
         ),
         expected_output="Diff limited to approved scope; note any user overrides.",
+    ),
+    TaskSpec(
+        name="verify_implementation",
+        description=(
+            "After UI implementation, inspect the running product in a real browser at desktop and "
+            "mobile. Check applicable interaction/content states, keyboard and reduced motion, compare "
+            "against baseline, preserve list, calibration, and DESIGN.md. Static inspection cannot pass."
+        ),
+        expected_output="panel-report/verification.md with evidence and PASS|REVISE|BLOCK verdict.",
+        blocking=True,
+    ),
+    TaskSpec(
+        name="close_learning_loop",
+        description=(
+            "Compare predicted and observed outcomes for every implemented H-ID. Mark confirmed, "
+            "disproved, or inconclusive without inventing causality. Route reusable learning to its "
+            "system-of-record owner; give inconclusive results a narrower next-run test."
+        ),
+        expected_output=(
+            "panel-report/learning.md plus cited updates to DESIGN.md, calibration, personas, or skills."
+        ),
+        blocking=True,
     ),
 )

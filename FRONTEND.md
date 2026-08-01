@@ -101,7 +101,11 @@ Creates `design-system/<slug>/MASTER.md` (skip if exists unless `--force`).
 
 #### 0. Ask the managers (mandatory)
 
-Before any `--design-system` search, mock, or redesign proposal, Frontend Design **interviews** Orchestrator + **every seated Persona Manager**.
+Before any `--design-system` search, mock, or redesign proposal, Frontend Design **interviews** the required managers for the run class:
+
+- `standard` section/page visual refresh: Orchestrator + **priority PM**
+- `standard` change touching a secondary non-negotiable: add that PM
+- `full` homepage / marketing / multi-surface redesign: Orchestrator + **every seated Persona Manager**
 
 Write this handoff (transcript or `panel-report/council.md`):
 
@@ -124,10 +128,14 @@ Orchestrator:
 9. Constraints (stack, library, dark/light)?
 ```
 
-**Each Persona Manager must answer** (not “whatever looks good”).  
-**Orchestrator confirms** priority + secondary non-negotiables.
+**Each required Persona Manager must answer** (not “whatever looks good”).
+**Orchestrator confirms** priority + any secondary non-negotiables in scope.
 
-If answers are missing → Frontend Design **stops** and posts `BLOCKED: design brief incomplete` — no library search, no UI implement.
+Frontend Design must also ask one structural question:
+
+10. Which page/section jobs are missing today for your persona: orientation, proof, trust, comparison, or next-step clarity?
+
+If required answers are missing → Frontend Design **stops** and posts `BLOCKED: design brief incomplete` — no library search, no UI implement.
 
 #### 0b. Load project DESIGN.md (mandatory when UI is in scope)
 
@@ -176,6 +184,12 @@ For each major visual choice:
 |--------|-------------|-----------------|--------------|------------------|
 | … | help/neutral/hurt | … | if hurt → revise or get that PM Approve | cite section or “new — needs DESIGN.md update” |
 
+For each proposed new section or major restructure:
+
+| Structural change | Missing job served | Priority PM | Secondary PMs | What is reduced/merged to pay for it? | DESIGN.md align? |
+|------------------|--------------------|-------------|----------------|----------------------------------------|------------------|
+| … | proof / trust / orientation / comparison / next-step clarity | … | … | … | cite section or “new — needs DESIGN.md update” |
+
 #### 4. Gate
 
 **DESIGN.md** + ANTI-SLOP + MOTION + preserve list.  
@@ -184,6 +198,16 @@ If library says glassmorphism and craft / DESIGN.md say no → **craft + DESIGN.
 #### 5. Propose (not ship)
 
 Present: design brief summary · **DESIGN.md constraints honored** · library cites · accepted vs rejected · section plan.  
+Frontend Design is allowed to propose a **more modern feel** for an existing section in `standard` runs without escalating to `full`, as long as the section’s job stays intact and the proposal cites the priority PM brief plus `DESIGN.md` constraints. Frontend Design is also allowed to propose a **new section direction** when the current page lacks a job the personas need. That proposal must cite the missing job, the PM(s) asking for it, and the reduction tradeoff elsewhere on the page.
+
+For every changed interactive component or data-bearing section, include a state contract in `panel-report/frontend.md`:
+
+| Surface | Default | Hover | Focus-visible | Active | Loading | Empty | Error | Disabled | Success | Mobile | Reduced motion |
+|---------|---------|-------|---------------|--------|---------|-------|-------|----------|---------|--------|----------------|
+| … | behavior or `n/a: reason` | … | … | … | … | … | … | … | … | … | … |
+
+The proposal must also name the desktop/mobile acceptance viewport, calibration traits being expressed, and the before-state evidence the verifier will compare against.
+
 **Implement only after Approves** per `COLLABORATION.md` (Craft, Motion, Orchestrator, Persona Managers as required).
 
 ### Depth rule (after anti-slop)
@@ -197,7 +221,7 @@ Sparse ≠ refined. Unless managers explicitly asked for minimal:
 
 Add **Frontend Design System** section:
 
-- **Design brief Q&A** (Orchestrator + each Persona Manager answers)  
+- **Design brief Q&A** (Orchestrator + required Persona Managers for the run class)
 - **`design_system` run-state** — path · status · 3–5 constraints · sections cited  
 - Query used + product type match  
 - Recommended pattern / style / palette / type (cite search)  
@@ -206,6 +230,9 @@ Add **Frontend Design System** section:
 - Multi-persona impact table (include DESIGN.md align column)  
 - Stack notes  
 - **DESIGN.md updates proposed** (if new patterns shipped — must land same PR as code)
+- State contract for every changed interactive/data-bearing surface
+- Calibration traits cited from `docs/design-calibration.md`
+- Browser acceptance checks and before-state evidence
 
 **Approve evidence (visual):** one line naming a DESIGN.md section, e.g. `Approve — Components · InstallBlock; Do’s and Don’ts · no glass`.
 

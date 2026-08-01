@@ -135,10 +135,23 @@ MOTION_CRITIC = AgentSpec(
     may_veto=("implement_motion", "homepage_redesign"),
 )
 
+MARKETING_COPYWRITER = AgentSpec(
+    role="Isa · Marketing Copywriter",
+    goal="Own truthful marketing narrative, product-show strategy, and CTA structure.",
+    backstory=(
+        "You apply COPY.md and the marketing-copy skill. Product truth and persona voice constrain "
+        "the story; you never invent customers, metrics, or capabilities."
+    ),
+    may_propose=("marketing_narrative", "product_show", "homepage_redesign"),
+    must_get_approve_from=("Orchestrator Manager", "Persona Manager"),
+    may_veto=("marketing_narrative", "product_show", "homepage_redesign"),
+)
+
 FRONTEND_DESIGN = AgentSpec(
     role="Frontend Design",
     goal=(
-        "First interview Orchestrator + all Persona Managers for visual preferences (design brief). "
+        "First interview Orchestrator + the Persona Managers required by the run class for visual "
+        "preferences (design brief). "
         "Then search ui-ux-pro-max. Propose systems; never invent persona taste; never ship without "
         "Craft + Motion + required PMs."
     ),
@@ -164,6 +177,18 @@ REPORT_WRITER = AgentSpec(
     must_get_approve_from=("Manager",),
 )
 
+IMPLEMENTATION_VERIFIER = AgentSpec(
+    role="Implementation Verifier",
+    goal="Prove the final rendered UI works across required viewports, states, and journeys.",
+    backstory=(
+        "You inspect the running product in a real browser. Source, tests, and build output support "
+        "your verdict but never replace rendered evidence."
+    ),
+    may_propose=("mark_ui_shippable",),
+    must_get_approve_from=("Orchestrator Manager",),
+    may_veto=("mark_ui_shippable",),
+)
+
 ALL_AGENTS: tuple[AgentSpec, ...] = (
     MANAGER,
     PERSONA_MANAGER,
@@ -175,6 +200,8 @@ ALL_AGENTS: tuple[AgentSpec, ...] = (
     CRAFT_CRITIC,
     PROSE_CRITIC,
     MOTION_CRITIC,
+    MARKETING_COPYWRITER,
     FRONTEND_DESIGN,
     REPORT_WRITER,
+    IMPLEMENTATION_VERIFIER,
 )

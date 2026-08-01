@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0",
+  "runId": "ACTIVE_RUN_ID",
+  "surface": "",
+  "findings": [
+    {
+      "id": "H-001",
+      "severity": "P1",
+      "confidence": "observed",
+      "surface": "route / component / state",
+      "problem": "Observable user problem, not an aesthetic adjective",
+      "evidence": [
+        {
+          "type": "browser",
+          "ref": "panel-report/evidence/example.png",
+          "claim": "What this evidence directly demonstrates"
+        }
+      ],
+      "change": "Concrete reduction-first change",
+      "personaImpact": {
+        "priority": "help | neutral | hurt — reason",
+        "secondary": "help | neutral | hurt — reason"
+      },
+      "acceptanceCheck": "Observable pass condition",
+      "owner": "Responsible seat",
+      "sourceArtifacts": ["panel-report/journeys.md"],
+      "status": "open"
+    }
+  ]
+}

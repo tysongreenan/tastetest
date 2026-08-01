@@ -26,6 +26,7 @@ node_modules/
 npm-debug.log*
 
 # Local agent / browser artifacts (not product)
+.panel/
 .playwright-mcp/
 overhaul-*.png
 tastetest-*.png

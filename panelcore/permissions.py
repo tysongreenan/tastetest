@@ -77,6 +77,20 @@ GATES: tuple[ApprovalGate, ...] = (
         veto_roles=("Design System Checker",),
     ),
     ApprovalGate(
+        action="marketing_narrative",
+        proposers=("Isa · Marketing Copywriter",),
+        must_consult=("Product Analyst", "Prose Critic", PRIORITY_PM),
+        must_approve=(ORCHESTRATOR, "Isa · Marketing Copywriter", PRIORITY_PM),
+        veto_roles=("Isa · Marketing Copywriter", PRIORITY_PM),
+    ),
+    ApprovalGate(
+        action="product_show",
+        proposers=("Isa · Marketing Copywriter",),
+        must_consult=("Craft Critic", "Frontend Design", "Journey Critic", PRIORITY_PM),
+        must_approve=(ORCHESTRATOR, "Isa · Marketing Copywriter", "Craft Critic", PRIORITY_PM),
+        veto_roles=("Isa · Marketing Copywriter", "Craft Critic"),
+    ),
+    ApprovalGate(
         action="implement_layout",
         proposers=("Frontend Design", "Craft Critic"),
         must_consult=("Journey Critic", "Empathy Mapper", "Design System Checker"),
@@ -115,14 +129,28 @@ GATES: tuple[ApprovalGate, ...] = (
             "Craft Critic",
             "Motion Critic",
             "Design System Checker",
+            "Isa · Marketing Copywriter",
         ),
-        veto_roles=("Craft Critic", "Motion Critic", "Design System Checker", PRIORITY_PM),
+        veto_roles=(
+            "Craft Critic",
+            "Motion Critic",
+            "Design System Checker",
+            "Isa · Marketing Copywriter",
+            PRIORITY_PM,
+        ),
     ),
     ApprovalGate(
         action="ship_report",
         proposers=("Report Writer",),
         must_consult=(PRIORITY_PM,),
         must_approve=(ORCHESTRATOR,),
+    ),
+    ApprovalGate(
+        action="mark_ui_shippable",
+        proposers=("Implementation Verifier",),
+        must_consult=("Craft Critic", "Heuristic Auditor", "Motion Critic", PRIORITY_PM),
+        must_approve=(ORCHESTRATOR, "Implementation Verifier"),
+        veto_roles=("Implementation Verifier",),
     ),
 )
 
@@ -166,7 +194,9 @@ def can_implement(
 
     gate = get_gate(action)
     if not gate:
-        return True, f"no gate registered for {action!r}"
+        if run_class in ("standard", "full", "implement"):
+            return False, f"no approval gate registered for {action!r}"
+        return True, f"no gate registered for {action!r} in lite run"
 
     approves = approves or {}
     missing: list[str] = []

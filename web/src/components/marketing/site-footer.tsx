@@ -61,6 +61,12 @@ export function SiteFooter({ className }: { className?: string }) {
           className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground"
         >
           <Link
+            href="/harness"
+            className="transition-colors hover:text-foreground"
+          >
+            Harness
+          </Link>
+          <Link
             href="/report"
             className="transition-colors hover:text-foreground"
           >

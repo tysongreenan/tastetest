@@ -228,13 +228,16 @@ Whitespace protects the **install → sample** path. Do not fill every band with
 
 1. Nav — logo · How · Files · GitHub · Install  
 2. Hero — H1 · plain sub · install + Copy · **Sample report** (outline) · What gets installed (ghost). No fake path demo.  
-3. Three steps (Install / Ask / Fix) — buyer words only  
-4. What gets installed — mono file list + Browse on GitHub + quiet AGENTS.md link  
-5. Dark close: “Start in your project” + install (command stays on light card)  
-6. Thin footer (Sample · Agents · Skills · GitHub)
+3. Harness proof — hypothesis → specialist artifacts → cross-critique → decision → verify/learn; use ruled rows, not a card grid
+4. Three steps (Install / Ask / Fix) — buyer words only
+5. What gets installed — mono file list + Browse on GitHub + quiet AGENTS.md link
+6. Dark close: “Start in your project” + install (command stays on light card)
+7. Thin footer (Sample · Agents · Skills · GitHub)
 
 **Still off the homepage:** full crew portraits, product-path tab demos, org chart pyramid, gap demos, long sample essay, sticky install bar.  
 **Sample page:** `/report` (primary proof). **Crew depth:** GitHub `AGENTS.md` (not homepage `AgentRoster`).
+
+**Harness page:** `/harness` is a scan-first product-story route. Its first pass is three layers: five-step visual loop, three enforcement gates, and a compact dogfood pass/block ledger. Detail is progressive (`details`) rather than a long document. It extends existing tokens and type roles; do not convert it into a generic feature-card grid, agent-chat diagram, or prose-heavy architecture essay.
 
 ---
 

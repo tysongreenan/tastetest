@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0",
+  "runId": "2026-08-01T19-26-19-800Z-94424a19",
+  "surface": "/harness",
+  "findings": [
+    {
+      "id": "F-001",
+      "severity": "P1",
+      "confidence": "observed",
+      "surface": "/harness at desktop and mobile",
+      "problem": "The previous route presented a long architecture document with too many equally weighted sections for a skimming visitor.",
+      "evidence": [
+        {
+          "type": "browser",
+          "ref": "panel-report/harness-mobile.png",
+          "claim": "The redesigned mobile route exposes the mechanism as five short steps before enforcement detail and remains free of horizontal overflow."
+        }
+      ],
+      "change": "Replace the architecture essay with a five-step loop, three enforcement gates, and a compact pass/block ledger with progressive disclosure.",
+      "personaImpact": {
+        "priority": "help - first-time evaluators can identify the product mechanism from headings alone",
+        "secondary": "help - technical buyers retain access to concrete artifact and error names"
+      },
+      "acceptanceCheck": "The primary mechanism appears first, detail is collapsed, and desktop/mobile renders have no overflow or runtime errors.",
+      "owner": "Frontend Design",
+      "sourceArtifacts": ["panel-report/craft.md", "panel-report/hypotheses.md", "panel-report/verification.md"],
+      "status": "verified"
+    }
+  ]
+}

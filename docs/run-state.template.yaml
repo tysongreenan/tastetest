@@ -28,10 +28,19 @@ deferred: []
 
 design_brief:
   # Required before library search / redesign when run_class is full (or UI-heavy standard)
+  # standard defaults to Orchestrator + priority PM; add secondary PMs only if their non-negotiable is touched
   Orchestrator: ""
   PM-Avery: ""
   PM-Jordan: ""
   PM-Sam: ""
+
+missing_jobs: [] # e.g. proof, trust, orientation, comparison, next-step clarity
+
+calibration:
+  path: docs/design-calibration.md
+  status: null # loaded | missing-drafted | missing-blocked | n/a
+  positive_refs: [] # { ref: "...", traits: ["..."] }
+  anti_refs: [] # { ref: "...", avoid: ["..."] }
 
 # Visual system contract — Design System Checker owns (DESIGN-SYSTEM.md + skills/design-md/)
 design_system:
@@ -62,10 +71,81 @@ consensus:
   log_path: null # e.g. panel-report/council.md#consensus-…
   revise_round: 0 # max 2 before BLOCK or ask user
 
+hypotheses:
+  status: null # drafted | cross-critiqued | approved | measured | n/a
+  artifact: panel-report/hypotheses.md
+  active_ids: [] # e.g. [H-001, H-002]
+  unresolved_ids: []
+
+learning:
+  status: null # open | routed | closed
+  artifact: panel-report/learning.md
+  confirmed_ids: []
+  disproved_ids: []
+  inconclusive_ids: []
+  untested_ids: [] # review-only proposals; must retain owner + trigger + test to carry forward
+  system_updates: [] # { hypothesis: H-001, owner: "...", path: "...", status: updated|deferred }
+  next_run_tests: []
+
+delivery_status: null # PLANNED | IMPLEMENTED | REVISE | BLOCKED | SHIPPABLE
+
+verification:
+  verdict: null # PASS | REVISE | BLOCK | n/a
+  blocker: null # exact runtime/browser blocker; null when available
+  artifact: panel-report/verification.md
+  before_evidence: [] # baseline screenshots or approved proposal references
+  desktop_evidence: []
+  mobile_evidence: []
+  visual_regression: null # pass | fail | n/a
+  preserve_regression: null # pass | fail | n/a
+  states:
+    default: null # pass | fail | "n/a: reason"
+    hover: null
+    focus_visible: null
+    active_pressed: null
+    loading: null
+    empty: null
+    error: null
+    disabled: null
+    success: null
+    reduced_motion: null
+
+design_system_delta:
+  status: null # updated | none | required-blocked
+  sections: []
+  rationale: ""
+
 artifacts:
   # Paths relative to project root — prefer refs over pasted walls of text
-  # - panel-report/journeys.md
-  # - panel-report/craft.md
-  # - panel-report/report.md
+  council: panel-report/council.md
+  product: panel-report/product.md
+  empathy: panel-report/empathy.md
+  journeys: panel-report/journeys.md
+  heuristics: panel-report/heuristics.md
+  design_system: panel-report/design-system.md
+  craft: panel-report/craft.md
+  prose: panel-report/prose.md
+  copy: panel-report/copy.md
+  motion: panel-report/motion.md
+  frontend: panel-report/frontend.md
+  report: panel-report/report.md
+  verification: panel-report/verification.md
+  process_score: panel-report/process-score.md
+  hypotheses: panel-report/hypotheses.md
+  learning: panel-report/learning.md
+  findings: panel-report/findings.json
 
 notes: ""
+
+skills_used:
+  # For every in-scope specialist seat on standard/full runs
+  # - seat: Craft Critic
+  #   files:
+  #     - ANTI-SLOP.md
+  #   hook: "Used anti-reference check against identical card-grid DNA"
+  #   artifact: panel-report/craft.md
+
+artifact_checks:
+  # - seat: Craft Critic
+  #   required: panel-report/craft.md
+  #   present: false

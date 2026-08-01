@@ -3,8 +3,12 @@ import {
   cpSync,
   existsSync,
   mkdirSync,
+  readFileSync,
+  readdirSync,
+  statSync,
   writeFileSync,
 } from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -26,7 +30,12 @@ const ROOT_SKILLS_LEAN = [
 ];
 
 /** Optional companion for design-system work — only with --full */
-const ROOT_SKILLS_FULL_EXTRA = ["FRONTEND.md"];
+const ROOT_SKILLS_FULL_EXTRA = [
+  "PANEL.full.md",
+  "FRONTEND.md",
+  "DESIGN.md",
+  "DESIGN-SYSTEM.md",
+];
 
 /** Deep packs only with --full */
 const SKILL_PACKS = [
@@ -34,6 +43,21 @@ const SKILL_PACKS = [
   "motion",
   "stop-slop-prose",
   "marketing-copy",
+  "design-md",
+];
+
+const REQUIRED_DOCS = [
+  "crew-isa.md",
+  "design-calibration.md",
+  "findings.schema.json",
+  "findings.template.json",
+  "harness.md",
+  "hypotheses.template.md",
+  "learning.template.md",
+  "personas.md",
+  "run-state.template.yaml",
+  "skills-audit.md",
+  "verification.template.md",
 ];
 
 /**
@@ -47,27 +71,36 @@ const SKILL_PACKS = [
  *   cursor?: boolean,
  *   claude?: boolean,
  *   dryRun?: boolean,
+ *   upgrade?: boolean,
+ *   packageVersion?: string,
  * }} opts
  */
 export async function initProject(opts = {}) {
   const target = path.resolve(opts.dir || process.cwd());
-  const force = Boolean(opts.force);
+  const upgrade = Boolean(opts.upgrade);
+  const force = Boolean(opts.force || upgrade);
   const dryRun = Boolean(opts.dryRun);
+  const packageVersion = opts.packageVersion || "unknown";
   // Default: lean. --full installs packs. --lite is accepted as alias for lean (legacy).
-  const full = opts.full === true && opts.lite !== true;
+  const manifest = readManifest(target);
+  const inferredFull = manifest?.mode === "full" || isFullInstall(target);
+  const full = opts.lite === true ? false : opts.full === true || (upgrade && inferredFull);
   const wantCursor = opts.cursor !== false;
   const wantClaude = opts.claude !== false;
 
   const log = [];
 
   console.log("");
-  console.log("  Panel onboarding");
+  console.log(`  Panel ${upgrade ? "upgrade" : "onboarding"}`);
   console.log("  ────────────────");
   console.log(`  Target: ${target}`);
   console.log(
     `  Mode:   ${full ? "full (thin skills + deep packs)" : "lean (thin skills only)"}`
   );
   if (dryRun) console.log("  Dry run — no files will be written");
+  const backupRoot = upgrade
+    ? path.join(target, ".panel", "backups", backupStamp())
+    : null;
   console.log("");
 
   if (!existsSync(target)) {
@@ -83,7 +116,7 @@ export async function initProject(opts = {}) {
       console.warn(`    ! missing in package: ${name}`);
       continue;
     }
-    const r = copyOne(src, dest, { force, dryRun });
+    const r = copyOne(src, dest, { force, dryRun, upgrade, backupRoot, target, manifest });
     log.push(r);
     console.log(`    ${r.status.padEnd(8)} ${name}`);
   }
@@ -98,7 +131,7 @@ export async function initProject(opts = {}) {
         console.warn(`    ! missing in package: ${name}`);
         continue;
       }
-      const r = copyOne(src, dest, { force, dryRun });
+      const r = copyOne(src, dest, { force, dryRun, upgrade, backupRoot, target, manifest });
       log.push(r);
       console.log(`    ${r.status.padEnd(8)} ${name}`);
     }
@@ -114,7 +147,7 @@ export async function initProject(opts = {}) {
         console.warn(`    ! missing pack: skills/${pack}`);
         continue;
       }
-      const r = copyDir(src, dest, { force, dryRun });
+      const r = copyDir(src, dest, { force, dryRun, upgrade, backupRoot, target, manifest });
       log.push(r);
       console.log(`    ${r.status.padEnd(8)} skills/${pack}/`);
     }
@@ -122,7 +155,7 @@ export async function initProject(opts = {}) {
     if (existsSync(readmeSrc)) {
       const dest = path.join(target, "skills", "README.md");
       if (!dryRun) mkdirSync(path.dirname(dest), { recursive: true });
-      const r = copyOne(readmeSrc, dest, { force, dryRun });
+      const r = copyOne(readmeSrc, dest, { force, dryRun, upgrade, backupRoot, target, manifest });
       log.push(r);
       console.log(`    ${r.status.padEnd(8)} skills/README.md`);
     }
@@ -135,8 +168,8 @@ export async function initProject(opts = {}) {
     console.log("  → Cursor (rules + command)");
     const ruleDest = path.join(target, ".cursor", "rules", "panel.mdc");
     const cmdDest = path.join(target, ".cursor", "commands", "panel.md");
-    log.push(writeText(ruleDest, cursorRuleContent({ full }), { force, dryRun }));
-    log.push(writeText(cmdDest, cursorCommandContent(), { force, dryRun }));
+    log.push(writeText(ruleDest, cursorRuleContent({ full }), { force, dryRun, upgrade, backupRoot, target, manifest }));
+    log.push(writeText(cmdDest, cursorCommandContent(), { force, dryRun, upgrade, backupRoot, target, manifest }));
     console.log(`    ${log.at(-2).status.padEnd(8)} .cursor/rules/panel.mdc`);
     console.log(`    ${log.at(-1).status.padEnd(8)} .cursor/commands/panel.md`);
   }
@@ -151,14 +184,14 @@ export async function initProject(opts = {}) {
       "panel",
       "SKILL.md"
     );
-    log.push(writeText(skillDest, claudeSkillContent({ full }), { force, dryRun }));
+    log.push(writeText(skillDest, claudeSkillContent({ full }), { force, dryRun, upgrade, backupRoot, target, manifest }));
     console.log(`    ${log.at(-1).status.padEnd(8)} .claude/skills/panel/SKILL.md`);
   }
 
   // 6) Onboarding note
   const onboardDest = path.join(target, "ONBOARDING.md");
   log.push(
-    writeText(onboardDest, onboardReadmeContent({ full }), { force, dryRun })
+    writeText(onboardDest, onboardReadmeContent({ full }), { force, dryRun, upgrade, backupRoot, target, manifest })
   );
   console.log(`  → ${log.at(-1).status.padEnd(8)} ONBOARDING.md (how to run)`);
 
@@ -169,10 +202,23 @@ export async function initProject(opts = {}) {
   if (!dryRun && !existsSync(keep)) writeFileSync(keep, "");
   console.log("  →         panel-report/");
 
+  console.log("  → Protocol docs");
+  for (const name of REQUIRED_DOCS) {
+    const src = path.join(PACKAGE_ROOT, "docs", name);
+    const dest = path.join(target, "docs", name);
+    if (!existsSync(src)) {
+      console.warn(`    ! missing in package: docs/${name}`);
+      continue;
+    }
+    const r = copyOne(src, dest, { force, dryRun, upgrade, backupRoot, target, manifest });
+    log.push(r);
+    console.log(`    ${r.status.padEnd(8)} docs/${name}`);
+  }
+
   const runStateSrc = path.join(PACKAGE_ROOT, "docs", "run-state.template.yaml");
   if (existsSync(runStateSrc)) {
     const runStateDest = path.join(reportDir, "run-state.template.yaml");
-    const r = copyOne(runStateSrc, runStateDest, { force, dryRun });
+    const r = copyOne(runStateSrc, runStateDest, { force, dryRun, upgrade, backupRoot, target, manifest });
     log.push(r);
     console.log(`  → ${r.status.padEnd(8)} panel-report/run-state.template.yaml`);
   }
@@ -182,7 +228,7 @@ export async function initProject(opts = {}) {
     const src = path.join(PACKAGE_ROOT, name);
     if (!existsSync(src)) continue;
     const dest = path.join(target, name);
-    const r = copyOne(src, dest, { force, dryRun });
+    const r = copyOne(src, dest, { force, dryRun, upgrade, backupRoot, target, manifest });
     log.push(r);
     console.log(`  → ${r.status.padEnd(8)} ${name}`);
   }
@@ -190,6 +236,12 @@ export async function initProject(opts = {}) {
   const written = log.filter((x) => x.status === "wrote").length;
   const skipped = log.filter((x) => x.status === "skip").length;
   const would = log.filter((x) => x.status === "would").length;
+  const backedUp = log.filter((x) => x.backedUp).length;
+
+  if (!dryRun && (upgrade || skipped === 0)) {
+    writeManifest(target, { version: packageVersion, mode: full ? "full" : "lean" }, log);
+    writePanelGitignore(target);
+  }
 
   console.log("");
   console.log("  ────────────────");
@@ -198,6 +250,9 @@ export async function initProject(opts = {}) {
       ? `  Dry run: ${would} would write, ${skipped} skip`
       : `  Done: ${written} written, ${skipped} skipped (already existed)`
   );
+  if (upgrade && backedUp > 0) {
+    console.log(`  Backup: ${path.relative(target, backupRoot)} (${backedUp} changed paths)`);
+  }
   console.log("");
   console.log("  Next steps");
   console.log("  1. Open this project in Cursor or Claude Code");
@@ -217,7 +272,9 @@ export async function initProject(opts = {}) {
   if (!full) {
     console.log("");
     console.log("  Deep packs later:");
-    console.log("    npx @tysongreenan/panel init --full");
+    console.log(
+      `    npx @tysongreenan/panel${upgrade ? "@latest upgrade" : " init"} --full`
+    );
   }
   console.log("");
   console.log("  Load map: PANEL + playbook · craft → ANTI-SLOP · motion → MOTION · sell → COPY (Isa)");
@@ -227,34 +284,110 @@ export async function initProject(opts = {}) {
   return { ok: true, log, target, full };
 }
 
-function copyOne(src, dest, { force, dryRun }) {
+function copyOne(src, dest, options) {
+  const { force, dryRun } = options;
   if (existsSync(dest) && !force) {
     return { status: "skip", dest };
   }
   if (dryRun) return { status: "would", dest };
+  const backedUp = backupChanged(dest, options);
   mkdirSync(path.dirname(dest), { recursive: true });
   copyFileSync(src, dest);
-  return { status: "wrote", dest };
+  return { status: "wrote", dest, backedUp };
 }
 
-function copyDir(src, dest, { force, dryRun }) {
+function copyDir(src, dest, options) {
+  const { force, dryRun } = options;
   if (existsSync(dest) && !force) {
     return { status: "skip", dest };
   }
   if (dryRun) return { status: "would", dest };
+  const backedUp = backupChanged(dest, options);
   mkdirSync(path.dirname(dest), { recursive: true });
   cpSync(src, dest, { recursive: true, force: true });
-  return { status: "wrote", dest };
+  return { status: "wrote", dest, backedUp };
 }
 
-function writeText(dest, body, { force, dryRun }) {
+function writeText(dest, body, options) {
+  const { force, dryRun } = options;
   if (existsSync(dest) && !force) {
     return { status: "skip", dest };
   }
   if (dryRun) return { status: "would", dest };
+  const backedUp = backupChanged(dest, options);
   mkdirSync(path.dirname(dest), { recursive: true });
   writeFileSync(dest, body, "utf8");
-  return { status: "wrote", dest };
+  return { status: "wrote", dest, backedUp };
+}
+
+function backupChanged(dest, { upgrade, backupRoot, target, manifest }) {
+  if (!upgrade || !existsSync(dest)) return false;
+  const relative = path.relative(target, dest);
+  const previousHash = manifest?.hashes?.[relative];
+  const currentHash = hashPath(dest);
+  if (previousHash && previousHash === currentHash) return false;
+  const backupDest = path.join(backupRoot, relative);
+  mkdirSync(path.dirname(backupDest), { recursive: true });
+  if (statSync(dest).isDirectory()) cpSync(dest, backupDest, { recursive: true });
+  else copyFileSync(dest, backupDest);
+  return true;
+}
+
+function hashPath(targetPath) {
+  const hash = createHash("sha256");
+  if (statSync(targetPath).isDirectory()) {
+    for (const file of walkFiles(targetPath)) {
+      hash.update(path.relative(targetPath, file));
+      hash.update(readFileSync(file));
+    }
+  } else {
+    hash.update(readFileSync(targetPath));
+  }
+  return hash.digest("hex");
+}
+
+function walkFiles(dir) {
+  const files = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
+    const entryPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) files.push(...walkFiles(entryPath));
+    else if (entry.isFile()) files.push(entryPath);
+  }
+  return files;
+}
+
+function readManifest(target) {
+  const manifestPath = path.join(target, ".panel", "manifest.json");
+  if (!existsSync(manifestPath)) return null;
+  try {
+    return JSON.parse(readFileSync(manifestPath, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+function writeManifest(target, details, log) {
+  const hashes = {};
+  for (const item of log) {
+    if (!item.dest || !existsSync(item.dest)) continue;
+    hashes[path.relative(target, item.dest)] = hashPath(item.dest);
+  }
+  const manifestPath = path.join(target, ".panel", "manifest.json");
+  mkdirSync(path.dirname(manifestPath), { recursive: true });
+  writeFileSync(manifestPath, `${JSON.stringify({ ...details, installedAt: new Date().toISOString(), hashes }, null, 2)}\n`, "utf8");
+}
+
+function writePanelGitignore(target) {
+  const gitignorePath = path.join(target, ".panel", ".gitignore");
+  if (!existsSync(gitignorePath)) writeFileSync(gitignorePath, "backups/\n", "utf8");
+}
+
+function isFullInstall(target) {
+  return existsSync(path.join(target, "FRONTEND.md")) || existsSync(path.join(target, "skills", "ui-ux-pro-max"));
+}
+
+function backupStamp() {
+  return new Date().toISOString().replace(/[:.]/g, "-");
 }
 
 function cursorRuleContent({ full }) {
@@ -398,11 +531,18 @@ ${
 2. Set \`run_class\` + \`protocol\`  
 3. No implement without consensus **PROCEED** (see \`COLLABORATION.md\`)
 
+### Health checks
+
+\`npx @tysongreenan/panel doctor\` checks installation health.
+\`npx @tysongreenan/panel validate\` must pass before claiming **SHIPPABLE**.
+
 ## Re-run
 
 \`\`\`bash
-npx @tysongreenan/panel init --force
-npx @tysongreenan/panel init --full --force
+npx @tysongreenan/panel@latest upgrade
+npx @tysongreenan/panel@latest upgrade --full
 \`\`\`
+
+Upgrade backs up locally changed managed files under \`.panel/backups/\` before replacing them.
 `;
 }

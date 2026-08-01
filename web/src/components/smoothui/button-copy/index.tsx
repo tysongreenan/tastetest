@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Copy, LoaderCircle } from "lucide-react";
+import { Check, Copy, LoaderCircle, TextCursorInput } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { type ReactNode, useCallback, useState } from "react";
 
@@ -12,12 +12,14 @@ export interface ButtonCopyProps {
   loadingDuration?: number;
   loadingIcon?: ReactNode;
   onCopy?: () => Promise<void> | void;
+  onError?: (error: unknown) => void;
   successIcon?: ReactNode;
   /** Visible labels make the action scannable (Don't Make Me Think). */
   labels?: {
     idle?: string;
     loading?: string;
     success?: string;
+    error?: string;
   };
   showIcon?: boolean;
 }
@@ -30,6 +32,7 @@ const defaultIcons = {
 
 export default function ButtonCopy({
   onCopy,
+  onError,
   idleIcon = defaultIcons.idle,
   loadingIcon = defaultIcons.loading,
   successIcon = defaultIcons.success,
@@ -41,33 +44,35 @@ export default function ButtonCopy({
   showIcon = true,
 }: ButtonCopyProps) {
   const [buttonState, setButtonState] = useState<
-    "idle" | "loading" | "success"
+    "idle" | "loading" | "success" | "error"
   >("idle");
   const shouldReduceMotion = useReducedMotion();
 
   const handleClick = useCallback(async () => {
     setButtonState("loading");
-    if (onCopy) {
-      await onCopy();
-    }
-    setTimeout(() => {
+    try {
+      if (onCopy) await onCopy();
       setButtonState("success");
-    }, loadingDuration);
-    setTimeout(() => {
-      setButtonState("idle");
-    }, loadingDuration + duration);
-  }, [onCopy, loadingDuration, duration]);
+      setTimeout(() => setButtonState("idle"), duration);
+    } catch (error) {
+      onError?.(error);
+      setButtonState("error");
+      setTimeout(() => setButtonState("idle"), duration + loadingDuration);
+    }
+  }, [onCopy, onError, loadingDuration, duration]);
 
   const icons = {
     idle: idleIcon,
     loading: loadingIcon,
     success: successIcon,
+    error: <TextCursorInput size={16} />,
   };
 
   const textLabels = {
     idle: labels?.idle ?? "Copy",
     loading: labels?.loading ?? "Copying…",
     success: labels?.success ?? "Copied",
+    error: labels?.error ?? "Select text",
   };
 
   const hasVisibleLabel = Boolean(labels);

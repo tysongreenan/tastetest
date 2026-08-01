@@ -1,6 +1,6 @@
 {
   "name": "@tysongreenan/panel",
-  "version": "0.2.2",
+  "version": "0.4.0",
   "description": "A buyer panel that lives in your repo — persona review, craft, motion, scored report",
   "license": "MIT",
   "author": "Tyson Greenan",
@@ -22,6 +22,8 @@
     "JOURNEY.md",
     "REPORT.md",
     "FRONTEND.md",
+    "DESIGN.md",
+    "DESIGN-SYSTEM.md",
     "AGENTS.md",
     "COLLABORATION.md",
     "docs",
@@ -29,7 +31,8 @@
   ],
   "scripts": {
     "panel": "node bin/panel.js",
-    "init": "node bin/panel.js init"
+    "init": "node bin/panel.js init",
+    "test": "node --test test/*.test.js"
   },
   "engines": {
     "node": ">=18"

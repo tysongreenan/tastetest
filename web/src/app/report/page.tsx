@@ -29,17 +29,18 @@ function renderMarkdown(md: string): string {
 
   const lines = escaped.split("\n");
   const out: string[] = [];
-  let inList = false;
+  let listType: "ul" | "ol" | null = null;
   let inCode = false;
 
   const closeList = () => {
-    if (inList) {
-      out.push("</ul>");
-      inList = false;
+    if (listType) {
+      out.push(`</${listType}>`);
+      listType = null;
     }
   };
 
-  for (const line of lines) {
+  for (let index = 0; index < lines.length; index++) {
+    const line = lines[index];
     if (line.startsWith("```")) {
       closeList();
       if (inCode) {
@@ -59,33 +60,41 @@ function renderMarkdown(md: string): string {
     if (line.startsWith("### ")) {
       closeList();
       out.push(
-        `<h3 class="mt-8 text-lg font-semibold tracking-tight">${inline(line.slice(4))}</h3>`
+        `<h3 id="${headingId(line.slice(4))}" class="mt-8 scroll-mt-20 text-lg font-semibold tracking-tight">${inline(line.slice(4))}</h3>`
       );
     } else if (line.startsWith("## ")) {
       closeList();
       out.push(
-        `<h2 class="mt-10 border-b pb-2 text-2xl font-semibold tracking-tight">${inline(line.slice(3))}</h2>`
+        `<h2 id="${headingId(line.slice(3))}" class="mt-10 scroll-mt-20 border-b pb-2 text-2xl font-semibold tracking-tight">${inline(line.slice(3))}</h2>`
       );
     } else if (line.startsWith("# ")) {
       closeList();
       out.push(
-        `<h1 class="text-3xl font-semibold tracking-tight">${inline(line.slice(2))}</h1>`
+        `<h1 id="${headingId(line.slice(2))}" class="scroll-mt-20 text-3xl font-semibold tracking-tight">${inline(line.slice(2))}</h1>`
       );
     } else if (line.startsWith("|") && line.includes("|")) {
       closeList();
-      // keep tables as preformatted rows for simplicity
-      out.push(
-        `<div class="font-mono text-xs leading-relaxed text-muted-foreground">${inline(line)}</div>`
-      );
+      const tableLines = [];
+      while (index < lines.length && lines[index].trim().startsWith("|")) {
+        tableLines.push(lines[index]);
+        index++;
+      }
+      index--;
+      out.push(renderTable(tableLines));
     } else if (line.startsWith("- ") || line.startsWith("* ")) {
-      if (!inList) {
+      if (listType !== "ul") {
+        closeList();
         out.push('<ul class="my-3 list-disc space-y-1 pl-5">');
-        inList = true;
+        listType = "ul";
       }
       out.push(`<li>${inline(line.slice(2))}</li>`);
     } else if (/^\d+\.\s/.test(line)) {
-      closeList();
-      out.push(`<p class="my-2">${inline(line)}</p>`);
+      if (listType !== "ol") {
+        closeList();
+        out.push('<ol class="my-3 list-decimal space-y-1 pl-5">');
+        listType = "ol";
+      }
+      out.push(`<li>${inline(line.replace(/^\d+\.\s/, ""))}</li>`);
     } else if (line.trim() === "" || line.trim() === "---") {
       closeList();
       if (line.trim() === "---") {
@@ -99,6 +108,20 @@ function renderMarkdown(md: string): string {
   closeList();
   if (inCode) out.push("</code></pre>");
   return out.join("\n");
+}
+
+function headingId(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-");
+}
+
+function renderTable(lines: string[]): string {
+  const rows = lines.map((line) => line.split("|").slice(1, -1).map((cell) => cell.trim()));
+  if (rows.length < 2 || !rows[1].every((cell) => /^:?-{2,}:?$/.test(cell))) {
+    return `<pre class="my-4 overflow-x-auto rounded-lg bg-muted p-4 text-xs"><code>${lines.join("\n")}</code></pre>`;
+  }
+  const header = `<thead><tr>${rows[0].map((cell) => `<th class="border-b px-3 py-2 text-left font-semibold text-foreground">${inline(cell)}</th>`).join("")}</tr></thead>`;
+  const body = rows.slice(2).map((row) => `<tr>${row.map((cell) => `<td class="border-b border-border/60 px-3 py-2 align-top text-muted-foreground">${inline(cell)}</td>`).join("")}</tr>`).join("");
+  return `<div class="my-5 overflow-x-auto"><table class="w-full min-w-[34rem] border-collapse text-sm">${header}<tbody>${body}</tbody></table></div>`;
 }
 
 function inline(text: string): string {
@@ -122,7 +145,7 @@ export default async function ReportPage() {
             <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
               Sample output · fictional product
             </p>
-            <h1 className="text-lg font-semibold">Acme Checkout — Panel report</h1>
+            <p className="text-lg font-semibold">Acme Checkout — Panel report</p>
           </div>
           <div className="flex gap-2">
             <Link

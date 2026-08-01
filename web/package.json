@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "smoke": "node scripts/panel-audit.mjs",
+    "release:check": "node scripts/release-check.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
