@@ -1,5 +1,7 @@
-# Craft approval
-Run: `2026-08-01T19-26-19-800Z-94424a19`
+Run: 2026-08-04T17-48-20-903Z-d4080e50
 
-## Approve
-Use one visual pipeline and hard information hierarchy. Cut prose and repeated two-column compositions.
+# Craft Critic
+
+## Approval
+
+Approve. Separate command names preserve a clear fast path and avoid overloading `/panel` with an expensive default.

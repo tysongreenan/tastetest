@@ -22,6 +22,10 @@ That installs the **lean** skill set (buyer review + craft + motion), Cursor rul
 Then open your AI agent and say:
 
 > Run a panel  
+
+For a complete every-page harness audit in Cursor or Claude Code:
+
+> /panel-full
 > or  
 > Do a Panel review
 

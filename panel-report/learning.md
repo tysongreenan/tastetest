@@ -1,18 +1,8 @@
-Run: 2026-08-01T19-26-19-800Z-94424a19
+Run: 2026-08-04T17-48-20-903Z-d4080e50
 
 # Learning
 
-## Confirmed
-
-- A harness explanation should lead with the enforced loop, not its implementation history.
-- Ruled sequences and status ledgers carry more information per glance than repeated feature cards or long prose sections.
-- Technical evidence belongs behind progressive disclosure after the product idea is clear.
-
-## Unresolved
-
-- Real-user skim comprehension is not proven by browser checks. A future test should ask first-time visitors to explain the five-step loop after a 10-second exposure.
-
-## System-of-record update
-
-- `web/DESIGN.md` now defines `/harness` as a three-layer scan-first route and bans a prose-heavy architecture essay.
+- Keep `/panel` fast and scoped; expensive every-page work should be explicit as `/panel-full`.
+- Generate host commands from one shared contract to prevent Cursor and Claude behavior drift.
+- Installer wiring requires an integration test because core tests commonly disable host integrations.
 

@@ -1,24 +1,12 @@
-Run: 2026-08-01T19-26-19-800Z-94424a19
+Run: 2026-08-04T17-48-20-903Z-d4080e50
 
-# Hypotheses - harness route
+# Hypotheses
 
-## Ledger
+## H-001
 
-| ID | Persona | Observed problem | Proposed change | Expected outcome | Secondary harm risk | Falsifiable signal | Owner | Challenger | Cross-critique | Status |
-|----|---------|------------------|-----------------|------------------|---------------------|--------------------|-------|------------|----------------|--------|
-| H-001 | First-time evaluator | The route reads like a long architecture document | Lead with a five-step loop, three gates, and one ledger | Mechanism is understandable from headings alone | Technical buyers may need more evidence | Primary mechanism appears before collapsed detail with no overflow | Frontend Design | Craft Critic | mutated | measured |
-
-## Cross-critiques
-
-### H-001 - Craft Critic
-
-- Evidence challenged: Shorter copy alone would still leave too many equally weighted sections.
-- Assumption challenged: Compression automatically creates scan hierarchy.
-- Result: mutated
-- Mutation made to proposal, hypothesis, or test: Reduced the route to three visual layers and moved implementation detail behind a disclosure.
-- Proposal owner acknowledgment: Frontend Design applied the mutation before browser verification.
-
-## Observed result
-
-PASS for hierarchy, progressive disclosure, and overflow at desktop and mobile. Real-user comprehension remains unmeasured.
+- Problem: Users must paste a long prompt to request the complete every-page workflow.
+- Change: Install `/panel-full` for Cursor and Claude Code from one shared command template.
+- Expected: The full harness audit can be invoked consistently without replacing the fast `/panel` path.
+- Cross-critique result: upheld with new evidence; installer test verifies both host files and the write gate language.
+- Status: measured
 

@@ -1,29 +1,20 @@
 {
   "schemaVersion": "1.0",
-  "runId": "2026-08-01T19-26-19-800Z-94424a19",
-  "surface": "/harness",
+  "runId": "2026-08-04T17-48-20-903Z-d4080e50",
+  "surface": "Panel installer host commands",
   "findings": [
     {
       "id": "F-001",
       "severity": "P1",
       "confidence": "observed",
-      "surface": "/harness at desktop and mobile",
-      "problem": "The previous route presented a long architecture document with too many equally weighted sections for a skimming visitor.",
-      "evidence": [
-        {
-          "type": "browser",
-          "ref": "panel-report/harness-mobile.png",
-          "claim": "The redesigned mobile route exposes the mechanism as five short steps before enforcement detail and remains free of horizontal overflow."
-        }
-      ],
-      "change": "Replace the architecture essay with a five-step loop, three enforcement gates, and a compact pass/block ledger with progressive disclosure.",
-      "personaImpact": {
-        "priority": "help - first-time evaluators can identify the product mechanism from headings alone",
-        "secondary": "help - technical buyers retain access to concrete artifact and error names"
-      },
-      "acceptanceCheck": "The primary mechanism appears first, detail is collapsed, and desktop/mobile renders have no overflow or runtime errors.",
-      "owner": "Frontend Design",
-      "sourceArtifacts": ["panel-report/craft.md", "panel-report/hypotheses.md", "panel-report/verification.md"],
+      "surface": "Cursor and Claude Code invocation",
+      "problem": "The complete harness audit requires users to paste a long prompt because only a generic quick command is installed.",
+      "evidence": [{"type": "file", "ref": "cli/init.js", "claim": "The previous installer generated only the generic Cursor command and Claude skill."}],
+      "change": "Install a shared `/panel-full` command contract for Cursor and Claude Code while preserving `/panel`.",
+      "personaImpact": {"priority": "help - operators get a memorable one-command full audit", "secondary": "neutral - the quick review remains available"},
+      "acceptanceCheck": "A fresh full install contains both host command files with full-run and write-permit requirements.",
+      "owner": "Orchestrator Manager",
+      "sourceArtifacts": ["panel-report/council.md", "panel-report/verification.md"],
       "status": "verified"
     }
   ]

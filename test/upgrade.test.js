@@ -79,3 +79,19 @@ test("upgrade backs up local changes and installs the complete current protocol"
     assert.equal(existsSync(path.join(target, file)), true, file);
   }
 });
+
+test("installer registers the full harness slash command for Cursor and Claude Code", async (t) => {
+  const target = await mkdtemp(path.join(os.tmpdir(), "panel-command-test-"));
+  t.after(() => rm(target, { recursive: true, force: true }));
+
+  await initProject({ dir: target, full: true, packageVersion });
+
+  for (const file of [
+    ".cursor/commands/panel-full.md",
+    ".claude/commands/panel-full.md",
+  ]) {
+    const content = readFileSync(path.join(target, file), "utf8");
+    assert.match(content, /full Panel review/);
+    assert.match(content, /Do \*\*not\*\* modify product code until consensus/);
+  }
+});

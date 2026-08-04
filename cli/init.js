@@ -168,10 +168,13 @@ export async function initProject(opts = {}) {
     console.log("  → Cursor (rules + command)");
     const ruleDest = path.join(target, ".cursor", "rules", "panel.mdc");
     const cmdDest = path.join(target, ".cursor", "commands", "panel.md");
+    const fullCmdDest = path.join(target, ".cursor", "commands", "panel-full.md");
     log.push(writeText(ruleDest, cursorRuleContent({ full }), { force, dryRun, upgrade, backupRoot, target, manifest }));
     log.push(writeText(cmdDest, cursorCommandContent(), { force, dryRun, upgrade, backupRoot, target, manifest }));
-    console.log(`    ${log.at(-2).status.padEnd(8)} .cursor/rules/panel.mdc`);
-    console.log(`    ${log.at(-1).status.padEnd(8)} .cursor/commands/panel.md`);
+    log.push(writeText(fullCmdDest, fullAuditCommandContent(), { force, dryRun, upgrade, backupRoot, target, manifest }));
+    console.log(`    ${log.at(-3).status.padEnd(8)} .cursor/rules/panel.mdc`);
+    console.log(`    ${log.at(-2).status.padEnd(8)} .cursor/commands/panel.md`);
+    console.log(`    ${log.at(-1).status.padEnd(8)} .cursor/commands/panel-full.md`);
   }
 
   // 5) Claude Code wiring
@@ -186,6 +189,9 @@ export async function initProject(opts = {}) {
     );
     log.push(writeText(skillDest, claudeSkillContent({ full }), { force, dryRun, upgrade, backupRoot, target, manifest }));
     console.log(`    ${log.at(-1).status.padEnd(8)} .claude/skills/panel/SKILL.md`);
+    const commandDest = path.join(target, ".claude", "commands", "panel-full.md");
+    log.push(writeText(commandDest, fullAuditCommandContent(), { force, dryRun, upgrade, backupRoot, target, manifest }));
+    console.log(`    ${log.at(-1).status.padEnd(8)} .claude/commands/panel-full.md`);
   }
 
   // 6) Onboarding note
@@ -442,6 +448,26 @@ If the user named a URL or path, focus there. Otherwise review the main app/UI e
 `;
 }
 
+function fullAuditCommandContent() {
+  return `---
+description: Run the complete Panel harness audit across every user-facing page
+---
+
+Run a **full Panel review** of every user-facing page using the npm execution harness.
+
+1. Start a managed \`full\` run and follow the authoritative phase order in \`.panel/runs/<run-id>/state.json\`.
+2. Audit desktop and mobile for product promise, persona journeys, UX heuristics, visual craft, copy, motion, accessibility, interaction states, and design-system consistency.
+3. Load every in-scope specialist skill and record skill-use proof. Write every required seat artifact plus \`hypotheses.md\`, \`findings.json\`, and \`learning.md\` under \`panel-report/\` with active-run provenance.
+4. Cross-critique material findings. Every challenge must mutate, reject, or uphold a hypothesis with evidence.
+5. Inspect the running product in a real browser. Capture applicable states and desktop/mobile evidence; never substitute source review for rendered proof.
+6. Produce a deduplicated, prioritized fix plan with concrete surfaces, persona impact, acceptance checks, owners, and evidence.
+7. Do **not** modify product code until consensus is \`PROCEED\`, all required approvals are recorded, and the harness issues a registered write permit.
+8. If implementation is requested after consensus, use one executor, consume the permit, verify fixes in the browser, run \`panel validate\`, and close the learning loop.
+
+If any required page, browser, persona, design-system source, artifact, approval, or evidence is unavailable, record the exact blocker instead of claiming the run passed.
+`;
+}
+
 function claudeSkillContent({ full }) {
   return `---
 name: panel
@@ -501,8 +527,8 @@ Run a panel
 
 ### Cursor / Claude
 
-- Cursor: **\`/panel\`** · \`.cursor/rules/panel.mdc\`
-- Claude Code: \`.claude/skills/panel/\`
+- Cursor: **\`/panel\`** (quick) · **\`/panel-full\`** (complete harness)
+- Claude Code: **\`/panel-full\`** · \`.claude/skills/panel/\`
 
 ## Files
 

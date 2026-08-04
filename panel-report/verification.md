@@ -1,27 +1,13 @@
-Run: 2026-08-01T19-26-19-800Z-94424a19
+Run: 2026-08-04T17-48-20-903Z-d4080e50
 
 # Verification
 
 Verdict: PASS
 
-## Rendered evidence
-
-- Desktop: `panel-report/harness-desktop.png` (`1440x1000`)
-- Mobile: `panel-report/harness-mobile.png` (`375x667`)
-- Production-mode smoke: HTTP 200, one H1, no unnamed links/buttons, no overflow, no runtime errors.
-
-## States and access
-
-- Default, hover, focus-visible, active: PASS for links and disclosure control.
-- Keyboard path and focus order: PASS.
-- Readable zoom and responsive reflow: PASS.
-- Reduced motion: PASS; no essential motion is used.
-- Loading, empty, error, disabled, success: n/a; this is a static explanatory route with no asynchronous or form state.
-
-## Direction check
-
-- Five-step loop is the first complete visual explanation: PASS.
-- Three enforcement gates are visually distinct: PASS.
-- Detailed run data is progressively disclosed: PASS.
-- Existing Panel type, color, spacing, and ruled-row language is preserved: PASS.
+- Installer integration test created a full install in a fresh directory.
+- `.cursor/commands/panel-full.md` exists and contains the full-run and no-write-before-permit contract.
+- `.claude/commands/panel-full.md` exists with the identical contract.
+- Existing `/panel` command remains unchanged.
+- Test suite: 11 passed, 0 failed.
+- Browser states: n/a; this change installs host command files and has no rendered UI.
 
