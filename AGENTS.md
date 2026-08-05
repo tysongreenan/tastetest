@@ -150,7 +150,7 @@ Set `run_class` in run-state at preflight. Skipping run-class selection on a mul
 | 8 | **Prose Critic** | `skills/stop-slop-prose/` | Anti-slop writing polish |
 | 8b | **Isa · Marketing Copywriter** | `COPY.md` + `skills/marketing-copy/` | StoryBrand · DMMT · WHO/WHY/WHAT · PAS · product-show · CTA |
 | 9 | **Motion Critic** | `MOTION.md` + `skills/motion/` | Motion |
-| 10 | **Frontend Design** | `FRONTEND.md` + `web/DESIGN.md` | Brief first · load DESIGN.md · then library proposals only |
+| 10 | **Frontend Design** | `FRONTEND.md` + `web/DESIGN.md` + Impeccable `4.x` when installed | Brief first · load DESIGN.md · optional Impeccable mode/playbook/craft-floor · then library proposals |
 | 11 | **Report Writer** | `REPORT.md` | Assemble; multi-persona coverage; no invented scores |
 | 12 | **Implementation Verifier** | `playbook.md` + browser evidence | Post-build state, responsive, interaction, a11y, visual-regression proof |
 
@@ -189,7 +189,7 @@ Set `run_class` in run-state at preflight. Skipping run-class selection on a mul
    (before Frontend redesign; Prose polishes after story is right)
          ▼
 5. Frontend Design **asks** Orchestrator + seated PMs for visual prefs (design brief)
-   then library search · Craft · Motion · Prose · Isa · Design System
+   then loads DESIGN.md · optional Impeccable 4.x surface mode/playbook · library search · Craft · Motion · Prose · Isa · Design System
    (`standard`: Orchestrator + priority PM by default; `full`: all PMs; may propose new sections when a persona-needed page job is missing)
          ▼
 5b. Cross-critique — adjacent specialists challenge frozen proposals

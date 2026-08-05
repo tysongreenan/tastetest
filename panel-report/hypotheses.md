@@ -1,12 +1,12 @@
-Run: 2026-08-04T17-48-20-903Z-d4080e50
+Run: 2026-08-05T16-17-05-487Z-271bece7
 
 # Hypotheses
 
 ## H-001
 
-- Problem: Users must paste a long prompt to request the complete every-page workflow.
-- Change: Install `/panel-full` for Cursor and Claude Code from one shared command template.
-- Expected: The full harness audit can be invoked consistently without replacing the fast `/panel` path.
-- Cross-critique result: upheld with new evidence; installer test verifies both host files and the write gate language.
+- Problem: Panel's recent `/panel-full` patch cannot use the installed Impeccable 4.x workflow.
+- Change: Add optional version-aware Impeccable loading to Frontend Design and generated full-audit commands.
+- Expected: Visual work gains surface modes, new-work direction, craft-floor rules, and bounded QA without bypassing Panel gates.
+- Cross-critique result: upheld with new evidence; generated-command integration tests pass for Cursor and Claude.
 - Status: measured
 

@@ -93,5 +93,7 @@ test("installer registers the full harness slash command for Cursor and Claude C
     const content = readFileSync(path.join(target, file), "utf8");
     assert.match(content, /full Panel review/);
     assert.match(content, /Do \*\*not\*\* modify product code until consensus/);
+    assert.match(content, /Impeccable skill is installed/);
+    assert.match(content, /reference\/craft-floor\.md/);
   }
 });

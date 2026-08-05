@@ -26,6 +26,8 @@ Then open your AI agent and say:
 For a complete every-page harness audit in Cursor or Claude Code:
 
 > /panel-full
+
+When Impeccable `4.x` is installed, `/panel-full` uses its surface modes, owning playbook, craft floor, and bounded visual QA inside Panel's persona, consensus, permit, and verification gates. Impeccable is optional; Panel remains standalone.
 > or  
 > Do a Panel review
 

@@ -1,7 +1,7 @@
-Run: 2026-08-04T17-48-20-903Z-d4080e50
+Run: 2026-08-05T16-17-05-487Z-271bece7
 
 # Craft Critic
 
 ## Approval
 
-Approve. Separate command names preserve a clear fast path and avoid overloading `/panel` with an expensive default.
+Approve. Impeccable 4.x contributes surface modes, new-work direction, craft-floor bans, and bounded verification; Panel retains persona, consensus, provenance, and release authority.

@@ -1,13 +1,12 @@
-Run: 2026-08-04T17-48-20-903Z-d4080e50
+Run: 2026-08-05T16-17-05-487Z-271bece7
 
 # Verification
 
 Verdict: PASS
 
-- Installer integration test created a full install in a fresh directory.
-- `.cursor/commands/panel-full.md` exists and contains the full-run and no-write-before-permit contract.
-- `.claude/commands/panel-full.md` exists with the identical contract.
-- Existing `/panel` command remains unchanged.
+- Fresh full-install integration test confirms Cursor and Claude `/panel-full` files contain Impeccable detection and `reference/craft-floor.md` requirements.
+- Panel remains standalone because missing or stale Impeccable is explicitly non-blocking.
+- Project DESIGN.md, persona consensus, write permits, and Implementation Verifier remain authoritative.
 - Test suite: 11 passed, 0 failed.
-- Browser states: n/a; this change installs host command files and has no rendered UI.
+- Browser states: n/a; this is installer and protocol text with no rendered interface.
 

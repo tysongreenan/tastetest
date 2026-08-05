@@ -8,6 +8,8 @@ When designing, redesigning, or reviewing **frontend UI** (pages, components, co
 **Upstream:** [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) (MIT)  
 **What it is:** Searchable design intelligence — styles, palettes, font pairings, product-type patterns, landing structures, UX rules, stack guidance. Think “visual comparisons / pattern bank from premium app categories,” not one screenshot dump.
 
+**Optional craft engine:** Impeccable `4.x` ([pbakaus/impeccable](https://github.com/pbakaus/impeccable), Apache-2.0). When an active Impeccable skill is installed, Frontend Design loads it after the Panel brief and project `DESIGN.md`. Panel remains fully functional without it.
+
 ---
 
 ### When to run
@@ -29,6 +31,7 @@ When designing, redesigning, or reviewing **frontend UI** (pages, components, co
 | `PANEL.md` | Buyer jobs and conversion honesty |
 | `COPY.md` (Isa) | Marketing pages: scan-layer copy locked before layout invent |
 | `docs/personas.md` | Who the UI is for; PM visual prefs |
+| Impeccable `4.x` (if installed) | Surface mode, new-work direction, craft floor, and bounded visual QA |
 
 **Positive + negative references (with Craft):** name what good looks like and what slop to ban this run. Blank “make it premium” → default AI SaaS look.
 
@@ -163,6 +166,18 @@ If `status` is still null/`missing-blocked` → post `BLOCKED: design_system not
 If `DESIGN.md` is missing on a **client** project under review: Design System Checker (or Frontend) drafts a starter from tokens + patterns, sets `status: missing-drafted`, notes the gap in the report. Do **not** paste Panel’s brand kit as the client’s system.
 
 #### 1. Translate brief → search keywords
+
+Before library search, check whether the active host exposes an `impeccable` skill. If present:
+
+1. Read its `SKILL.md` frontmatter and record the loaded version in `panel-report/frontend.md`.
+2. Require major version `4`. Older versions are reported as stale and skipped; they do not block Panel.
+3. Run its context script against the concrete surface. Panel's completed design brief and resolved `DESIGN.md` still win on conflict.
+4. Choose the surface mode: `Persuade`, `Operate`, `Read`, or `Experience`.
+5. Load exactly one owning playbook: the explicit command reference, or `reference/new-work.md` for a new surface or replacement visual world.
+6. Immediately before UI edits, load `reference/craft-floor.md`. Do not load it for report-only work.
+7. Use Impeccable's bounded verification rule: one batched desktop/mobile inspection, one batched fix, and at most one confirmation pass. Panel's Implementation Verifier still owns the final verdict.
+
+Impeccable may sharpen or replace a visual world only when the approved Panel hypothesis explicitly authorizes redesign. It may not silently rewrite factual copy, change persona priority, bypass approvals, or mark work shippable.
 
 Map manager answers into multi-word queries (product + tone + density), e.g.  
 `developer tools SaaS calm premium sparse` vs `developer tools product demo interactive dense`.

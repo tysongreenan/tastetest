@@ -1,11 +1,8 @@
-Run: 2026-08-04T17-48-20-903Z-d4080e50
+Run: 2026-08-05T16-17-05-487Z-271bece7
 
 # Council
 
-## Decision
-
-PROCEED with a dedicated full-audit command while preserving `/panel` as the fast scoped command.
-
 ## Approval
 
-- Orchestrator: Approve. The command makes run class, scope, artifacts, verification, and write gating explicit.
+- Orchestrator Manager: Approve optional Impeccable 4.x integration without making Panel depend on an external installation.
+- PM-Avery: Approve because `/panel-full` remains one command and missing Impeccable cannot block the run.

@@ -1,8 +1,8 @@
-Run: 2026-08-04T17-48-20-903Z-d4080e50
+Run: 2026-08-05T16-17-05-487Z-271bece7
 
 # Learning
 
-- Keep `/panel` fast and scoped; expensive every-page work should be explicit as `/panel-full`.
-- Generate host commands from one shared contract to prevent Cursor and Claude behavior drift.
-- Installer wiring requires an integration test because core tests commonly disable host integrations.
+- External craft skills should be advisory capabilities, not hidden runtime dependencies.
+- Version-specific workflows require explicit detection because Impeccable 3.x and 4.x have materially different contracts.
+- Panel owns product authority and release gates; Impeccable owns optional visual craft guidance inside those gates.
 

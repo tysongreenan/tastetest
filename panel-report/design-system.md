@@ -1,7 +1,7 @@
-Run: 2026-08-04T17-48-20-903Z-d4080e50
+Run: 2026-08-05T16-17-05-487Z-271bece7
 
 # Design System Checker
 
 ## Approval
 
-Approve. This installer-only change does not alter the product design system.
+Approve. Project DESIGN.md remains authoritative; Impeccable may interpret or critique it but cannot replace it outside an approved redesign.

@@ -45,6 +45,7 @@ This is not “copy every viral thread.” It’s **keep what matches our produc
 | **Isa (copy)** | `COPY.md` | marketing-copy/* + **frameworks-x** | **Upgraded** |
 | Motion | `MOTION.md` | `skills/motion/` Emil | Strong |
 | Frontend Design | `FRONTEND.md` | ui-ux-pro-max, DESIGN.md | Strong |
+| Optional visual craft engine | Impeccable `4.x` when installed | surface modes, new-work, craft-floor, bounded QA | Advisory; Panel gates remain authoritative |
 | Report Writer | **`REPORT.md`** | — | **Added** |
 
 ---
