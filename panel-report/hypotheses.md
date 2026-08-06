@@ -1,12 +1,12 @@
-Run: 2026-08-06T00-22-16-197Z-eb32ee0d
+Run: 2026-08-06T01-43-16-306Z-83c50ac7
 
 # Hypotheses
 
 ## H-001
 
-- Problem: A focused component can be completely hidden while Panel's existing focus-visible check still passes.
-- Change: Add WCAG 2.4.11 as a separate browser procedure, run-state field, validator gate, and generated command requirement.
-- Expected: SHIPPABLE UI runs fail when focus-obstruction evidence is missing or failing.
-- Cross-critique result: upheld with new evidence; the negative validator test fails closed on omission.
+- Problem: npm 0.4.1 lacks the committed WCAG 2.4.11 gate.
+- Change: Publish the complete source as 0.4.2.
+- Expected: `@latest` installs all recent Panel process changes.
+- Result: upheld with new evidence
+- Mutation: Added published-tarball inspection to release verification.
 - Status: measured
-

@@ -1,7 +1,7 @@
-Run: 2026-08-06T00-22-16-197Z-eb32ee0d
+Run: 2026-08-06T01-43-16-306Z-83c50ac7
 
 # Design System Checker
 
 ## Approval
 
-Approve. Sticky and overlay primitives must define focus-safe behavior across breakpoints.
+Approve release-only version change; no design-system delta.

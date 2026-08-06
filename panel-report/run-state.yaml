@@ -1,8 +1,8 @@
 preflight: GO
 protocol: full
 run_class: implement
-run_id: 2026-08-06T00-22-16-197Z-eb32ee0d
-intent: "Add WCAG 2.4.11 to Panel's verification and release gates."
+run_id: 2026-08-06T01-43-16-306Z-83c50ac7
+intent: "Publish all recent Panel changes as 0.4.2."
 delivery_status: IMPLEMENTED
 consensus:
   decision: PROCEED
@@ -12,27 +12,24 @@ learning:
   status: closed
 verification:
   verdict: PASS
-  states:
-    focus_visible: "n/a: no rendered UI changed"
-    focus_not_obscured: "n/a: no rendered UI changed"
 design_system_delta:
   status: none
 skills_used:
   - seat: Orchestrator Manager
-    files: [PANEL.md, COLLABORATION.md]
-    hook: "Required WCAG criterion to become an enforceable release gate"
+    files: [PANEL.md]
+    hook: "Compared Git and registry state"
     artifact: panel-report/council.md
   - seat: Craft Critic
     files: [ANTI-SLOP.md]
-    hook: "Kept focus-visible and focus-obstruction evidence separate"
+    hook: "Confirmed no visual behavior delta"
     artifact: panel-report/craft.md
   - seat: Design System Checker
     files: [DESIGN-SYSTEM.md]
-    hook: "Applied the gate to sticky and overlay primitives"
+    hook: "Confirmed no design-system delta"
     artifact: panel-report/design-system.md
   - seat: Implementation Verifier
-    files: [playbook.md, docs/verification.template.md]
-    hook: "Defined desktop/mobile keyboard evidence and W3C exceptions"
+    files: [playbook.md]
+    hook: "Required package tests and tarball inspection"
     artifact: panel-report/verification.md
 artifact_checks:
   - seat: Orchestrator Manager

@@ -1,7 +1,7 @@
-Run: 2026-08-06T00-22-16-197Z-eb32ee0d
+Run: 2026-08-06T01-43-16-306Z-83c50ac7
 
 # Craft Critic
 
 ## Approval
 
-Approve. Focus visibility and focus obstruction must remain separate checks.
+Approve release-only version change; no craft behavior changes.

@@ -1,21 +1,19 @@
 {
   "schemaVersion": "1.0",
-  "runId": "2026-08-06T00-22-16-197Z-eb32ee0d",
-  "surface": "Panel accessibility verification process",
-  "findings": [
-    {
-      "id": "F-001",
-      "severity": "P0",
-      "confidence": "observed",
-      "surface": "SHIPPABLE UI verification",
-      "problem": "Panel can pass a focus-visible state without proving that focused components remain visible around sticky or persistent author-created content.",
-      "evidence": [{"type": "file", "ref": "cli/validate.js", "claim": "The previous required-state list contained focus_visible but no focus-obstruction state."}],
-      "change": "Require and validate a distinct WCAG 2.4.11 focus_not_obscured result with a rendered keyboard-test procedure.",
-      "personaImpact": {"priority": "help - keyboard users can track their current interaction point", "secondary": "help - teams receive a concrete AA release check"},
-      "acceptanceCheck": "A SHIPPABLE run without focus_not_obscured pass or justified n/a fails validation.",
-      "owner": "Implementation Verifier",
-      "sourceArtifacts": ["panel-report/council.md", "panel-report/verification.md"],
-      "status": "verified"
-    }
-  ]
+  "runId": "2026-08-06T01-43-16-306Z-83c50ac7",
+  "surface": "npm release",
+  "findings": [{
+    "id": "F-001",
+    "severity": "P0",
+    "confidence": "observed",
+    "surface": "@tysongreenan/panel@latest",
+    "problem": "Published 0.4.1 lacks the committed WCAG 2.4.11 validator gate.",
+    "evidence": [{"type": "test", "ref": "https://registry.npmjs.org/@tysongreenan/panel/-/panel-0.4.1.tgz", "claim": "Published tarball contains no focus_not_obscured validator state."}],
+    "change": "Publish the complete source as 0.4.2.",
+    "personaImpact": {"priority": "help - installers receive the promised checks", "secondary": "neutral - no API removal"},
+    "acceptanceCheck": "Registry latest is 0.4.2 and its validator contains focus_not_obscured.",
+    "owner": "Orchestrator Manager",
+    "sourceArtifacts": ["panel-report/council.md", "panel-report/verification.md"],
+    "status": "verified"
+  }]
 }

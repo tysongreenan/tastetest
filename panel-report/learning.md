@@ -1,8 +1,6 @@
-Run: 2026-08-06T00-22-16-197Z-eb32ee0d
+Run: 2026-08-06T01-43-16-306Z-83c50ac7
 
 # Learning
 
-- Focus visibility and focus obstruction are separate accessibility properties and require separate evidence.
-- Accessibility criteria become reliable only when encoded in templates, runtime state, validation, and a negative test.
-- WCAG 2.4.11 testing must include sticky and persistent layers at desktop and mobile.
-
+- Git synchronization and npm synchronization must be verified independently.
+- Release closure requires inspecting the published tarball, not only its version tag.

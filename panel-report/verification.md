@@ -1,12 +1,10 @@
-Run: 2026-08-06T00-22-16-197Z-eb32ee0d
+Run: 2026-08-06T01-43-16-306Z-83c50ac7
 
 # Verification
 
 Verdict: PASS
 
-- Validator now requires `verification.states.focus_not_obscured` for SHIPPABLE runs.
-- A negative test removes the field and confirms `STATE_COVERAGE_INCOMPLETE` names it.
-- Fresh installs receive the updated run-state and verification templates.
+- Package version is 0.4.2.
 - Test suite: 11 passed, 0 failed.
-- Browser and WCAG state evidence: n/a; this change modifies protocol and validation code, not a rendered UI.
-
+- Package includes `/panel-full`, Impeccable 4 integration, and WCAG 2.4.11 validation.
+- Browser states: n/a; release metadata only.
