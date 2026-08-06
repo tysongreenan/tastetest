@@ -232,6 +232,7 @@ function validateShippable(target, state, issues) {
     "default",
     "hover",
     "focus_visible",
+    "focus_not_obscured",
     "active_pressed",
     "loading",
     "empty",

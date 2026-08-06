@@ -92,6 +92,7 @@ Every standard/full UI implementation seats an **Implementation Verifier** after
 - desktop and mobile screenshots for each touched surface
 - default, hover, focus-visible, active/pressed, loading, empty, error, disabled, and success states when applicable
 - keyboard path, focus order, overflow, readable zoom, and reduced-motion checks
+- WCAG 2.4.11 Focus Not Obscured evidence at desktop and mobile with sticky/persistent overlays present; a completely hidden focused component blocks `PASS`
 - comparison against the approved proposal, preserve list, DESIGN.md, and calibration traits
 - regressions found, owner, fix status, and final `PASS | REVISE | BLOCK`
 

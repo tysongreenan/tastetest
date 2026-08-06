@@ -20,15 +20,16 @@
 
 Use `n/a: reason` only when the state genuinely cannot occur.
 
-| Surface | Default | Hover | Focus-visible | Active | Loading | Empty | Error | Disabled | Success | Reduced motion |
-|---------|---------|-------|---------------|--------|---------|-------|-------|----------|---------|----------------|
-| | | | | | | | | | | |
+| Surface | Default | Hover | Focus-visible | Focus not obscured (2.4.11) | Active | Loading | Empty | Error | Disabled | Success | Reduced motion |
+|---------|---------|-------|---------------|-----------------------------|--------|---------|-------|-------|----------|---------|----------------|
+| | | | | | | | | | | | |
 
 ## Journey and accessibility
 
 - Primary persona path:
 - Secondary non-negotiables:
 - Keyboard path and focus order:
+- WCAG 2.4.11 focus-not-obscured path, sticky/overlay conditions, and evidence:
 - Readable zoom / reflow:
 - Overflow and touch targets:
 - Motion preference:

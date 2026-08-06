@@ -62,6 +62,12 @@ npx @tysongreenan/panel harness block --reason "Browser verification unavailable
 
 Blocked and completed runs cannot advance.
 
+## WCAG 2.4.11 release gate
+
+For `SHIPPABLE` UI runs, `panel validate` requires `verification.states.focus_not_obscured` to be `pass` or `n/a: reason`. The verifier must keyboard-test desktop and mobile with author-created sticky and persistent layers present. A focused component entirely hidden by a sticky header/footer, cookie banner, chat widget, drawer, notification, or non-modal overlay is a failure. User-opened content may pass only when the focused component can be revealed without advancing keyboard focus.
+
+This is separate from `focus_visible`: a component can have a valid focus indicator and still be completely hidden behind another layer.
+
 ## Storage and integrity
 
 Each run is stored under `.panel/runs/<run-id>/`:

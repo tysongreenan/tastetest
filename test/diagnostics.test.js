@@ -56,6 +56,21 @@ test("validate accepts evidenced output and rejects speculative blockers", async
   const valid = validateProject({ dir: target, json: true });
   assert.equal(valid.ok, true, JSON.stringify(valid.issues));
 
+  writeFileSync(
+    path.join(reportDir, "run-state.yaml"),
+    validRunState().replace("    focus_not_obscured: pass\n", ""),
+    "utf8"
+  );
+  const obscuredFocusMissing = validateProject({ dir: target, json: true });
+  assert.equal(obscuredFocusMissing.ok, false);
+  assert.equal(
+    obscuredFocusMissing.issues.some(
+      (item) => item.code === "STATE_COVERAGE_INCOMPLETE" && item.message.includes("focus_not_obscured")
+    ),
+    true
+  );
+  writeFileSync(path.join(reportDir, "run-state.yaml"), validRunState(), "utf8");
+
   const badFindings = validFindings();
   badFindings.findings[0].confidence = "speculative";
   badFindings.findings[0].severity = "Block";
@@ -105,6 +120,7 @@ verification:
     default: pass
     hover: pass
     focus_visible: pass
+    focus_not_obscured: pass
     active_pressed: pass
     loading: "n/a: static surface"
     empty: "n/a: static surface"

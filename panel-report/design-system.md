@@ -1,7 +1,7 @@
-Run: 2026-08-05T16-17-05-487Z-271bece7
+Run: 2026-08-06T00-22-16-197Z-eb32ee0d
 
 # Design System Checker
 
 ## Approval
 
-Approve. Project DESIGN.md remains authoritative; Impeccable may interpret or critique it but cannot replace it outside an approved redesign.
+Approve. Sticky and overlay primitives must define focus-safe behavior across breakpoints.

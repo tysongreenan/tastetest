@@ -1,12 +1,12 @@
-Run: 2026-08-05T16-17-05-487Z-271bece7
+Run: 2026-08-06T00-22-16-197Z-eb32ee0d
 
 # Hypotheses
 
 ## H-001
 
-- Problem: Panel's recent `/panel-full` patch cannot use the installed Impeccable 4.x workflow.
-- Change: Add optional version-aware Impeccable loading to Frontend Design and generated full-audit commands.
-- Expected: Visual work gains surface modes, new-work direction, craft-floor rules, and bounded QA without bypassing Panel gates.
-- Cross-critique result: upheld with new evidence; generated-command integration tests pass for Cursor and Claude.
+- Problem: A focused component can be completely hidden while Panel's existing focus-visible check still passes.
+- Change: Add WCAG 2.4.11 as a separate browser procedure, run-state field, validator gate, and generated command requirement.
+- Expected: SHIPPABLE UI runs fail when focus-obstruction evidence is missing or failing.
+- Cross-critique result: upheld with new evidence; the negative validator test fails closed on omission.
 - Status: measured
 

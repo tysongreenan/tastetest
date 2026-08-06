@@ -37,10 +37,22 @@ Prefer the simplest structure that still does the job.
 
 ## Accessibility baseline (hard gate smoke)
 - Focus states visible
+- **WCAG 2.4.11 Focus Not Obscured (Minimum), Level AA:** when tabbing through the rendered surface, no focused component may be entirely hidden by author-created sticky headers/footers, cookie banners, chat widgets, non-modal dialogs, drawers, notifications, or overlays
 - Interactive elements have names/labels
 - Contrast sufficient for body and CTA
 - Keyboard can reach primary actions
 - Motion respects reduced-motion when decorative
+
+### WCAG 2.4.11 browser procedure
+
+1. Test every touched route at desktop and mobile with sticky and persistent layers in their initial state.
+2. Traverse the complete keyboard path in both directions. At each stop, capture or record whether any part of the focused component remains visible in the viewport.
+3. Open persistent user-controlled disclosures such as chat, drawers, and non-modal dialogs and repeat the affected path.
+4. Pass user-opened content only when the focused component can be revealed without advancing focus, for example with `Escape` or viewport scrolling.
+5. A modal passes only when it takes focus and constrains focus until dismissal.
+6. Record `pass | fail | n/a: reason` as `verification.states.focus_not_obscured`. `n/a` is valid only when the surface has no focusable component.
+
+Prefer no obstruction. The AA minimum permits partial obstruction, but a completely hidden focused component is a release blocker.
 
 ## Hard-gate scores (1–10)
 

@@ -1,20 +1,20 @@
 {
   "schemaVersion": "1.0",
-  "runId": "2026-08-05T16-17-05-487Z-271bece7",
-  "surface": "Panel Frontend Design and /panel-full",
+  "runId": "2026-08-06T00-22-16-197Z-eb32ee0d",
+  "surface": "Panel accessibility verification process",
   "findings": [
     {
       "id": "F-001",
-      "severity": "P1",
+      "severity": "P0",
       "confidence": "observed",
-      "surface": "Generated full-audit host commands",
-      "problem": "The recent Panel patch does not know how to invoke the installed Impeccable 4.x workflow.",
-      "evidence": [{"type": "file", "ref": "cli/init.js", "claim": "The previous full-audit command contained no Impeccable detection or playbook loading."}],
-      "change": "Add optional Impeccable 4.x version detection, surface mode, owning playbook, craft-floor, and bounded QA instructions.",
-      "personaImpact": {"priority": "help - operators get stronger visual craft from the same command", "secondary": "neutral - Panel works when Impeccable is absent"},
-      "acceptanceCheck": "Fresh Cursor and Claude command installs contain Impeccable 4.x and craft-floor requirements while retaining Panel write gates.",
-      "owner": "Frontend Design",
-      "sourceArtifacts": ["panel-report/council.md", "panel-report/craft.md", "panel-report/verification.md"],
+      "surface": "SHIPPABLE UI verification",
+      "problem": "Panel can pass a focus-visible state without proving that focused components remain visible around sticky or persistent author-created content.",
+      "evidence": [{"type": "file", "ref": "cli/validate.js", "claim": "The previous required-state list contained focus_visible but no focus-obstruction state."}],
+      "change": "Require and validate a distinct WCAG 2.4.11 focus_not_obscured result with a rendered keyboard-test procedure.",
+      "personaImpact": {"priority": "help - keyboard users can track their current interaction point", "secondary": "help - teams receive a concrete AA release check"},
+      "acceptanceCheck": "A SHIPPABLE run without focus_not_obscured pass or justified n/a fails validation.",
+      "owner": "Implementation Verifier",
+      "sourceArtifacts": ["panel-report/council.md", "panel-report/verification.md"],
       "status": "verified"
     }
   ]

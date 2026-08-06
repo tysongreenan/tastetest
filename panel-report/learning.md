@@ -1,8 +1,8 @@
-Run: 2026-08-05T16-17-05-487Z-271bece7
+Run: 2026-08-06T00-22-16-197Z-eb32ee0d
 
 # Learning
 
-- External craft skills should be advisory capabilities, not hidden runtime dependencies.
-- Version-specific workflows require explicit detection because Impeccable 3.x and 4.x have materially different contracts.
-- Panel owns product authority and release gates; Impeccable owns optional visual craft guidance inside those gates.
+- Focus visibility and focus obstruction are separate accessibility properties and require separate evidence.
+- Accessibility criteria become reliable only when encoded in templates, runtime state, validation, and a negative test.
+- WCAG 2.4.11 testing must include sticky and persistent layers at desktop and mobile.
 

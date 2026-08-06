@@ -102,6 +102,7 @@ verification:
     default: null # pass | fail | "n/a: reason"
     hover: null
     focus_visible: null
+    focus_not_obscured: null # WCAG 2.4.11: pass | fail | n/a: no focusable component
     active_pressed: null
     loading: null
     empty: null

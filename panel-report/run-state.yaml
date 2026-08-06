@@ -1,63 +1,38 @@
 preflight: GO
 protocol: full
 run_class: implement
-run_id: 2026-08-01T19-04-28-266Z-79349d80
-intent: "Create and verify a detailed /harness product-story page."
-delivery_status: SHIPPABLE
+run_id: 2026-08-06T00-22-16-197Z-eb32ee0d
+intent: "Add WCAG 2.4.11 to Panel's verification and release gates."
+delivery_status: IMPLEMENTED
 consensus:
   decision: PROCEED
-  log_path: panel-report/council.md#consensus-proceed
-  revise_round: 0
 hypotheses:
   status: measured
-  artifact: panel-report/hypotheses.md
-  active_ids: [H-001]
-  unresolved_ids: [H-001]
 learning:
   status: closed
-  artifact: panel-report/learning.md
-  confirmed_ids: []
-  inconclusive_ids: [H-001]
-  system_updates: [web/DESIGN.md, web/scripts/panel-audit.mjs]
 verification:
   verdict: PASS
-  blocker: null
-  artifact: panel-report/verification.md
-  desktop_evidence: [panel-report/harness-desktop.png]
-  mobile_evidence: [panel-report/harness-mobile.png]
-  visual_regression: pass
-  preserve_regression: pass
   states:
-    default: pass
-    hover: pass
-    focus_visible: pass
-    active_pressed: pass
-    loading: "n/a: no async control"
-    empty: "n/a: static explanatory route"
-    error: "n/a: no stateful control"
-    disabled: "n/a: no disableable control"
-    success: "n/a: no stateful control"
-    reduced_motion: pass
+    focus_visible: "n/a: no rendered UI changed"
+    focus_not_obscured: "n/a: no rendered UI changed"
 design_system_delta:
-  status: updated
-  sections: ["Harness page"]
-  rationale: "Documented the new product-story route."
+  status: none
 skills_used:
   - seat: Orchestrator Manager
     files: [PANEL.md, COLLABORATION.md]
-    hook: "Required permit and evidence-cited consensus"
+    hook: "Required WCAG criterion to become an enforceable release gate"
     artifact: panel-report/council.md
   - seat: Craft Critic
-    files: [ANTI-SLOP.md, web/DESIGN.md]
-    hook: "Rejected feature-card and agent-chat defaults"
+    files: [ANTI-SLOP.md]
+    hook: "Kept focus-visible and focus-obstruction evidence separate"
     artifact: panel-report/craft.md
   - seat: Design System Checker
-    files: [DESIGN-SYSTEM.md, web/DESIGN.md]
-    hook: "Required same-change route documentation"
+    files: [DESIGN-SYSTEM.md]
+    hook: "Applied the gate to sticky and overlay primitives"
     artifact: panel-report/design-system.md
   - seat: Implementation Verifier
-    files: [playbook.md, AGENTS.md]
-    hook: "Required production desktop/mobile browser proof"
+    files: [playbook.md, docs/verification.template.md]
+    hook: "Defined desktop/mobile keyboard evidence and W3C exceptions"
     artifact: panel-report/verification.md
 artifact_checks:
   - seat: Orchestrator Manager
