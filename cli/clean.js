@@ -1,4 +1,4 @@
-import { existsSync, lstatSync, readdirSync, readFileSync, rmSync } from "node:fs";
+import { existsSync, lstatSync, readdirSync, readFileSync, realpathSync, rmSync } from "node:fs";
 import path from "node:path";
 
 // Scratch screenshots and browser profiles live here, one folder per run.
@@ -7,8 +7,10 @@ export const SHOTS_DIR = path.join(".panel", "shots");
 
 /** Delete one run's scratch folder. Returns bytes freed. */
 export function cleanRunShots(projectRoot, runId) {
-  const dir = path.join(path.resolve(projectRoot), SHOTS_DIR, runId);
-  if (!existsSync(dir)) return 0;
+  const shotsRoot = safeShotsRoot(path.resolve(projectRoot));
+  if (!shotsRoot) return 0;
+  const dir = path.join(shotsRoot, runId);
+  if (path.dirname(dir) !== shotsRoot || !existsSync(dir)) return 0;
   const bytes = dirSize(dir);
   rmSync(dir, { recursive: true, force: true });
   return bytes;
@@ -20,21 +22,21 @@ export function cleanRunShots(projectRoot, runId) {
  */
 export function cleanProject({ dir, dryRun = false, all = false, json = false }) {
   const root = path.resolve(dir || process.cwd());
-  const shotsRoot = path.join(root, SHOTS_DIR);
+  const shotsRoot = safeShotsRoot(root);
   const activeRun = all ? null : activeRunId(root);
   const removed = [];
   const kept = [];
 
-  if (existsSync(shotsRoot)) {
+  if (shotsRoot) {
     for (const name of readdirSync(shotsRoot)) {
       const entry = path.join(shotsRoot, name);
       if (name === activeRun) {
-        kept.push({ path: path.relative(root, entry), reason: "active run" });
+        kept.push({ path: path.join(SHOTS_DIR, name), reason: "active run" });
         continue;
       }
       const bytes = dirSize(entry);
       if (!dryRun) rmSync(entry, { recursive: true, force: true });
-      removed.push({ path: path.relative(root, entry), bytes });
+      removed.push({ path: path.join(SHOTS_DIR, name), bytes });
     }
   }
 
@@ -50,6 +52,18 @@ export function cleanProject({ dir, dryRun = false, all = false, json = false })
       : "Nothing to clean.");
   }
   return { ok: true, freedBytes: freed, removed, kept };
+}
+
+// Only clean a real .panel/shots folder inside the project. If .panel or
+// .panel/shots is a symlink, deleting "inside" it would reach somewhere else.
+function safeShotsRoot(root) {
+  for (const dir of [path.join(root, ".panel"), path.join(root, SHOTS_DIR)]) {
+    if (!existsSync(dir)) return null;
+    const stat = lstatSync(dir);
+    if (stat.isSymbolicLink() || !stat.isDirectory()) return null;
+  }
+  const real = realpathSync(path.join(root, SHOTS_DIR));
+  return real === path.join(realpathSync(root), SHOTS_DIR) ? real : null;
 }
 
 function activeRunId(root) {

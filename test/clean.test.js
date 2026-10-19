@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, symlinkSync, writeFileSync } from "node:fs";
 import { mkdtemp, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -45,6 +45,18 @@ test("clean removes finished runs, keeps the active run, and honors dry-run", as
 
   cleanProject({ dir: target, all: true, json: true });
   assert.equal(existsSync(path.join(target, ".panel", "shots", "live")), false);
+});
+
+test("clean refuses to follow a symlinked .panel/shots folder", async (t) => {
+  const target = await temporaryProject(t, "panel-clean-symlink-");
+  const outside = await temporaryProject(t, "panel-clean-outside-");
+  writeFile(outside, "precious/data.txt", "keep me");
+  mkdirSync(path.join(target, ".panel"), { recursive: true });
+  symlinkSync(outside, path.join(target, ".panel", "shots"));
+
+  const result = cleanProject({ dir: target, all: true, json: true });
+  assert.equal(result.removed.length, 0);
+  assert.equal(existsSync(path.join(outside, "precious", "data.txt")), true);
 });
 
 test("upgrade adds shots/ to an existing .panel/.gitignore", async (t) => {
