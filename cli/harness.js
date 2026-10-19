@@ -13,6 +13,7 @@ import {
 } from "node:fs";
 import path from "node:path";
 
+import { cleanRunShots } from "./clean.js";
 import { hashPath } from "./diagnostics.js";
 import { missingApprovers } from "./gates.js";
 import { validateProject } from "./validate.js";
@@ -155,6 +156,7 @@ export class HarnessRuntime {
       status: nextPhase === "complete" ? "complete" : "active",
     };
     this._commit("phase_completed", { phase, artifacts: [...supplied], metadata }, nextState);
+    if (nextState.status === "complete") this._cleanScratch();
     return nextState;
   }
 
@@ -216,7 +218,18 @@ export class HarnessRuntime {
     if (!reason?.trim()) throw new HarnessError("BLOCK_REASON_REQUIRED", "A block reason is required.");
     const nextState = { ...state, status: "blocked", blockedReason: reason.trim() };
     this._commit("run_blocked", { reason: reason.trim() }, nextState);
+    this._cleanScratch();
     return nextState;
+  }
+
+  // The run is over: drop scratch screenshots and browser profiles. Cited
+  // evidence lives in panel-report/ and is not touched. Never fail the run on this.
+  _cleanScratch() {
+    try {
+      cleanRunShots(this.projectRoot, this.runId);
+    } catch {
+      // best effort
+    }
   }
 
   _readPermit(permitId) {

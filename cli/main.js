@@ -1,4 +1,5 @@
 import { initProject } from "./init.js";
+import { cleanProject } from "./clean.js";
 import { doctorProject } from "./doctor.js";
 import { validateProject } from "./validate.js";
 import { runHarnessCommand } from "./harness-command.js";
@@ -15,6 +16,7 @@ Usage:
   npx @tysongreenan/panel@latest upgrade [options]
   npx @tysongreenan/panel doctor [options]
   npx @tysongreenan/panel validate [options]
+  npx @tysongreenan/panel clean [options]
   npx @tysongreenan/panel harness <subcommand> [options]
   npx @tysongreenan/panel --help
 
@@ -24,6 +26,7 @@ Commands:
   update   Alias for upgrade
   doctor   Check installation, version, files, and run readiness
   validate Validate run artifacts and SHIPPABLE gates
+  clean    Delete scratch screenshots and browser profiles in .panel/shots/
   harness  Runtime state machine: start, status, events, advance, authorize, block
   run      Placeholder — use your AI agent after init
 
@@ -35,7 +38,8 @@ Options:
   --no-cursor      Skip Cursor rules/commands
   --no-claude      Skip Claude Code skill registration
   --dry-run        Print actions without writing
-  --json           Machine-readable doctor/validate output
+  --json           Machine-readable doctor/validate/clean output
+  --all            clean: also remove the active run's scratch folder
 
 Harness options:
   --run-id <id>         Run identifier (defaults to current run)
@@ -119,6 +123,12 @@ export async function main(argv) {
     return;
   }
 
+  if (command === "clean") {
+    const result = cleanProject({ dir: args.dir, dryRun: args.dryRun, all: args.all, json: args.json });
+    process.exitCode = result.ok ? 0 : 1;
+    return;
+  }
+
   if (command === "harness") {
     const result = runHarnessCommand(args);
     process.exitCode = result.ok ? 0 : 1;
@@ -168,6 +178,7 @@ function parseArgs(argv) {
     help: false,
     version: false,
     json: false,
+    all: false,
     runId: undefined,
     runClass: "standard",
     reviewOnly: false,
@@ -191,6 +202,7 @@ function parseArgs(argv) {
     else if (a === "--no-claude") out.claude = false;
     else if (a === "--dry-run") out.dryRun = true;
     else if (a === "--json") out.json = true;
+    else if (a === "--all") out.all = true;
     else if (a === "--review-only") out.reviewOnly = true;
     else if (a === "--run-id") out.runId = argv[++i];
     else if (a === "--run-class") out.runClass = argv[++i];

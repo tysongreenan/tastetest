@@ -98,7 +98,7 @@ Check: dense and open sections alternate; the visual weight peaks at the section
 
 The Executor builds sections in spine order under the single permit. After each section:
 
-1. Screenshot the section at desktop 1440 and mobile 390.
+1. Screenshot the section at desktop 1440 and mobile 390 into `.panel/shots/<run-id>/` (scratch; see `PANEL.md` step 6). Copy a frame into `panel-report/` only if a checkpoint cites it.
 2. **Count words from the rendered DOM** for that section (not from source) and compare to the card's cap.
 3. Check the card: layout matches the wireframe, carrier present and doing the job, mobile behaviour as written.
 4. Record pass/fail per section in `page-walk.md` → *Build checkpoints*.

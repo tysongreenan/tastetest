@@ -33,11 +33,12 @@ Run before the critique wave so Craft, Heuristic, and Motion critique the same f
 1. **Production build only.** Score a deployed URL or a local production build served per the jury skill (`next start`, or `scripts/serve.mjs <dist>`). A dev server invalidates WPO numbers; if only a dev URL exists, record that on the card and in `jury.notes`.
 2. **Evidence:**
    ```bash
-   node <jury>/scripts/shoot.mjs <url> --crawl --nav --out <abs>/.jury/<host>/shots
+   node <jury>/scripts/shoot.mjs <url> --crawl --nav --out <abs>/.panel/shots/<run-id>/jury/<host>
    node <jury>/scripts/audit.mjs <url> > <abs>/.jury/<host>/audit.txt
    ```
+   Frames go in the run's scratch folder and are deleted when the run completes or blocks (`PANEL.md` step 6); `audit.txt` and the scorecard stay in `.jury/<host>/`. Copy any frame a seat must keep into `panel-report/` with its provenance sidecar.
    `audit.mjs` exiting `1` is a finding, not a broken run. Do not add Playwright/axe to the reviewed project for a review-only run; use the jury cache folder (`~/.cache/jury`).
-3. **Blind critic.** Hand a **fresh subagent** only the jury critic brief, the rubric, and the `.jury/<host>/` evidence paths. See the blindness carve-out below.
+3. **Blind critic.** Hand a **fresh subagent** only the jury critic brief, the rubric, and the evidence paths (`.panel/shots/<run-id>/jury/<host>/` frames + `.jury/<host>/audit.txt`). See the blindness carve-out below.
 4. **Scorecard** lands at `.jury/<host>/scorecard.md`. Record its path as `jury.baseline_scorecard`.
 
 ### How critics consume it

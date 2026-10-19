@@ -400,7 +400,12 @@ function writeManifest(target, details, log) {
 
 function writePanelGitignore(target) {
   const gitignorePath = path.join(target, ".panel", ".gitignore");
-  if (!existsSync(gitignorePath)) writeFileSync(gitignorePath, "backups/\n", "utf8");
+  const current = existsSync(gitignorePath) ? readFileSync(gitignorePath, "utf8") : "";
+  const lines = current.split(/\r?\n/);
+  const missing = ["backups/", "shots/"].filter((entry) => !lines.includes(entry));
+  if (!missing.length) return;
+  const prefix = current && !current.endsWith("\n") ? "\n" : "";
+  writeFileSync(gitignorePath, `${current}${prefix}${missing.join("\n")}\n`, "utf8");
 }
 
 function isFullInstall(target) {
@@ -410,6 +415,9 @@ function isFullInstall(target) {
 function backupStamp() {
   return new Date().toISOString().replace(/[:.]/g, "-");
 }
+
+const SCREENSHOT_RULE =
+  "**Screenshots:** reuse one Playwright (or jury `shoot.mjs`) browser session, at most one profile per parallel worker; never a new Chrome profile per shot and never `/tmp`. Scratch goes in `.panel/shots/<run-id>/` and is deleted when the run completes or blocks; copy only cited evidence into `panel-report/` and never cite a `.panel/shots/` path. Outside the harness, run `npx @tysongreenan/panel clean` after the report (see `PANEL.md` step 6).";
 
 function cursorRuleContent({ full }) {
   return `---
@@ -428,6 +436,7 @@ alwaysApply: false
 4. Marketing / StoryBrand / sell / product demo → + \`COPY.md\` (Isa)${full ? " + \`skills/marketing-copy\`" : " (deep pack: `init --full`)"}.
 5. Design system / colors / type → + \`FRONTEND.md\` + \`skills/ui-ux-pro-max\` only${full ? "" : " (needs `npx @tysongreenan/panel init --full`)"}.
 6. Prefer delete / merge / cut. Preserve install / primary CTA.
+7. ${SCREENSHOT_RULE}
 
 ## Load map
 
@@ -460,6 +469,7 @@ Run a Panel review on this codebase.
 4. Marketing / landing sell → seat **Isa** with \`COPY.md\` (+ \`skills/marketing-copy\` if present).
 5. Do not load \`FRONTEND.md\` or \`skills/ui-ux-pro-max\` unless design-system work is in scope.
 6. Preserve install / primary CTA. Report to \`panel-report/report.md\`.
+7. ${SCREENSHOT_RULE}
 
 If the user named a URL or path, focus there. Otherwise review the main app/UI entrypoints.
 `;
@@ -481,6 +491,7 @@ Run a **full Panel review** of every user-facing page using the npm execution ha
 7. Produce a deduplicated, prioritized fix plan with concrete surfaces, persona impact, acceptance checks, owners, and evidence.
 8. Do **not** modify product code until consensus is \`PROCEED\`, all required approvals are recorded, and the harness issues a registered write permit.
 9. If implementation is requested after consensus, use one executor, consume the permit, verify fixes in the browser, run \`panel validate\`, and close the learning loop.
+10. ${SCREENSHOT_RULE}
 
 If any required page, browser, persona, design-system source, artifact, approval, or evidence is unavailable, record the exact blocker instead of claiming the run passed.
 `;
@@ -530,6 +541,7 @@ function pageWalkBody() {
 4. **Rhythm check** across the whole page, then show the user the cards before consensus. Write everything to \`panel-report/page-walk.md\` from \`docs/page-walk.template.md\` and pass it when advancing the \`frontend\` phase.
 5. Do **not** write product code until consensus is \`PROCEED\` and the harness issues a write permit. Build sections in spine order under that one permit. After each section, screenshot desktop and mobile, count rendered words against the cap, and record the checkpoint. A failed checkpoint stops the build and returns \`REVISE\`; never redesign mid-build.
 6. Verify the finished page per \`playbook.md\` (optionally \`/jury\`, \`docs/jury.md\`), run \`panel validate\`, and close the learning loop.
+7. ${SCREENSHOT_RULE}
 `;
 }
 
@@ -553,6 +565,7 @@ description: >
 6. Delete before add. Preserve install/CTA.
 7. Building a new page → run the page walk in \`docs/page-walk.md\` (\`/panel-page\`) before any layout code.
 8. If the \`jury\` skill is installed, use it for rendered audit evidence per \`docs/jury.md\` (labeled estimate, never the verdict).
+9. ${SCREENSHOT_RULE}
 
 ## Output
 

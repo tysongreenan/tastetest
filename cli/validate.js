@@ -223,7 +223,9 @@ function validateShippable(target, state, issues) {
       ...listValues(state, "verification", "desktop_evidence"),
       ...listValues(state, "verification", "mobile_evidence"),
     ]) {
-      if (!isExternal(evidencePath) && !existsSync(path.join(target, evidencePath))) {
+      if (/^(\.\/)?\.panel[\\/]shots[\\/]/.test(evidencePath)) {
+        issues.push(issue("error", "BROWSER_EVIDENCE_SCRATCH", `Evidence is in scratch and is deleted when the run ends; copy it into panel-report/: ${evidencePath}.`));
+      } else if (!isExternal(evidencePath) && !existsSync(path.join(target, evidencePath))) {
         issues.push(issue("error", "BROWSER_EVIDENCE_NOT_FOUND", `Browser evidence does not exist: ${evidencePath}.`));
       }
     }

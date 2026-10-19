@@ -122,6 +122,12 @@ If a recommendation adds a section, it must also state:
 - Why restructure alone is insufficient
 - What gets reduced, merged, or displaced to keep the page honest
 
+**6. Screenshots (keep the disk clean)**
+- Take screenshots with Playwright (or jury's `shoot.mjs`), reusing one browser session. Never launch a fresh Chrome profile per shot (`--user-data-dir=<new dir>`); each one is about 150 MB and they pile up. Parallel workers each get **one** profile, reused for all of that worker's shots.
+- Never write screenshots or browser profiles to `/tmp` or the project root. Scratch goes in `.panel/shots/<run-id>/` (`.panel/shots/manual/` outside a managed run), profiles included. If a browser tool saves to its own folder, move what you need into scratch.
+- Only screenshots a report cites as evidence belong in `panel-report/` (binary evidence needs its `.provenance.json` sidecar per `docs/harness.md`). Copy them there; never list a `.panel/shots/` path as evidence (`panel validate` rejects it).
+- Scratch is deleted automatically when the harness marks the run `complete` or `blocked`. Outside the harness, run `npx @tysongreenan/panel clean` once the report is written.
+
 ---
 
 ### Output format

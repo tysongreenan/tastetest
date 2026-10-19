@@ -36,7 +36,7 @@ test("upgrade backs up local changes and installs the complete current protocol"
   );
   assert.equal(manifest.version, packageVersion);
   assert.equal(manifest.mode, "lean");
-  assert.equal(readFileSync(path.join(target, ".panel", ".gitignore"), "utf8"), "backups/\n");
+  assert.equal(readFileSync(path.join(target, ".panel", ".gitignore"), "utf8"), "backups/\nshots/\n");
 
   for (const file of [
     "docs/design-calibration.md",

@@ -56,6 +56,16 @@ test("validate accepts evidenced output and rejects speculative blockers", async
   const valid = validateProject({ dir: target, json: true });
   assert.equal(valid.ok, true, JSON.stringify(valid.issues));
 
+  mkdirSync(path.join(target, ".panel", "shots", "run"), { recursive: true });
+  writeFileSync(path.join(target, ".panel", "shots", "run", "desktop.png"), "scratch", "utf8");
+  writeFileSync(
+    path.join(reportDir, "run-state.yaml"),
+    validRunState().replace("[panel-report/desktop.png]", "[.panel/shots/run/desktop.png]"),
+    "utf8"
+  );
+  const scratchEvidence = validateProject({ dir: target, json: true });
+  assert.equal(scratchEvidence.issues.some((item) => item.code === "BROWSER_EVIDENCE_SCRATCH"), true);
+
   writeFileSync(
     path.join(reportDir, "run-state.yaml"),
     validRunState().replace("    focus_not_obscured: pass\n", ""),
