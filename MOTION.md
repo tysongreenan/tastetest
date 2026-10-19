@@ -24,3 +24,5 @@ From Emil Kowalski’s design-eng skills:
 - Prefer delete when purpose is unclear
 
 Optional deep pack (when installed with `--full`): `skills/motion/` — STANDARDS, REVIEW, OPPORTUNITIES.
+
+Optional external evidence (`docs/jury.md`): `/jury` reduced-motion, idle-motion, transition frames and FPS. For an approved signature-moment or page-transition proposal, `/awwwards` `references/motion.md` + `engine.md` may inform the spec. Neither overrides the rules above; stills cannot judge how motion feels.

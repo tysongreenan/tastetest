@@ -95,5 +95,29 @@ test("installer registers the full harness slash command for Cursor and Claude C
     assert.match(content, /Do \*\*not\*\* modify product code until consensus/);
     assert.match(content, /Impeccable skill is installed/);
     assert.match(content, /reference\/craft-floor\.md/);
+    assert.match(content, /docs\/jury\.md/);
+    assert.match(content, /new\*\* blind critic/);
   }
+  assert.equal(existsSync(path.join(target, "docs", "jury.md")), true);
+
+  for (const file of [
+    ".cursor/commands/panel-page.md",
+    ".claude/commands/panel-page.md",
+  ]) {
+    const content = readFileSync(path.join(target, file), "utf8");
+    assert.match(content, /Panel page walk/);
+    assert.match(content, /approval of the spine/);
+    assert.match(content, /visual carrier/);
+  }
+  for (const file of [
+    ".claude/skills/panel-page/SKILL.md",
+    ".cursor/rules/panel-page.mdc",
+  ]) {
+    const content = readFileSync(path.join(target, file), "utf8");
+    assert.match(content, /building, adding, planning, or laying out a new page/);
+    assert.match(content, /approval of the spine/);
+  }
+  assert.match(readFileSync(path.join(target, ".claude/skills/panel/SKILL.md"), "utf8"), /docs\/page-walk\.md/);
+  assert.equal(existsSync(path.join(target, "docs", "page-walk.md")), true);
+  assert.equal(existsSync(path.join(target, "docs", "page-walk.template.md")), true);
 });

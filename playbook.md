@@ -54,6 +54,14 @@ Prefer the simplest structure that still does the job.
 
 Prefer no obstruction. The AA minimum permits partial obstruction, but a completely hidden focused component is a release blocker.
 
+## Optional `/jury` evidence
+
+When the `/jury` skill is installed (`docs/jury.md`), use its production-build evidence (`.jury/<host>/shots/`, `audit.txt`, `scorecard.md`) as input for the Heuristic Auditor and Implementation Verifier: axe, tap targets, overflow, `colorOnly`, `noHoverChange`, mobile LCP/CLS on a throttled phone, reduced-motion frames.
+
+- Jury's ranked fixes are candidate findings; dedupe survivors into `findings.json` with Panel severity.
+- Verifier re-scores after implementation with a **new** blind critic and records the per-category delta in `verification.md`. A drop must be resolved or explained.
+- Jury evidence never sets the verdict or fills the state matrix. Its keyboard-focus frames do **not** satisfy `focus_not_obscured`; run the WCAG 2.4.11 procedure above.
+
 ## Hard-gate scores (1–10)
 
 | Gate | Question |

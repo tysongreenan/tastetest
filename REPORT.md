@@ -86,6 +86,7 @@ Builds the final Markdown report from specialist artifacts. Does **not** invent 
 - state coverage exceptions:
 - visual regressions:
 - DESIGN.md delta: updated | none — rationale
+- jury (optional): baseline → post critic score per category, scorecard paths, independent yes/no — labeled estimate, not affiliated with Awwwards
 
 ## Consensus
 - Decision: PROCEED | REVISE | BLOCK
@@ -106,3 +107,4 @@ Builds the final Markdown report from specialist artifacts. Does **not** invent 
 - A process-complete run with a generic, regressed, inaccessible, or persona-worse result is a **failed run**; report the outcome honestly.
 - Do not claim a hypothesis was confirmed when multiple changes prevent attribution; mark it `inconclusive` and state what narrower test is needed.
 - Do not close the run with confirmed reusable learning only in the report; cite its durable destination and owner approval.
+- `/jury` numbers are supporting evidence: keep critic score and jury estimate separate, never merge them into Panel's Scores table, and never present a non-independent score as an Approve (`docs/jury.md`).

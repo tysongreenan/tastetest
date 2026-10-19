@@ -53,6 +53,9 @@ const REQUIRED_DOCS = [
   "findings.template.json",
   "harness.md",
   "hypotheses.template.md",
+  "jury.md",
+  "page-walk.md",
+  "page-walk.template.md",
   "learning.template.md",
   "personas.md",
   "run-state.template.yaml",
@@ -172,9 +175,15 @@ export async function initProject(opts = {}) {
     log.push(writeText(ruleDest, cursorRuleContent({ full }), { force, dryRun, upgrade, backupRoot, target, manifest }));
     log.push(writeText(cmdDest, cursorCommandContent(), { force, dryRun, upgrade, backupRoot, target, manifest }));
     log.push(writeText(fullCmdDest, fullAuditCommandContent(), { force, dryRun, upgrade, backupRoot, target, manifest }));
-    console.log(`    ${log.at(-3).status.padEnd(8)} .cursor/rules/panel.mdc`);
-    console.log(`    ${log.at(-2).status.padEnd(8)} .cursor/commands/panel.md`);
-    console.log(`    ${log.at(-1).status.padEnd(8)} .cursor/commands/panel-full.md`);
+    const pageCmdDest = path.join(target, ".cursor", "commands", "panel-page.md");
+    log.push(writeText(pageCmdDest, pageWalkCommandContent(), { force, dryRun, upgrade, backupRoot, target, manifest }));
+    const pageRuleDest = path.join(target, ".cursor", "rules", "panel-page.mdc");
+    log.push(writeText(pageRuleDest, pageWalkRuleContent(), { force, dryRun, upgrade, backupRoot, target, manifest }));
+    console.log(`    ${log.at(-5).status.padEnd(8)} .cursor/rules/panel.mdc`);
+    console.log(`    ${log.at(-4).status.padEnd(8)} .cursor/commands/panel.md`);
+    console.log(`    ${log.at(-3).status.padEnd(8)} .cursor/commands/panel-full.md`);
+    console.log(`    ${log.at(-2).status.padEnd(8)} .cursor/commands/panel-page.md`);
+    console.log(`    ${log.at(-1).status.padEnd(8)} .cursor/rules/panel-page.mdc`);
   }
 
   // 5) Claude Code wiring
@@ -192,6 +201,12 @@ export async function initProject(opts = {}) {
     const commandDest = path.join(target, ".claude", "commands", "panel-full.md");
     log.push(writeText(commandDest, fullAuditCommandContent(), { force, dryRun, upgrade, backupRoot, target, manifest }));
     console.log(`    ${log.at(-1).status.padEnd(8)} .claude/commands/panel-full.md`);
+    const pageCommandDest = path.join(target, ".claude", "commands", "panel-page.md");
+    log.push(writeText(pageCommandDest, pageWalkCommandContent(), { force, dryRun, upgrade, backupRoot, target, manifest }));
+    console.log(`    ${log.at(-1).status.padEnd(8)} .claude/commands/panel-page.md`);
+    const pageSkillDest = path.join(target, ".claude", "skills", "panel-page", "SKILL.md");
+    log.push(writeText(pageSkillDest, pageWalkSkillContent(), { force, dryRun, upgrade, backupRoot, target, manifest }));
+    console.log(`    ${log.at(-1).status.padEnd(8)} .claude/skills/panel-page/SKILL.md`);
   }
 
   // 6) Onboarding note
@@ -409,7 +424,7 @@ alwaysApply: false
 
 1. \`PANEL.md\` is source of truth (buyer job + reduction bias).
 2. Load \`playbook.md\` with every panel run.
-3. UI / craft → + \`ANTI-SLOP.md\`. Motion → + \`MOTION.md\`.
+3. UI / craft → + \`ANTI-SLOP.md\`. Motion → + \`MOTION.md\`. New page → page walk in \`docs/page-walk.md\` (\`/panel-page\`). Audit with \`jury\` installed → \`docs/jury.md\`.
 4. Marketing / StoryBrand / sell / product demo → + \`COPY.md\` (Isa)${full ? " + \`skills/marketing-copy\`" : " (deep pack: `init --full`)"}.
 5. Design system / colors / type → + \`FRONTEND.md\` + \`skills/ui-ux-pro-max\` only${full ? "" : " (needs `npx @tysongreenan/panel init --full`)"}.
 6. Prefer delete / merge / cut. Preserve install / primary CTA.
@@ -423,6 +438,8 @@ alwaysApply: false
 | Animations / motion | + \`MOTION.md\` |
 | Marketing / landing / StoryBrand | + \`COPY.md\` (Isa) |
 | Design system / colors / type | + \`FRONTEND.md\` + \`skills/ui-ux-pro-max\` |
+| Building a new page / section plan | \`/panel-page\` → \`docs/page-walk.md\` |
+| Full audit (uses \`/jury\` if installed) | \`/panel-full\` → \`docs/jury.md\` |
 
 ## Priority of truth
 
@@ -457,15 +474,62 @@ Run a **full Panel review** of every user-facing page using the npm execution ha
 
 1. Start a managed \`full\` run and follow the authoritative phase order in \`.panel/runs/<run-id>/state.json\`.
 2. Audit desktop and mobile for product promise, persona journeys, UX heuristics, visual craft, copy, motion, accessibility, interaction states, and design-system consistency. Keyboard-test WCAG 2.4.11 Focus Not Obscured with sticky and persistent overlays present; record it separately from focus visibility.
-3. Load every in-scope specialist skill and record skill-use proof. If an active Impeccable skill is installed, read its version; use only major version 4, run its context script for the concrete surface, choose \`Persuade | Operate | Read | Experience\`, load one owning playbook (or \`reference/new-work.md\`), and load \`reference/craft-floor.md\` immediately before UI edits. Treat it as advisory to Panel and \`DESIGN.md\`; skip stale or missing installs without blocking the run.
+3. Load every in-scope specialist skill and record skill-use proof. If an active Impeccable skill is installed, read its version; use only major version 4, run its context script for the concrete surface, choose \`Persuade | Operate | Read | Experience\`, load one owning playbook (or \`reference/new-work.md\`), and load \`reference/craft-floor.md\` immediately before UI edits. Treat it as advisory to Panel and \`DESIGN.md\`; skip stale or missing installs without blocking the run. If a \`jury\` skill is installed, follow \`docs/jury.md\`: before the critique wave, score a production build (never a dev server) with \`shoot.mjs --crawl --nav\` + \`audit.mjs\` and a fresh blind critic that sees only the rubric and evidence, then dedupe its ranked fixes into \`findings.json\`. If an \`awwwards\` skill is installed, use only its references for approved redesigns; never run its workflow, write \`DESIGN.md\`, install dependencies, or deploy.
 4. Write every required seat artifact plus \`hypotheses.md\`, \`findings.json\`, and \`learning.md\` under \`panel-report/\` with active-run provenance.
 5. Cross-critique material findings. Every challenge must mutate, reject, or uphold a hypothesis with evidence.
-6. Inspect the running product in a real browser. Capture applicable states and desktop/mobile evidence; never substitute source review for rendered proof. For Impeccable-guided work, keep visual iteration bounded to one batched inspection/fix pass and at most one confirmation pass.
+6. Inspect the running product in a real browser. Capture applicable states and desktop/mobile evidence; never substitute source review for rendered proof. For Impeccable-guided work, keep visual iteration bounded to one batched inspection/fix pass and at most one confirmation pass. When \`jury\` is installed, re-score after fixes with a **new** blind critic and record the per-category delta in \`verification.md\`; jury scores are labeled estimates, never the verifier verdict, and do not prove focus-not-obscured.
 7. Produce a deduplicated, prioritized fix plan with concrete surfaces, persona impact, acceptance checks, owners, and evidence.
 8. Do **not** modify product code until consensus is \`PROCEED\`, all required approvals are recorded, and the harness issues a registered write permit.
 9. If implementation is requested after consensus, use one executor, consume the permit, verify fixes in the browser, run \`panel validate\`, and close the learning loop.
 
 If any required page, browser, persona, design-system source, artifact, approval, or evidence is unavailable, record the exact blocker instead of claiming the run passed.
+`;
+}
+
+const PAGE_WALK_TRIGGER =
+  "Use when the user is building, adding, planning, or laying out a new page, landing page, or set of page sections, or asks for a section-by-section page plan. Runs the Panel page walk: section order as the reader's questions, then one card per section (content shape, layout, visual carrier, word budget) before any code.";
+
+function pageWalkCommandContent() {
+  return `---
+description: Design a new page with the Panel, section by section from top to bottom
+---
+
+${pageWalkBody()}`;
+}
+
+function pageWalkSkillContent() {
+  return `---
+name: panel-page
+description: >
+  ${PAGE_WALK_TRIGGER}
+---
+
+# Panel page walk
+
+${pageWalkBody()}`;
+}
+
+function pageWalkRuleContent() {
+  return `---
+description: ${JSON.stringify(PAGE_WALK_TRIGGER)}
+globs:
+alwaysApply: false
+---
+
+# Panel page walk
+
+${pageWalkBody()}`;
+}
+
+function pageWalkBody() {
+  return `Run a **Panel page walk** for a new page using \`docs/page-walk.md\` inside a managed \`standard\` run (\`full\` if it is a homepage or changes the selling narrative).
+
+1. **Spine first.** Journey Critic (with Isa on marketing pages and the priority PM) lists the reader's questions in order. Give each section a job, the question it answers, and what breaks if it is cut. Run the headline-ladder test. **Stop and get the user's approval of the spine** before any layout.
+2. **One card per section, top to bottom.** For each: content shape → layout derived from it (ASCII wireframe) → visual carrier that is not body text → text budget (headline ≤ 10 words, section ≤ 60 by default) → mobile behaviour → motion or none → DESIGN.md cite → persona impact. Do not cycle through trendy layouts; every layout must cite its content shape.
+3. **Craft checks every card:** delete-the-body test, text budget, neighbour check (same layout twice needs a reason), template check.
+4. **Rhythm check** across the whole page, then show the user the cards before consensus. Write everything to \`panel-report/page-walk.md\` from \`docs/page-walk.template.md\` and pass it when advancing the \`frontend\` phase.
+5. Do **not** write product code until consensus is \`PROCEED\` and the harness issues a write permit. Build sections in spine order under that one permit. After each section, screenshot desktop and mobile, count rendered words against the cap, and record the checkpoint. A failed checkpoint stops the build and returns \`REVISE\`; never redesign mid-build.
+6. Verify the finished page per \`playbook.md\` (optionally \`/jury\`, \`docs/jury.md\`), run \`panel validate\`, and close the learning loop.
 `;
 }
 
@@ -487,6 +551,8 @@ description: >
 4. Design system / colors / type → + \`FRONTEND.md\` + \`skills/ui-ux-pro-max/\`${full ? "" : " (needs `init --full`)"}
 5. Priority of truth: PANEL → ANTI-SLOP → MOTION → playbook → COPY → packs
 6. Delete before add. Preserve install/CTA.
+7. Building a new page → run the page walk in \`docs/page-walk.md\` (\`/panel-page\`) before any layout code.
+8. If the \`jury\` skill is installed, use it for rendered audit evidence per \`docs/jury.md\` (labeled estimate, never the verdict).
 
 ## Output
 
@@ -516,6 +582,8 @@ Run a panel
 | Animations / motion | + \`MOTION.md\` |
 | Marketing / StoryBrand / sell | + \`COPY.md\` (Isa) |
 | Design system / colors / type | + \`FRONTEND.md\` + \`skills/ui-ux-pro-max\` |
+| Building a new page / section plan | \`/panel-page\` → \`docs/page-walk.md\` |
+| Full audit (uses \`/jury\` if installed) | \`/panel-full\` → \`docs/jury.md\` |
 
 ### Priority of truth
 

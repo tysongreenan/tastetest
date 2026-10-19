@@ -44,3 +44,4 @@ Friction: …
 - No source-code-only reviews of buyer journeys — use UI, screenshots, or live URL when available.  
 - Preserve conversion path.  
 - Hand friction list to Heuristic, Craft, Isa (if messaging), Frontend.
+- **New page:** you own the page-walk spine (`docs/page-walk.md` Step 1): the reader's question ladder in order, one section per question, what breaks if each is cut, and the headline-ladder test.

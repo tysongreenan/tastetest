@@ -27,9 +27,14 @@ For a complete every-page harness audit in Cursor or Claude Code:
 
 > /panel-full
 
-When Impeccable `4.x` is installed, `/panel-full` uses its surface modes, owning playbook, craft floor, and bounded visual QA inside Panel's persona, consensus, permit, and verification gates. Impeccable is optional; Panel remains standalone.
 > or  
 > Do a Panel review
+
+When Impeccable `4.x` is installed, `/panel-full` uses its surface modes, owning playbook, craft floor, and bounded visual QA inside Panel's persona, consensus, permit, and verification gates. Impeccable is optional; Panel remains standalone.
+
+When [`/jury`](https://github.com/juliobsz/skills) is installed (`npx skills add juliobsz/skills -g`), `/panel-full` also scores a production build with a blind Awwwards-rubric critic before critique and re-scores with a fresh critic after fixes. Its ranked fixes feed `findings.json`; the score is labeled an estimate and never replaces Panel's verifier verdict. `/awwwards` from the same repo is used only as a reference library for approved redesigns. See `docs/jury.md`.
+
+Building a new page? `/panel-page` runs a page walk: the panel agrees the section order as the reader's questions, then designs each section top to bottom (content shape → layout → a visual that is not body text → word budget) before any code, and checks each section as it is built. See `docs/page-walk.md`.
 
 **Cursor:** type `/panel`  
 **Claude Code:** use the `panel` skill, or the same phrases above

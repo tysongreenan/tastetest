@@ -43,6 +43,22 @@ Use `n/a: reason` only when the state genuinely cannot occur.
 - Visual regression: pass | fail
 - DESIGN.md delta: updated | none | required-blocked
 
+## Jury evidence (optional — `docs/jury.md`)
+
+Supporting evidence only; never sets the verdict and does not prove `focus_not_obscured`.
+
+| Category | Baseline critic | Post critic (new blind critic) | Delta | Explained / resolved |
+|----------|-----------------|--------------------------------|-------|----------------------|
+| Design | | | | |
+| Usability | | | | |
+| Creativity | | | | |
+| Content | | | | |
+
+- Baseline scorecard: `.jury/<host>/scorecard-<n>.md` | n/a
+- Post scorecard: `.jury/<host>/scorecard.md` | n/a
+- Production build scored: yes | no — reason
+- Independent critic: yes | no — reason
+
 ## Findings
 
 | Severity | Surface / state | Evidence | Expected | Owner | Status | Recheck evidence |
