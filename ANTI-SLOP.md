@@ -41,19 +41,6 @@ Borrowed from the best anti-slop practice (Hallmark, Taste-Skill, Anthropic fron
 6. **Honesty test** — Claims and numbers have a source or are labeled sample/mock?
 7. **A11y smoke** — Focus visible, labels on controls, contrast not decorative-only?
 
-### Section-level checks (page walk)
-
-On a new page (`docs/page-walk.md`), run these on every section card and again on the rendered section:
-
-- **Delete-the-body test** — remove body copy; if headline + visual carrier no longer do the job, the carrier is decoration.
-- **Text budget** — count rendered words against the card's cap.
-- **Neighbour check** — same layout as the previous section needs a written reason.
-- **Template check** — would this section look the same on another product's page? Name what makes it this product's.
-
-### Optional `/jury` evidence
-
-When `/jury` is installed (`docs/jury.md`), critique its production-build frames (desktop 1440, throttled phone 390, rest/hover pairs) and blind Design/Creativity scores alongside your own pass. Each jury fix you adopt still uses the finding format below and cites a DESIGN.md section; a jury fix that contradicts DESIGN.md or the preserve list loses. Label jury numbers *estimate, not affiliated with Awwwards*.
-
 ### Finding format (Craft Critic)
 
 ```markdown

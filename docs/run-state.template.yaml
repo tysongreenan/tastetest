@@ -111,16 +111,6 @@ verification:
     success: null
     reduced_motion: null
 
-# Optional /jury audit engine — docs/jury.md. Supporting evidence only; never sets verification.verdict.
-jury:
-  status: null # used | n/a (not installed or not applicable)
-  awwwards_refs: [] # /awwwards reference files loaded, if any
-  production_build: null # true | false — false invalidates WPO numbers
-  independent: null # true | false — false if the critic saw anything beyond evidence + rubric
-  baseline_scorecard: null # e.g. .jury/127.0.0.1-4400/scorecard-1.md
-  post_scorecard: null
-  notes: ""
-
 design_system_delta:
   status: null # updated | none | required-blocked
   sections: []

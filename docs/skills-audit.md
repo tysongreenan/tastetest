@@ -46,8 +46,6 @@ This is not “copy every viral thread.” It’s **keep what matches our produc
 | Motion | `MOTION.md` | `skills/motion/` Emil | Strong |
 | Frontend Design | `FRONTEND.md` | ui-ux-pro-max, DESIGN.md | Strong |
 | Optional visual craft engine | Impeccable `4.x` when installed | surface modes, new-work, craft-floor, bounded QA | Advisory; Panel gates remain authoritative |
-| Optional audit engine | `/jury` when installed (`docs/jury.md`) | production-build shots, audit, blind Awwwards-rubric critic, ranked fixes | Evidence for Craft / Heuristic / Motion / Verifier; never the verdict |
-| Optional award-caliber reference | `/awwwards` references when installed | concept, art direction, motion engine | Reference only; workflow, DESIGN.md writes, deploy forbidden |
 | Report Writer | **`REPORT.md`** | — | **Added** |
 
 ---

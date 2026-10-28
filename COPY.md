@@ -106,8 +106,6 @@ Every demo proposal must state: **what the buyer learns in 5 seconds**, **what i
 8. **Prose pass** — hand to Prose Critic for stop-slop if landing is long.  
 9. **Handoff** — never ship layout alone; Frontend implements after Approves.
 
-**New page:** write headlines for the page-walk headline ladder and write each section inside its card's text budget (`docs/page-walk.md`). Default `Persuade` caps: headline ≤ 10 words, support ≤ 25, section ≤ 60. Going over needs a reason on the card.
-
 ---
 
 ### Output format

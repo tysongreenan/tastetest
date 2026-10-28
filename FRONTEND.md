@@ -10,8 +10,6 @@ When designing, redesigning, or reviewing **frontend UI** (pages, components, co
 
 **Optional craft engine:** Impeccable `4.x` ([pbakaus/impeccable](https://github.com/pbakaus/impeccable), Apache-2.0). When an active Impeccable skill is installed, Frontend Design loads it after the Panel brief and project `DESIGN.md`. Panel remains fully functional without it.
 
-**Optional award-caliber reference:** `/awwwards` ([juliobsz/skills](https://github.com/juliobsz/skills), MIT). Reference library only — never its end-to-end workflow. Rules in [`docs/jury.md`](docs/jury.md#awwwards--optional-craft-reference).
-
 ---
 
 ### When to run
@@ -34,7 +32,6 @@ When designing, redesigning, or reviewing **frontend UI** (pages, components, co
 | `COPY.md` (Isa) | Marketing pages: scan-layer copy locked before layout invent |
 | `docs/personas.md` | Who the UI is for; PM visual prefs |
 | Impeccable `4.x` (if installed) | Surface mode, new-work direction, craft floor, and bounded visual QA |
-| `/awwwards` references (if installed) | Concept, art direction, layout, type for approved marketing / `Experience` redesigns |
 
 **Positive + negative references (with Craft):** name what good looks like and what slop to ban this run. Blank “make it premium” → default AI SaaS look.
 
@@ -182,8 +179,6 @@ Before library search, check whether the active host exposes an `impeccable` ski
 
 Impeccable may sharpen or replace a visual world only when the approved Panel hypothesis explicitly authorizes redesign. It may not silently rewrite factual copy, change persona priority, bypass approvals, or mark work shippable.
 
-If an `awwwards` skill is installed and the approved hypothesis authorizes redesign of a marketing or `Experience` surface, you may load its `references/concepts.md`, `art-direction.md`, `layout.md`, and `typography.md` after the brief and `DESIGN.md`. Do **not** run its workflow, skip the brief, write `DESIGN.md`, install dependencies, replace Isa's copy, or deploy. Record the files used in `skills_used`.
-
 Map manager answers into multi-word queries (product + tone + density), e.g.  
 `developer tools SaaS calm premium sparse` vs `developer tools product demo interactive dense`.
 
@@ -216,8 +211,6 @@ For each proposed new section or major restructure:
 If library says glassmorphism and craft / DESIGN.md say no → **craft + DESIGN.md win**.
 
 #### 5. Propose (not ship)
-
-**New page:** before any section plan, follow [`docs/page-walk.md`](docs/page-walk.md). You own each card's content shape, layout (with an ASCII wireframe), visual carrier, and mobile behaviour; the layout must follow from the content shape, never from a rotating list of trendy layouts.
 
 Present: design brief summary · **DESIGN.md constraints honored** · library cites · accepted vs rejected · section plan.  
 Frontend Design is allowed to propose a **more modern feel** for an existing section in `standard` runs without escalating to `full`, as long as the section’s job stays intact and the proposal cites the priority PM brief plus `DESIGN.md` constraints. Frontend Design is also allowed to propose a **new section direction** when the current page lacks a job the personas need. That proposal must cite the missing job, the PM(s) asking for it, and the reduction tradeoff elsewhere on the page.

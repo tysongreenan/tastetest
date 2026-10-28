@@ -145,15 +145,15 @@ Set `run_class` in run-state at preflight. Skipping run-class selection on a mul
 | 2 | **Product Analyst** | `PRODUCT.md` | Promised vs shipped · copy ban list · benefits Isa may use |
 | 3 | **Empathy Mapper** | `EMPATHY.md` | Maps + quality; seat PM-* |
 | 4 | **Journey Critic** | `JOURNEY.md` | Flows for **all** in-scope personas; persona-as-success measure |
-| 5 | **Heuristic Auditor** | `playbook.md` (+ `/jury` evidence when installed) | Hard gates · Occam · a11y smoke · states |
+| 5 | **Heuristic Auditor** | `playbook.md` | Hard gates · Occam · a11y smoke · states |
 | 6 | **Design System Checker** | `DESIGN-SYSTEM.md` + `skills/design-md/` · living `web/DESIGN.md` | **Owns** DESIGN.md currency + professional quality · alignment · veto stale/fail |
-| 7 | **Craft Critic** | `ANTI-SLOP.md` (+ `/jury` scorecard when installed) | Visual craft · evidence-based anti-slop · +/− refs · DESIGN.md don’ts |
+| 7 | **Craft Critic** | `ANTI-SLOP.md` | Visual craft · evidence-based anti-slop · +/− refs · DESIGN.md don’ts |
 | 8 | **Prose Critic** | `skills/stop-slop-prose/` | Anti-slop writing polish |
 | 8b | **Isa · Marketing Copywriter** | `COPY.md` + `skills/marketing-copy/` | StoryBrand · DMMT · WHO/WHY/WHAT · PAS · product-show · CTA |
 | 9 | **Motion Critic** | `MOTION.md` + `skills/motion/` | Motion |
 | 10 | **Frontend Design** | `FRONTEND.md` + `web/DESIGN.md` + Impeccable `4.x` when installed | Brief first · load DESIGN.md · optional Impeccable mode/playbook/craft-floor · then library proposals |
 | 11 | **Report Writer** | `REPORT.md` | Assemble; multi-persona coverage; no invented scores |
-| 12 | **Implementation Verifier** | `playbook.md` + browser evidence (+ `/jury` blind re-score when installed) | Post-build state, responsive, interaction, a11y, visual-regression proof |
+| 12 | **Implementation Verifier** | `playbook.md` + browser evidence | Post-build state, responsive, interaction, a11y, visual-regression proof |
 
 ### Panel default Persona Managers
 
@@ -183,7 +183,6 @@ Set `run_class` in run-state at preflight. Skipping run-class selection on a mul
 3. Journeys (all in-scope PMs; weight priority)
          ▼
 4. Critique — parallel read wave when possible
-   (optional `/jury` baseline first: production build · shoot + audit · blind critic → candidate findings; see `docs/jury.md`)
    (craft ∥ motion ∥ prose ∥ heuristics on frozen journey artifacts)
    then Orchestrator / Report Writer merges; any Block holds
          ▼
@@ -193,7 +192,6 @@ Set `run_class` in run-state at preflight. Skipping run-class selection on a mul
 5. Frontend Design **asks** Orchestrator + seated PMs for visual prefs (design brief)
    then loads DESIGN.md · optional Impeccable 4.x surface mode/playbook · library search · Craft · Motion · Prose · Isa · Design System
    (`standard`: Orchestrator + priority PM by default; `full`: all PMs; may propose new sections when a persona-needed page job is missing)
-   **New page:** run the page walk (`docs/page-walk.md`) — spine approved by user + priority PM, then one card per section (content shape → layout → visual carrier → text budget), rhythm check → `panel-report/page-walk.md`
          ▼
 5b. Cross-critique — adjacent specialists challenge frozen proposals
    → each challenge must mutate a proposal/hypothesis/test or explicitly uphold it with evidence
@@ -204,7 +202,6 @@ Set `run_class` in run-state at preflight. Skipping run-class selection on a mul
    → one Executor applies plan; critics re-score (no mid-edit redesign)
          ▼
 8. Implementation Verifier checks the rendered UI at desktop + mobile
-   (optional `/jury` re-score with a NEW blind critic — supporting evidence, never the verdict)
    → fixes are verified again → PASS is required for SHIPPABLE
          ▼
 9. Learning loop — compare predicted vs observed outcomes
@@ -286,6 +283,4 @@ Before implement, always include **multi-persona impact**.
 | `skills/design-md/` | Deep pack: AUDIT · QUALITY · STARTER |
 | `ANTI-SLOP` / `MOTION` / `FRONTEND` / `COPY` | Domain skills |
 | `skills/marketing-copy/` | Isa deep pack: SB7, DMMT, product-show, frameworks-x |
-| `docs/page-walk.md` | New-page protocol: section-by-section spine, cards, rhythm, per-section build checkpoints (`/panel-page`) |
-| `docs/jury.md` | Optional `/jury` audit engine + `/awwwards` reference guardrails |
 | `skills/*` | Deep packs |
